@@ -1,9 +1,4 @@
 # NeoVim Configurations
 ## 🚀 About:
-- Repository to keep track of my NeoVim configurations.
-
-## 🚀 Features:
-- No arrow keys allowed! 💪 Master the home row.
-- System clipboard for copy and paste.
-- Smart indentation.
-- Elegant syntax highlighting.
+- Repository to keep track of my Vi/Vim/Neovim syntax color themes.
+- To use, simply copy the .vim color file to vi/colors or /.config/nvim/colors directory.
