@@ -5,20 +5,24 @@
 * Minimal `.vimrc` / `init.vim` file with smart tabs.
 * Various color themes
 
+---
+
 ## Color Themes
 ### Gedit Cobalt – Vim/Neovim Theme
-Theme inspired by Gedit Cobalt.
+Theme inspired by Gedit Cobalt. <br>
 ![Screenshot](screenshots/gedit_cobalt_screenshot.png)
 
 ### Solarized Dark
-Theme modeled after Ethan Schoonover's "solarized" color scheme.
+Theme modeled after Ethan Schoonover's "solarized" color scheme. <br>
 ![Screenshot](screenshots/solarized_screenshot.png)
 
-[ ] Toggle between light and dark mode using *(TODO)*
+- [ ] Toggle between light and dark mode using *(TODO)*
 ```vim
 set background=dark 
 set background=light
 ```
+
+---
 
 ## Installation for color themes
 1. Set up colors folder in your vim directory
@@ -32,6 +36,8 @@ cp gedit_cobalt.vim ~/.vim/colors/
 colorscheme gedit_cobalt
 colorscheme solarized
 ```
+
+---
 
 ## License
 MIT
