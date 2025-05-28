@@ -28,7 +28,9 @@ let m_line_nr        = "#0088fe"
 let m_cursor_line_nr = "#fd9015"
 
 " Use execute to apply variables
-execute "hi! Normal guibg=" . m_background . " guifg=" . m_normal . " ctermbg=17 ctermfg=15"
+
+" uncomment this line and change the " to '
+execute 'hi! Normal guibg=' . m_background . ' guifg=' . m_normal . ' ctermbg=17 ctermfg=15'
 execute "hi! CursorLine guibg=" . m_current_line . " ctermbg=24"
 execute "hi! CursorLineNr guifg=" . m_cursor_line_nr . " ctermfg=214"
 execute "hi! LineNr guifg=" . m_line_nr . " ctermfg=32"
@@ -38,4 +40,6 @@ execute "hi! Type guifg=" . m_keyword_type . " ctermfg=85"
 execute "hi! String guifg=" . m_string . " ctermfg=28"
 execute "hi! PreProc guifg=" . m_string . " ctermfg=28"
 execute "hi! Number guifg=" . m_scalar . " ctermfg=196"
+
+set laststatus=0
 

@@ -1,4 +1,27 @@
-# NeoVim Configurations
-## 🚀 About:
-- Repository to keep track of my Vi/Vim/Neovim syntax color themes.
-- To use, simply copy the .vim color file to vi/colors or /.config/nvim/colors directory.
+# Gedit Cobalt – Vim/Neovim Theme
+A minimal color scheme for Vim/Neovim inspired by Gedit’s Cobalt theme.
+
+## Features
+* Clean, easy-to-edit `.vim` file
+* True color support (`termguicolors`)
+* Basic syntax highlighting
+
+## Install
+**Manual:**
+
+```bash
+mkdir -p ~/.vim/colors
+cp gedit_cobalt.vim ~/.vim/colors/
+```
+
+## Usage
+```vim
+colorscheme gedit_cobalt
+```
+
+## Preview
+![Screenshot](screenshots/gedit_cobalt_screenshot.png)
+
+## License
+MIT
+
