@@ -28,8 +28,6 @@ let m_line_nr        = "#0088fe"
 let m_cursor_line_nr = "#fd9015"
 
 " Use execute to apply variables
-
-" uncomment this line and change the " to '
 execute 'hi! Normal guibg=' . m_background . ' guifg=' . m_normal . ' ctermbg=17 ctermfg=15'
 execute "hi! CursorLine guibg=" . m_current_line . " ctermbg=24"
 execute "hi! CursorLineNr guifg=" . m_cursor_line_nr . " ctermfg=214"
