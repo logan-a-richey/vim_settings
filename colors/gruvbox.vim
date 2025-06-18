@@ -1,7 +1,7 @@
 "*******************************************************************************
 " Name: Gruvbox
 " Description: Low eye strain theme, inspired from Gruvbox theme
-" Author: Logan Alexander Richey
+" Author: Logan Richey
 
 "*******************************************************************************
 " Setup

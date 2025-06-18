@@ -1,7 +1,7 @@
 "*******************************************************************************
 " Name: Solarized
 " Description: Minimal Solarized Vim theme (Dark & Light)
-" Author: Original scheme by Ethan Schoonover
+" Author: Original scheme by Ethan Schoonover, VIM port by Logan Richey
 
 "*******************************************************************************
 " Setup

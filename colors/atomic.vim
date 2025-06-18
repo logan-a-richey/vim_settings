@@ -1,7 +1,7 @@
 "*******************************************************************************
 " Name: Atomic
 " Description: Inspired from Github syntax theme.
-" Author: Logan Alexander Richey
+" Author: Logan Richey
 
 "*******************************************************************************
 " Setup
