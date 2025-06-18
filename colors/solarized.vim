@@ -1,7 +1,10 @@
-" Name: solarized
+"*******************************************************************************
+" Name: Solarized
 " Description: Minimal Solarized Vim theme (Dark & Light)
-" Author: Original scheme by Ethan Schoonover, Ported to VIM by Logan Richey
+" Author: Original scheme by Ethan Schoonover
 
+"*******************************************************************************
+" Setup
 hi clear
 if exists("syntax_on")
   syntax reset
@@ -9,7 +12,8 @@ endif
 let g:colors_name = "solarized"
 set termguicolors
 
-" --- Define Solarized Palette ---
+"*******************************************************************************
+" Solarized Palette
 let s:base03  = "#002b36"
 let s:base02  = "#073642"
 let s:base01  = "#586e75"
@@ -27,7 +31,9 @@ let s:blue    = "#268bd2"
 let s:cyan    = "#2aa198"
 let s:green   = "#859900"
 
-" --- Choose background variant (default: dark) ---
+"*******************************************************************************
+" Background select functions
+
 if &background == "light"
   let s:bg       = s:base3
   let s:bg_sec   = s:base2
@@ -40,10 +46,12 @@ else
   let s:fg_alt   = s:base1
 endif
 
-" --- Editor UI ---
-" execute 'hi Normal       guifg=' . s:fg      . ' guibg=' . s:bg
+"*******************************************************************************
+" Text Color
+
 execute 'hi Normal       guifg=' . "#e0e0e0"      . ' guibg=' . s:bg
 
+" Editor UI
 execute 'hi CursorLine   guibg=' . s:bg_sec
 execute 'hi CursorLineNr guifg=' . s:yellow
 execute 'hi LineNr       guifg=' . s:fg_alt
@@ -53,11 +61,8 @@ execute 'hi IncSearch    guibg=' . s:orange . ' guifg=' . s:bg
 execute 'hi MatchParen   guibg=' . s:base01 . ' guifg=' . s:base3
 execute 'hi VertSplit    guifg=' . s:base00 . ' guibg=' . s:bg
 
-" --- Core Syntax ---
-" execute 'hi Comment      guifg=' . s:fg_alt . ' gui=italic'
-" execute 'hi Comment      guifg=' . s:magenta . ' gui=italic'
-execute 'hi Comment      guifg=' . "#707070"
-
+" Synatx
+execute 'hi Comment      guifg=' . "#707070" . ' gui=italic'
 execute 'hi Constant     guifg=' . s:cyan
 execute 'hi String       guifg=' . s:green
 execute 'hi Character    guifg=' . s:green
@@ -73,7 +78,9 @@ execute 'hi Special      guifg=' . s:violet
 execute 'hi Error        guifg=' . s:red . ' guibg=' . s:bg
 execute 'hi Todo         guifg=' . "#f0f0f0" . ' guibg=' . "#f00000"
 
-" --- StatusLine / UI tweaks (optional) ---
+"*******************************************************************************
+" UI Tweaks
+
 execute 'hi StatusLine   guifg=' . s:fg . ' guibg=' . s:bg_sec
 execute 'hi StatusLineNC guifg=' . s:fg_alt . ' guibg=' . s:bg_sec
 
