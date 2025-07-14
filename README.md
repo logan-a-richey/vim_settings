@@ -6,15 +6,15 @@
 
 # Colors Showcase
 ## Atomic Theme
-* Inspired by Github dark theme.
+Inspired by Github dark theme.
 ![Screenshot](screenshots/example_atomic.png)
 
 ## Gedit Cobalt Theme
-* Recreation of the classic blue theme with orange keywords from Linux Gedit.
+Recreation of the classic blue theme with orange keywords from Linux Gedit.
 ![Screenshot](screenshots/example_cobalt.png)
 
 ## Monokai
-* Recreation of the Monokai theme from VS Code. Features C++ namespace detection, colors as defclass.
+Recreation of the Monokai theme from VS Code. Features C++ namespace detection, colors as defclass.
 ![Screenshot](screenshots/example_monokai.png)
 
 ## Solarized Dark
