@@ -22,19 +22,19 @@
 * Contains functions to switch between light and dark mode.
 * Toggle between dark and light modes with `:call ToggleMode()`
 
-Dark mode:
+Solarized Dark mode:
 ![Screenshot](screenshots/example_solarized_dark_vimscript.png)
 
-Light mode:
+Solarized Light mode:
 ![Screenshot](screenshots/example_solarized_light_vimscript.png)
 
 ---
 
 # Installation:
-* Clone the repo.
+* Git clone this repository.
 * Place color files inside of your `~/.config/nvim/colors/` directory, or location recognized by Vim.
-* Activate the theme with `colorscheme <new_theme>`.
+* Inside of Vim, activate the theme with `colorscheme <new_theme>`.
 
-## License
+# License
 MIT Standard License.
 
