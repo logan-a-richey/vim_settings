@@ -1,44 +1,40 @@
 # Vim Settings
-* Collection of my favorite Vim/Neovim settings.
+* Collection of favorite vim configurations.
+* Collection of custom-made colorschemes.
 
-## Features
-* Minimal `.vimrc` / `init.vim` file with smart tabs.
-* Various color themes
+--- 
 
----
+# Colors Showcase
+## Atomic Theme
+* Inspired by Github dark theme.
+![Screenshot](screenshots/example_atomic.png)
 
-## Color Themes
-### Gedit Cobalt – Vim/Neovim Theme
-Theme inspired by Gedit Cobalt. <br>
-![Screenshot](screenshots/gedit_cobalt_screenshot.png)
+## Gedit Cobalt Theme
+* Recreation of the classic blue theme with orange keywords from Linux Gedit.
+![Screenshot](screenshots/example_cobalt.png)
 
-### Solarized Dark
-Theme modeled after Ethan Schoonover's "solarized" color scheme. <br>
-![Screenshot](screenshots/solarized_screenshot.png)
+## Monokai
+* Recreation of the Monokai theme from VS Code. Features C++ namespace detection, colors as defclass.
+![Screenshot](screenshots/example_monokai.png)
 
-- [ ] Toggle between light and dark mode using *(TODO)*
-```vim
-set background=dark 
-set background=light
-```
+## Solarized Dark
+* Recreation of Ethan Schoonover's "solarized" color scheme.
+* Contains functions to switch between light and dark mode.
+* Toggle between dark and light modes with `:call ToggleMode()`
 
----
+Dark mode:
+![Screenshot](screenshots/example_solarized_dark_vimscript.png)
 
-## Installation for color themes
-1. Set up colors folder in your vim directory
-```bash
-mkdir -p ~/.vim/colors
-cp gedit_cobalt.vim ~/.vim/colors/
-```
-
-2. Inside of `nvim`, activate the theme:
-```vim
-colorscheme gedit_cobalt
-colorscheme solarized
-```
+Light mode:
+![Screenshot](screenshots/example_solarized_light_vimscript.png)
 
 ---
+
+# Installation:
+* Clone the repo.
+* Place color files inside of your `~/.config/nvim/colors/` directory, or location recognized by Vim.
+* Activate the theme with `colorscheme <new_theme>`.
 
 ## License
-MIT
+MIT Standard License.
 

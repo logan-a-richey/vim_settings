@@ -16,8 +16,8 @@ set termguicolors
 "*******************************************************************************
 " Foreground and Background
 
-let s:bg = "#1e1e1e" " bg dark gray 
-let s:bg_sec = "#2a2a2a" " bg subtle highlight
+let s:bg = "#060606" " bg dark gray 
+let s:bg_sec = "#0b0b0b" " bg subtle highlight
 
 let s:fg = "#e0e0e0" " main text: soft white
 let s:fg_alt = "#707070" " comment text: soft gray
