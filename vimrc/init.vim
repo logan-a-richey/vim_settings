@@ -1,28 +1,41 @@
-" init.vim
-" Basic vim setup
+"===============================================================================
+" Name: init.vim / .vimrc
+" Description: Basic vim setup. Contains tab-stop logic and window navigation.
+
+"===============================================================================
+" Navigation
 
 " Line numbers
-set number
-set relativenumber
+set relativenumber  
+set number          
 
-" Smart indentation and tab settings
-set smartindent
-set expandtab
-set shiftwidth=4
-set tabstop=4
-set softtabstop=4
-
-" Window toggling key remaps
-" Use the following to navigate between windows
+" vim window change
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" Clipboard settings
-set clipboard=unnamedplus
+"===============================================================================
+" Editing
 
-" Syntax settings
+" Any yanked and deleted lines are copied to system clipboard:
+set clipboard+=unnamedplus
+
+" Smart indentation:
+filetype plugin indent on
+set smartindent
+set smarttab
+set expandtab
+
+let s:my_spacing = 4
+
+execute 'set shiftwidth=' . s:my_spacing
+execute 'set tabstop=' . s:my_spacing
+execute 'set softtabstop=' . s:my_spacing
+
+"===============================================================================
+" Default Colorscheme
+
 syntax enable
-colorscheme gedit_cobalt
+colorscheme monokai
 
