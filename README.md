@@ -28,6 +28,10 @@ Solarized Dark mode:
 Solarized Light mode:
 ![Screenshot](screenshots/example_solarized_light_vimscript.png)
 
+## Dracula Theme
+Recreation of the classic Dracula theme. 
+![Screenshot](screenshots/example_dracula.png)
+
 ---
 
 # Installation:
