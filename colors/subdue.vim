@@ -1,24 +1,24 @@
-"*******************************************************************************
-" Name:         MyFavoriteTheme
+" -------------------------------------------------
+" Name:         subdue
 " Description:  Inspired by Openai Code theme
 " Author:       Logan Richey
+" -------------------------------------------------
 
 hi clear
 if exists("syntax_on")
   syntax reset
 endif
 
-let g:colors_name = "myfav"
+let g:colors_name = "subdue"
 set termguicolors
 
-" ------------------------------------------------------------------------------
-let s:green =  "#01a72b"
-let s:red = "#dd0000"
-let s:cyan = "#0082c6"
-let s:blue = "#0000dd"
-let s:orange = "#e45046"
-let s:purple = "#5D3FD3"
-let s:yellow = "#dddd00"
+let s:green     = "#01a72b"
+let s:red       = "#dd0000"
+let s:cyan      = "#0082c6"
+let s:blue      = "#0000dd"
+let s:orange    = "#e45046"
+let s:purple    = "#5D3FD3"
+let s:yellow    = "#dddd00"
 
 let s:bg             = "#000000"
 let s:bg_sec         = "#222222"
@@ -35,7 +35,6 @@ let s:defclass       = s:purple
 let s:ckeyword       = s:purple
 let s:operator_color = s:red
 
-" ------------------------------------------------------------------------------
 execute 'hi Normal guifg=' . s:fg . ' guibg=' . s:bg
 execute 'hi CursorLine guibg=' . s:bg_sec
 execute 'hi CursorLineNr guifg=' . s:keyword2
@@ -48,7 +47,6 @@ execute 'hi VertSplit guifg=' . "#3e3d32" . ' guibg=' . s:bg
 execute 'hi StatusLine guifg=' . s:fg . ' guibg=' . s:bg_sec
 execute 'hi StatusLineNC guifg=' . "#666666". ' guibg=' . s:bg_sec
 
-" ------------------------------------------------------------------------------
 " Syntax Highlighting
 execute 'hi Comment guifg=' . s:comment . ' gui=italic'
 
@@ -76,19 +74,7 @@ execute 'hi DiffChange guibg=' . "#4a410d"
 execute 'hi DiffDelete guibg=' . "#420e09"
 execute 'hi DiffText guibg=' . "#4c4745"
 
-" ------------------------------------------------------------------------------
 " Advanced Tweaks
-
-augroup MySyntaxTweaks
-    autocmd!
-
-    " Always highlight operators (any filetype) 
-    autocmd ColorScheme * call s:setup_ops()
-
-    " For C/C++ only:
-    autocmd ColorScheme * if &filetype  =~# '^\(c\|cpp\|cxx\|cc\)$' | call s:setup_c_keywords() | endif 
-augroup END
-
 function! s:setup_c_keywords() abort
     " <stdlib.h>
     for item in ["abs", "atof", "atoi", "atol", "atoll", "calloc", "div", "exit", "free", "malloc", "qsort", "rand", "realloc", "srand" ]
@@ -129,8 +115,13 @@ function! s:setup_c_keywords() abort
 endfunction
 
 function! s:setup_ops() abort
-    " Operator Highlights
-    syntax match MyOp "[\\.\\-\\+\\=\\,\\;\\:\\[\\]\\{\\}\\(\\)\\*\\&\\^\\!\\?\\<\\>]"
-    execute "highlight MyOp guifg=" . s:operator_color
-endfunction 
+    " Highlight operators globally, but exclude Comment and String
+    syntax match MyOp "[\.\-\+\=,;:\[\]{}()*&^!?<>%]" containedin=ALLBUT,Comment,String
+    highlight MyOp guifg=#aa0000
+endfunction
 
+augroup MySyntaxTweaks
+    autocmd!
+    autocmd ColorScheme * call s:setup_ops()
+    autocmd FileType * call s:setup_ops()
+augroup END
