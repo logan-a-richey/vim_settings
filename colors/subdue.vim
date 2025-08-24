@@ -124,4 +124,9 @@ augroup MySyntaxTweaks
     autocmd!
     autocmd ColorScheme * call s:setup_ops()
     autocmd FileType * call s:setup_ops()
+    
+    if &filetype == 'c' || &filetype == 'cpp'
+        autocmd ColorScheme * call s:setup_c_keywords()
+        autocmd FileType * call s:setup_c_keywords()
+    endif
 augroup END
