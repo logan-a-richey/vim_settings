@@ -1,8 +1,8 @@
-" -------------------------------------------------
+" ------------------------------------------------------------------------------
 " Name:         subdue
 " Description:  Inspired by Openai Code theme
 " Author:       Logan Richey
-" -------------------------------------------------
+" ------------------------------------------------------------------------------
 
 hi clear
 if exists("syntax_on")
@@ -47,12 +47,8 @@ execute 'hi VertSplit guifg=' . "#3e3d32" . ' guibg=' . s:bg
 execute 'hi StatusLine guifg=' . s:fg . ' guibg=' . s:bg_sec
 execute 'hi StatusLineNC guifg=' . "#666666". ' guibg=' . s:bg_sec
 
-" Syntax Highlighting
 execute 'hi Comment guifg=' . s:comment . ' gui=italic'
-
-" covers char, string, numbers
 execute 'hi Constant guifg=' . s:string
-
 execute 'hi String guifg=' . s:string 
 execute 'hi Character guifg=' . s:string
 execute 'hi Number guifg=' . s:number
@@ -116,7 +112,7 @@ endfunction
 
 function! s:setup_ops() abort
     " Highlight operators globally, but exclude Comment and String
-    syntax match MyOp "[\.\-\+\=,;:\[\]{}()*&^!?<>%]" containedin=ALLBUT,Comment,String
+    syntax match MyOp "[\!\%\^\&\*\~\-\+\=\[\]\{\}\;\:\,\.\/\(\)\[\]\{\\}\<\>]" containedin=ALLBUT,Comment,String
     highlight MyOp guifg=#aa0000
 endfunction
 
