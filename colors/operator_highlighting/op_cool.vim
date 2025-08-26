@@ -70,6 +70,10 @@ execute 'hi DiffChange guibg=' . "#4a410d"
 execute 'hi DiffDelete guibg=' . "#420e09"
 execute 'hi DiffText guibg=' . "#4c4745"
 
+" Change popup menu background to dark blue
+highlight Pmenu ctermbg=darkblue guibg=darkblue
+highlight PmenuSel ctermbg=blue guibg=blue
+
 " Advanced Tweaks
 function! s:setup_c_keywords() abort
     " <stdlib.h>
@@ -126,3 +130,5 @@ augroup MySyntaxTweaks
         autocmd FileType * call s:setup_c_keywords()
     endif
 augroup END
+
+
