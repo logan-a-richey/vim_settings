@@ -80,11 +80,54 @@ execute 'hi DiffText guibg='   . "#4c4745"
 "*******************************************************************************
 " Language Specific and Advanced Tweaks
 
-" highlight Operator guifg=s:operator_color 
+" Namespaces
+function! InitNamespaces() abort
+    syntax match cppNamespace "\<[a-zA-Z_][a-zA-Z0-9_]*\(::[a-zA-Z_][a-zA-Z0-9_]*\)\+"
+    execute "highlight cppNamespace guifg=" . s:defclass . " gui=bold"
+endfunction
 
-" Highlight C++ namespace-qualified identifiers (e.g., std::vector)
-"\w\+\(::\w\+\)\+
-syntax match cppNamespace "\<[a-zA-Z_][a-zA-Z0-9_]*\(::[a-zA-Z_][a-zA-Z0-9_]*\)\+"
-" highlight cppNamespace guifg=s:defclass
-execute "highlight cppNamespace guifg=" . s:defclass . ' gui=bold'
+" Advanced Tweaks
+function! s:setup_c_keywords() abort
+    " <stdlib.h>
+    for item in ["abs", "atof", "atoi", "atol", "atoll", "calloc", "div", "exit", "free", "malloc", "qsort", "rand", "realloc", "srand" ]
+        execute "syntax match MyKeyword '\\<" . item . "\\>'"
+    endfor
 
+    " <string.h>
+    for item in ["memchr", "memcmp", "memcpy", "memmove", "memset", "strcat", "strchr", "strcmp", "strcoll", "strcpy", "strcspn", "strerror", "strlen", "strncat", "strncmp", "strncpy", "strpbrk", "strrchr", "strspn", "strstr", "strtok", "strxfrm" ]
+        execute "syntax match MyKeyword '\\<" . item . "\\>'"
+    endfor
+    
+    " <stdio.h>
+    for item in ["fclose", "feof", "ferror", "fgetc", "fgets", "fopen", "fprintf", "fputc", "fputs", "fread", "fscanf", "fseek", "ftell", "fwrite", "getc", "getchar", "printf", "putc", "putchar", "puts", "remove", "rename", "rewind", "scanf", "snprintf", "sprintf", "sscanf"]
+        execute "syntax match MyKeyword '\\<" . item . "\\>'"
+    endfor
+    
+    " <math.h>
+    for item in ["acos", "acosh", "asin", "asinh", "atan", "atan2", "atanh", "cbrt", "ceil", "copysign", "cos", "cosh", "exp", "exp2", "expm1", "erf", "erfc", "fabs", "fdim", "floor", "fma", "fmax", "fmin", "fmod", "frexp", "hypot", "ilogb", "ldexp", "lgamma", "llrint", "llround", "log", "log10", "log1p", "log2", "logb", "lrint", "lround", "modf", "nan", "nearbyint", "nextafter", "nexttoward", "pow", "remainder", "remquo", "rint", "round", "scalbln", "scalbn", "sin", "sinh", "sqrt", "tan", "tanh", "tgamma", "trunc"]
+        execute "syntax match MyKeyword '\\<" . item . "\\>'"
+    endfor
+    
+    " <ctype.h>
+    for item in ["isalnum","isalpha","isblank","iscntrl","isdigit","isgraph","islower","isprint","ispunct","isspace","isupper","isxdigit","tolower","toupper"]
+        execute "syntax match MyKeyword '\\<" . item . "\\>'"
+    endfor
+    
+    " <time.h>
+    for item in ["time","localtime","gmtime","ctime","asctime","strftime","difftime","mktime","clock"]
+        execute "syntax match MyKeyword '\\<" . item . "\\>'"
+    endfor
+
+    " Define highlight keyword groups once
+    execute "highlight MyKeyword guifg=" . s:defclass . ' gui=bold'
+endfunction
+
+" Init Advanced tweaks on startup
+augroup MySyntaxTweaks
+    autocmd!
+    " Always init namespaces for all filetypes
+    autocmd Syntax * call InitNamespaces()
+
+    " Only setup C keywords after filetype detection
+    autocmd FileType c,cpp call s:setup_c_keywords()
+augroup END
