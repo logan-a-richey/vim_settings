@@ -19,7 +19,7 @@ set termguicolors
 " -----------------------------------------------------------------------------+
 " CMD             | HEX        | COLORNAME      | DESCRIPTION
 " ----------------+------------+----------------+------------------------------+
-let s:bg          = "#272822"  " DARK_GRAY      | background idle
+let s:bg          = "#101010"  " DARK_GRAY      | background idle
 let s:bg_sec      = "#3e3d32"  " MID_GRAY       | current line background
 let s:comment     = "#5a5b50"  " LIGHT GRAY     | comments
 let s:fg          = "#c0c3bb"  " OFF WHITE      | normal text (off-white)
