@@ -64,3 +64,7 @@ execute 'hi DiffText guibg=' . "#4c4745"
 " Language Specific and Advanced Tweaks
 syntax match cppNamespace "\<[a-zA-Z_][a-zA-Z0-9_]*\(::[a-zA-Z_][a-zA-Z0-9_]*\)\+"
 execute "highlight cppNamespace guifg=" . s:defclass . ' gui=bold'
+
+" Change popup menu background to dark blue
+highlight Pmenu ctermbg=darkblue guibg=darkblue
+highlight PmenuSel ctermbg=blue guibg=blue

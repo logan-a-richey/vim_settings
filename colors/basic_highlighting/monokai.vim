@@ -131,3 +131,8 @@ augroup MySyntaxTweaks
     " Only setup C keywords after filetype detection
     autocmd FileType c,cpp call s:setup_c_keywords()
 augroup END
+
+" Change popup menu background to dark blue
+highlight Pmenu ctermbg=darkblue guibg=darkblue
+highlight PmenuSel ctermbg=blue guibg=blue
+

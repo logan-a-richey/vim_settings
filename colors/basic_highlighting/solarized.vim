@@ -145,3 +145,7 @@ if !exists('*ToggleMode')
     colorscheme solarized
   endfunction
 endif
+
+" Change popup menu background to dark blue
+highlight Pmenu ctermbg=darkblue guibg=darkblue
+highlight PmenuSel ctermbg=blue guibg=blue

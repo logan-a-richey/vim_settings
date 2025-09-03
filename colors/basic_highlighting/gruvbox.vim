@@ -64,3 +64,7 @@ execute 'hi Todo guifg=' . "#ffffff" . ' guibg=' . "#703000"
 " StatusLine / UI tweaks
 execute 'hi StatusLine guifg=' . s:fg . ' guibg=' . s:bg_sec
 execute 'hi StatusLineNC guifg=' . s:fg_alt . ' guibg=' . s:bg_sec
+
+" Change popup menu background to dark blue
+highlight Pmenu ctermbg=darkblue guibg=darkblue
+highlight PmenuSel ctermbg=blue guibg=blue

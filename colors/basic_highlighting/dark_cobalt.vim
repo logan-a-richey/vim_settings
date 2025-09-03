@@ -98,3 +98,6 @@ syntax match cppNamespace "\<[a-zA-Z_][a-zA-Z0-9_]*\(::[a-zA-Z_][a-zA-Z0-9_]*\)\
 execute "highlight cppNamespace guifg=" . s:defclass . ' gui=bold'
 " highlight Operator guifg=s:operator_color 
 
+" Change popup menu background to dark blue
+highlight Pmenu ctermbg=darkblue guibg=darkblue
+highlight PmenuSel ctermbg=blue guibg=blue
