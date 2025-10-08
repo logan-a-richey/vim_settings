@@ -1,0 +1,42 @@
+/* table stlye */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fdf6e3; /* light solarized base3 */
+  color: #073642; /* base tone */
+  margin: 2rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+thead {
+  background-color: #cccccc; /* gray header background */
+  font-weight: bold;
+}
+
+th, td {
+  border: 1px solid #93a1a1; /* subtle border, fits Solarized */
+  padding: 8px;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f8f8f8; /* light gray rows */
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #ffffff; /* white rows */
+}
+
+td:last-child {
+  width: 50px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
