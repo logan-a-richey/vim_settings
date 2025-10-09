@@ -1,55 +1,48 @@
 " ******************************************************************************
-" Name:         solar2.vim
-" Description:  Theme inspired by Solarized
+" Name:         pastel.vim
+" Description:  Pastel color theme
 " Author:       Logan Richey
-" Date:         Oct 7, 2025
+" Date:         Oct 8, 2025
 " ******************************************************************************
 
 hi clear
 if exists("syntax_on")
     syntax reset
 endif
-let g:colors_name = "solar2"
+let g:colors_name = "pastel"
 set termguicolors
 
 " ******************************************************************************
 " User Colors
 
-let s:blue0 = "#00171d"
-let s:blue1 = "#002b36" 
-let s:blue2 = "#073642"  " current row
-let s:blue3 = "#586e75"  " comments
-let s:green = "#859900"  " strings
-let s:orange = "#bb6622" " keywords
-let s:cyan = "#2aa198"   " types
-let s:red = "#dc322f"    " scalars
-let s:pink = "#d33682"   " special
-let s:white = "#b0b0b0"  " normal text
-let s:yellow = "#b58900" " other
-let s:purple = "#6c71c4" " classdef
-
+let s:pastel_red    = "#fbb4ae"
+let s:pastel_blue   = "#b3cde3"
+let s:pastel_green  = "#ccebc5"
+let s:pastel_purple = "#decbe4" 
+let s:pastel_orange = "#fed9a6" 
+let s:pastel_yellow = "#ffffcc"
+let s:dark_purple   = "#6a3d9a" 
 " Color Mapping
-let s:bg          = s:blue0
-let s:bg_sec      = s:blue2
-let s:comment     = s:blue3
-let s:fg          = s:white
-let s:keyword1    = s:cyan    " keywords (if, not, return)
-let s:keyword2    = s:cyan      " types (def, int, struct, etc.)
-let s:number      = s:red       " numbers
-let s:paren       = s:yellow    " highlighted parentheses
-let s:defclass    = s:orange    " def/class names
-let s:string      = s:green     
+let s:bg          = "#000000"
+let s:bg_sec      = "#101010"
+let s:comment     = s:dark_purple
+let s:fg          = "#e0e0e0"
+let s:keyword     = s:pastel_blue    
+let s:number      = s:pastel_red   
+let s:paren       = s:pastel_yellow
+let s:defclass    = s:pastel_purple
+let s:string      = s:pastel_green     
 
 " ******************************************************************************
 " UI Elements
 
 execute 'hi Normal guifg='     . s:fg       . ' guibg=' . s:bg
 execute 'hi CursorLine guibg=' . s:bg_sec
-execute 'hi CursorLineNr guifg=' . s:keyword2
+execute 'hi CursorLineNr guifg=' . s:keyword
 execute 'hi LineNr guifg='     . "#444444"
 execute 'hi Visual guibg='     . "#49483E"
-execute 'hi Search guifg='     . s:bg       . ' guibg=' . s:keyword2
-execute 'hi IncSearch guifg='  . s:bg       . ' guibg=' . s:keyword1
+execute 'hi Search guifg='     . s:bg       . ' guibg=' . s:keyword
+execute 'hi IncSearch guifg='  . s:bg       . ' guibg=' . s:keyword
 execute 'hi MatchParen guifg=' . s:paren    . ' guibg=' . "#49483E"
 execute 'hi VertSplit guifg='  . "#3e3d32"  . ' guibg=' . s:bg
 execute 'hi StatusLine guifg=' . s:fg       . ' guibg=' . s:bg_sec
@@ -73,16 +66,16 @@ execute 'hi Number guifg='     . s:number . ' gui=bold'
 execute 'hi Boolean guifg='    . s:number . ' gui=bold'
 execute 'hi Identifier guifg=' . s:defclass . ' gui=bold'
 execute 'hi Function guifg='   . s:defclass . ' gui=bold'
-execute 'hi Statement guifg='  . s:keyword1 . ' gui=bold'
-execute 'hi Keyword guifg='    . s:keyword1 . ' gui=bold'
-execute 'hi PreProc guifg='    . s:keyword1 . ' gui=bold'
-execute 'hi Type guifg='       . s:keyword2 . ' gui=bold'
+execute 'hi Statement guifg='  . s:keyword . ' gui=bold'
+execute 'hi Keyword guifg='    . s:keyword . ' gui=bold'
+execute 'hi PreProc guifg='    . s:keyword . ' gui=bold'
+execute 'hi Type guifg='       . s:keyword . ' gui=bold'
 execute 'hi Special guifg='    . s:number . ' gui=bold'
 execute 'hi Error guifg='      . "#ffffff" . ' guibg=#b02752'
 execute 'hi Todo guifg='       . "#ffffff" . ' guibg=#a08916'
 
 " Additional Tweaks
-execute 'hi Title guifg='      . s:keyword1
+execute 'hi Title guifg='      . s:keyword
 execute 'hi Directory guifg='  . s:defclass
 execute 'hi DiffAdd guibg='    . "#13354a"
 execute 'hi DiffChange guibg=' . "#4a410d"
