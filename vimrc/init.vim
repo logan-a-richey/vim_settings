@@ -37,5 +37,5 @@ execute 'set softtabstop=' . s:my_spacing
 " Default Colorscheme
 
 syntax enable
-colorscheme monokai
+colorscheme darkvs
 
