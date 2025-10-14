@@ -22,6 +22,7 @@ let s:green = "#579755"
 let s:purple = "#c870d6"
 let s:faint_green = "#b5ce9b"
 let s:yellow = "#ffee8c"
+let s:red = "#dd2211"
 
 " Color Mapping
 let s:bg = s:dark_gray
@@ -34,6 +35,7 @@ let s:number = s:faint_green
 let s:paren = s:purple
 let s:defclass = s:yellow
 let s:string = s:orange 
+let s:operator_color = s:red
 
 " UI Elements
 execute 'hi Normal guifg=' . s:fg . ' guibg=' . s:bg
@@ -95,7 +97,7 @@ endfunction
 " ------------------------------------------------------------------------------
 " Highlight words from C standard headers
 
-function! s:setup_c_keywords() abort
+function! s:SetupCLib() abort
     " <stdlib.h>
     for item in ["abs", "atof", "atoi", "atol", "atoll", "calloc", "div", "exit", "free", "malloc", "qsort", "rand", "realloc", "srand" ]
         execute "syntax match MyKeyword '\\<" . item . "\\>'"
@@ -136,7 +138,7 @@ endfunction
 augroup MySyntaxTweaks
     autocmd!
     autocmd Syntax * call InitNamespaces()
-    autocmd FileType c,cpp call s:setup_c_keywords()
+    autocmd FileType c,cpp call s:SetupCLib()
 augroup END
 
 " In case Namespaces does not load, simply call the function again.
