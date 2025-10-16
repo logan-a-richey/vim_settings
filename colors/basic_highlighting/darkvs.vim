@@ -57,7 +57,7 @@ highlight PmenuSel ctermbg=blue guibg=blue
 " ******************************************************************************
 " Code Syntax highlighting 
 
-execute 'hi Comment guifg=' . s:comment . ' gui=italic'
+execute 'hi Comment guifg=' . s:comment
 
 " covers char, string, numbers
 execute 'hi Constant guifg=' . s:string 
