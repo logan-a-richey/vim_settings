@@ -136,3 +136,4 @@ augroup END
 highlight Pmenu ctermbg=darkblue guibg=darkblue
 highlight PmenuSel ctermbg=blue guibg=blue
 
+call InitNamespaces()

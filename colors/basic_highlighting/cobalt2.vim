@@ -34,7 +34,7 @@ let s:comment     = s:blue3
 let s:fg          = s:white
 let s:keyword1    = s:orange    " keywords (if, not, return)
 let s:keyword2    = s:orange      " types (def, int, struct, etc.)
-let s:number      = s:red       " numbers
+let s:number      = s:pink       " numbers
 let s:paren       = s:yellow    " highlighted parentheses
 let s:defclass    = s:cyan    " def/class names
 let s:string      = s:green     
@@ -143,3 +143,4 @@ augroup MySyntaxTweaks
     autocmd FileType c,cpp call s:setup_c_keywords()
 augroup END
 
+call InitNamespaces()

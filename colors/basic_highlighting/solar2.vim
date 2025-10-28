@@ -144,3 +144,5 @@ augroup MySyntaxTweaks
     autocmd FileType c,cpp call s:setup_c_keywords()
 augroup END
 
+call InitNamespaces()
+
