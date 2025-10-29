@@ -13,7 +13,7 @@ let g:colors_name = "darkvs"
 set termguicolors
 
 " Main colors
-let s:dark_gray = "#1e1e1e"
+let s:dark_gray = "#101010"
 let s:mid_gray = "#282828"
 let s:white = "#d4d4d4"
 let s:orange = "#ce8f5e"
