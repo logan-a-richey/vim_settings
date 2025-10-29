@@ -23,6 +23,7 @@ let s:purple = "#c870d6"
 let s:faint_green = "#b5ce9b"
 let s:yellow = "#ffee8c"
 let s:red = "#dd2211"
+let s:cyan = "#4bc9b0"
 
 " Color Mapping
 let s:bg = s:dark_gray
@@ -33,7 +34,7 @@ let s:keyword1 = s:blue
 let s:keyword2 = s:blue
 let s:number = s:faint_green
 let s:paren = s:purple
-let s:defclass = s:yellow
+let s:defclass = s:cyan
 let s:string = s:orange 
 let s:operator_color = s:red
 
