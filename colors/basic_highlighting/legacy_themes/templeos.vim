@@ -1,7 +1,7 @@
 " ------------------------------------------------------------------------------
-" Name:     tsoding.vim
-" Info:     Inspired from TsodingDaily editor theme.
-" Author:   Logan Richey
+" Name:     templeos.vim
+" Info:     Inspired by TempleOS theme, created by Terry Davis.
+" Author:   Logan A Richey
 " Date:     Nov 7, 2025
 " ------------------------------------------------------------------------------
 
@@ -9,31 +9,34 @@ hi clear
 if exists("syntax_on")
  syntax reset
 endif
-let g:colors_name = "tsoding"
+let g:colors_name = "templeos"
 set termguicolors
 
 " Main colors
-let s:dark_gray = "#181818" 
-let s:dark_gray_2 = "#363636"
-let s:orange = "#c69e69"
-let s:white = "#f0f0f0"
-let s:gray = "#707070"
-let s:green = "#adcc93"
-let s:yellow = "#fce274"
-let s:teal = "#a0a4a3"
-let s:red = "#ffcccb"
+let s:off_white = "#FAF9F6"
+let s:tan = "#e5c287"
+let s:solarized_white = "#eee8d5"
+
+let s:white   = "#d0d0d0"
+let s:white2  = "#c0c0c0"
+let s:black   = "#000000"
+let s:gray    = "#707070"
+let s:red     = "#aa0000"
+let s:blue    = "#0000aa"
+let s:green   = "#00aa00"
+let s:magenta = "#aa00aa"
 
 " Color Mapping
-let s:bg = s:dark_gray
-let s:bg_sec = s:dark_gray_2
-let s:comment = s:gray
-let s:fg = s:white
-let s:keyword1 = s:yellow
-let s:keyword2 = s:yellow
-let s:number = s:red
-let s:paren = s:teal
-let s:defclass = s:orange
-let s:string = s:green
+let s:bg        = s:solarized_white
+let s:bg_sec    = s:white2
+let s:comment   = s:gray
+let s:fg        = s:black
+let s:keyword1  = s:blue
+let s:keyword2  = s:blue
+let s:number    = s:red
+let s:paren     = s:magenta
+let s:defclass  = s:black
+let s:string    = s:green
 
 " UI Elements
 execute 'hi Normal guifg=' . s:fg . ' guibg=' . s:bg
@@ -43,14 +46,14 @@ execute 'hi LineNr guifg=' . "#444444"
 execute 'hi Visual guibg=' . "#49483E"
 execute 'hi Search guifg=' . s:bg . ' guibg=' . s:keyword2
 execute 'hi IncSearch guifg=' . s:bg . ' guibg=' . s:keyword1
-execute 'hi MatchParen guifg=' . s:paren . ' guibg=' . "#00a0a0"
+execute 'hi MatchParen guifg=' . s:paren . ' guibg=' . "#49483E"
 execute 'hi VertSplit guifg=' . "#3e3d32" . ' guibg=' . s:bg
-execute 'hi StatusLine guifg=' . s:fg . ' guibg=' . s:bg_sec
-execute 'hi StatusLineNC guifg=' . "#666666". ' guibg=' . s:bg_sec
+execute 'hi StatusLine guifg=' . "#ffffff" . ' guibg=' . s:bg_sec
+execute 'hi StatusLineNC guifg=' . "#000000". ' guibg=' . s:bg_sec
 
 " Change popup menu background to dark blue
-highlight Pmenu ctermbg=darkblue guibg=darkblue
-highlight PmenuSel ctermbg=blue guibg=blue
+highlight Pmenu ctermbg=darkblue guibg=darkblue guifg=white
+highlight PmenuSel ctermbg=blue guibg=blue guifg=white
 
 " ******************************************************************************
 " Code Syntax highlighting 
@@ -68,7 +71,7 @@ execute 'hi Identifier guifg=' . s:defclass
 execute 'hi Function guifg=' . s:defclass 
 execute 'hi Statement guifg=' . s:keyword1 
 execute 'hi Keyword guifg=' . s:keyword1 
-execute 'hi PreProc guifg=' . s:keyword1 
+execute 'hi PreProc guifg=' . s:keyword1 . ' gui=bold'
 execute 'hi Type guifg=' . s:keyword2 
 execute 'hi Special guifg=' . s:number 
 execute 'hi Error guifg=' . "#ffffff" . ' guibg=#b02752'
@@ -89,7 +92,7 @@ execute 'hi DiffText guibg=' . "#4c4745"
 " Any word containing :: will be highlighed as a defclass
 function! InitNamespaces() abort
     syntax match cppNamespace "\<[a-zA-Z_][a-zA-Z0-9_]*\(::[a-zA-Z_][a-zA-Z0-9_]*\)\+"
-    execute "highlight cppNamespace guifg=" . s:defclass
+    execute "highlight cppNamespace guifg=" . s:defclass . " gui=bold"
 endfunction
 
 " ------------------------------------------------------------------------------
@@ -127,7 +130,7 @@ function! s:SetupCLib() abort
     endfor
 
     " Define highlight keyword groups once
-    execute "highlight MyKeyword guifg=" . s:defclass
+    execute "highlight MyKeyword guifg=" . s:defclass . " gui=bold"
 endfunction
 
 " ------------------------------------------------------------------------------

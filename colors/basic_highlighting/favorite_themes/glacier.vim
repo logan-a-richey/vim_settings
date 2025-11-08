@@ -22,6 +22,7 @@ let s:green = "#8ae39f"
 let s:turq = "#56a497"
 let s:purple = "#9c9bd4"
 let s:blue = "#44a8b7"
+let s:magenta = "#ff00ff"
 
 " Color Mapping
 let s:bg = s:blue1
@@ -30,10 +31,9 @@ let s:comment = s:gray
 let s:fg = s:white
 let s:keyword1 = s:blue
 let s:keyword2 = s:blue
-let s:number = s:green
-let s:paren = "#ff00ff"
+let s:number = s:yellow
+let s:paren = s:magenta
 let s:defclass = s:purple
-" let s:string = s:yellow
 let s:string = s:green
 
 " UI Elements
