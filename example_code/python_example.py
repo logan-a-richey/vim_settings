@@ -1,33 +1,43 @@
 #!/usr/bin/env python3
+# python_example.py
 
-# Comment
-
+from __future__ import annotations
+from typing import List
 from abc import (ABC, abstractmethod)
 
 class AbstractPerson(ABC):
-    ''' Docstring '''
-    def __init__(self, name: str, age: int):
-        self.name = name
-        self.age = age
+    ''' Person interface class '''
+    
+    def __init__(self, name_: str, age_: int):
+        self.name = name_
+        self.age = age_
     
     @abstractmethod
     def greet(self):
         raise NotImplementedError
 
+
 class Person(AbstractPerson):
-    def __init__(self, name: str, age: int):
-        super().__init__(name, age)
+    ''' Concrete Person class '''
+
+    def __init__(self, name_: str, age_: int):
+        super().__init__(name_, age_)
 
     def greet(self):
         print("Hello, my name is {} and I am {} years old.".format(self.name, self.age))
 
+
 def main():
-    people = [
+    ''' Example code '''
+
+    # list of People objects
+    people: List[People] = [
         Person("Alice", 11), 
         Person("Bob", 22), 
         Person("Claire", 33)
     ]
     
+    # print each person's data:
     for person in people:
         person.greet()
 
