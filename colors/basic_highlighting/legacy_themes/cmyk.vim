@@ -1,6 +1,6 @@
 " ******************************************************************************
-" Name:         monk2.vim
-" Description:  Monokai Theme that recognizes object and function signatures.
+" Name:         stack_overflow.vim
+" Description:  StackOverflow theme with function and object signatures.
 " Author:       Logan Richey
 " Date:         Nov 11, 2025
 " ******************************************************************************
@@ -9,42 +9,44 @@ hi clear
 if exists("syntax_on")
     syntax reset
 endif
-let g:colors_name = "monokai2"
+let g:colors_name = "stack_overflow"
 set termguicolors
 
 " ******************************************************************************
 " Color Scheme
-let s:gray1 = "#101010"
-let s:gray2 = "#202020"
-let s:gray3 = "#707070"
-let s:blue = "#65d3ee"
-let s:green = "#ade132"
-let s:red = "#f2266c"
-let s:purple = "#ab82ef"
-let s:white = "#fafae0"
-let s:yellow = "#e6db74"
+
+" Main colors
+let s:white = "#e0e0e0"
+let s:white2 = "#c0c0c0"
+let s:black = "#171717"
+let s:gray2 = "#303030"
+let s:gray = "#808080"
 let s:magenta = "#ff00ff"
-let s:orange = "#ef7215"
 
-" Mapping -> Color Mapping
-let s:background_primary    = s:gray1
-let s:background_secondary  = s:gray2
-let s:comment               = s:gray3
-let s:foreground            = s:white
+" Main 3 colors
+let s:blue = '#00aeef'
+let s:yellow = '#fff200'
+let s:magenta = '#ec008c'
 
-" Mapping -> Keywords and Values
-let s:keyword_control_flow  = s:red 
-let s:keyword_type          = s:blue 
-let s:number                = s:purple 
-" let s:string                = s:yellow 
-let s:string                = s:purple 
+" Mapping -> Main colors
+let s:background_primary = s:black
+let s:background_secondary = s:gray2
+let s:comment = s:gray
+let s:foreground = s:white
 
-" Mapping -> Additional Highlights
-let s:scope_highlight       = s:magenta 
-let s:defclass              = s:green 
-let s:namespace_color       = s:green 
-" let s:function_call_color   = s:orange
-let s:function_call_color   = s:yellow
+" Mapping -> Keywords and Scope
+let s:keyword_control_flow = s:blue 
+let s:keyword_type = s:blue 
+let s:scope_highlight = s:magenta 
+
+" Mapping -> Values
+let s:number = s:magenta
+let s:string = s:magenta
+
+" Mapping -> Functions and Namespaces
+let s:function = s:yellow
+let s:defclass = s:yellow 
+let s:namespace = s:yellow
 
 " ******************************************************************************
 " UI Elements
@@ -102,19 +104,18 @@ execute 'hi DiffText guibg=' . "#4c4745"
 " Match any word containing :: and color the entire word.
 function! InitNamespaceSyntax() abort
     syntax match cppNamespace "\<[a-zA-Z_][a-zA-Z0-9_]*\(::[a-zA-Z_][a-zA-Z0-9_]*\)\+"
-    execute "highlight cppNamespace guifg=" . s:namespace_color
+    execute "highlight cppNamespace guifg=" . s:namespace
 endfunction 
 
 " Match any word preceeding a function
 function! InitFunctionsSyntax() abort
     syntax match cppFunction "\<[A-Za-z_][A-Za-z0-9_]*\ze\s*("
-    execute "highlight cppFunction guifg=" . s:function_call_color
+    execute "highlight cppFunction guifg=" . s:function
 endfunction
 
 " Run OnStart
 augroup MySyntaxTweaks
     autocmd!
-    " Always init namespaces for all filetypes
     autocmd Syntax * call InitNamespaceSyntax()
     autocmd Syntax * call InitFunctionsSyntax()
 augroup END
