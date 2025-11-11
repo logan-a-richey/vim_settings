@@ -1,38 +1,47 @@
-"*******************************************************************************
-" Name: Monokai.vim
-" Description: Vim colorscheme inspired by VSCODE MONOKAI.
-" Author: Logan A. Richey
-" Date: Jul 10, 2025
-
-"*******************************************************************************
-" Setup
+" ******************************************************************************
+" Name:         monk2.vim
+" Description:  Theme inspired sublime Monokai. 
+"               Fun theme that recognizes namespaces and function signatures.
+" Author:       Logan Richey
+" Date:         Nov 11, 2025
+" ******************************************************************************
 
 hi clear
 if exists("syntax_on")
     syntax reset
 endif
-let g:colors_name = "monokai"
+let g:colors_name = "monokai2"
 set termguicolors
 
-"*******************************************************************************
-" Color Palette
-" -----------------------------------------------------------------------------+
-" CMD             | HEX        | COLORNAME      | DESCRIPTION
-" ----------------+------------+----------------+------------------------------+
-let s:bg          = "#101010"  " DARK_GRAY      | background idle
-let s:bg_sec      = "#3e3d32"  " MID_GRAY       | current line background
-let s:comment     = "#5a5b50"  " LIGHT GRAY     | comments
-let s:fg          = "#c0c3bb"  " OFF WHITE      | normal text (off-white)
-let s:keyword1    = "#b02752"  " MAGENTA        | keywords (if, not, return)
-let s:keyword2    = "#52a9b9"  " LIGHT BLUE     | types (def, int, struct, etc.)
-let s:number      = "#715aab"  " PURPLE         | numbers
-let s:paren       = "#a08916"  " GOLD           | highlighted parentheses
-let s:defclass    = "#81b02a"  " LIME GREEN     | def/class names
-let s:string      = "#bcb25f"  " OFF YELLOW     | strings, chars, docstrings
-let s:operator_color = "#b02752" "MAGENTA
+" ******************************************************************************
+" Color Scheme
 
-"*******************************************************************************
+let s:gray1     =   "#101010"
+let s:gray2     =   "#202020"
+let s:gray3     =   "#707070"
+let s:blue      =   "#65d3ee"
+let s:green     =   "#ade132"
+let s:red       =   "#f2266c"
+let s:purple    =   "#ab82ef"
+let s:white     =   "#fafae0"
+let s:yellow    =   "#e6db74"
+let s:magenta   =   "#ff00ff"
+
+" Color Mapping
+let s:bg          = s:gray1
+let s:bg_sec      = s:gray2
+let s:comment     = s:gray3
+let s:fg          = s:white
+let s:keyword1    = s:red       " keywords (if, not, return)
+let s:keyword2    = s:blue      " types (def, int, struct, etc.)
+let s:number      = s:purple    " numbers
+let s:paren       = s:magenta   " highlighted parentheses
+let s:defclass    = s:green     " def/class names
+let s:string      = s:yellow    " strings, chars, docstrings
+
+" ******************************************************************************
 " UI Elements
+
 execute 'hi Normal guifg='     . s:fg       . ' guibg=' . s:bg
 execute 'hi CursorLine guibg=' . s:bg_sec
 execute 'hi CursorLineNr guifg=' . s:keyword2
@@ -45,26 +54,30 @@ execute 'hi VertSplit guifg='  . "#3e3d32"  . ' guibg=' . s:bg
 execute 'hi StatusLine guifg=' . s:fg       . ' guibg=' . s:bg_sec
 execute 'hi StatusLineNC guifg=' . "#666666". ' guibg=' . s:bg_sec
 
-"*******************************************************************************
-" Syntax Highlighting
+" Change popup menu background to dark blue
+highlight Pmenu ctermbg=darkblue guibg=darkblue
+highlight PmenuSel ctermbg=blue guibg=blue
 
-" execute 'hi Comment guifg='    . s:comment . ' gui=italic'
-execute 'hi Comment guifg='    . s:comment . ' gui=bold'
+" ******************************************************************************
+" Code Syntax highlighting 
+
+execute 'hi Comment guifg='    . s:comment 
+" . ' gui=italic'
 
 " covers char, string, numbers
-execute 'hi Constant guifg='   . s:string . ' gui=bold'
+execute 'hi Constant guifg='   . s:string 
 
-execute 'hi String guifg='     . s:string . ' gui=bold'
-execute 'hi Character guifg='  . s:string . ' gui=bold'
-execute 'hi Number guifg='     . s:number . ' gui=bold'
-execute 'hi Boolean guifg='    . s:number . ' gui=bold'
-execute 'hi Identifier guifg=' . s:defclass . ' gui=bold'
-execute 'hi Function guifg='   . s:defclass . ' gui=bold'
-execute 'hi Statement guifg='  . s:keyword1 . ' gui=bold'
-execute 'hi Keyword guifg='    . s:keyword1 . ' gui=bold'
-execute 'hi PreProc guifg='    . s:keyword1 . ' gui=bold'
-execute 'hi Type guifg='       . s:keyword2 . ' gui=bold'
-execute 'hi Special guifg='    . s:number . ' gui=bold'
+execute 'hi String guifg='     . s:string 
+execute 'hi Character guifg='  . s:string 
+execute 'hi Number guifg='     . s:number 
+execute 'hi Boolean guifg='    . s:number 
+execute 'hi Identifier guifg=' . s:defclass 
+execute 'hi Function guifg='   . s:defclass 
+execute 'hi Statement guifg='  . s:keyword1 
+execute 'hi Keyword guifg='    . s:keyword1 
+execute 'hi PreProc guifg='    . s:keyword1 
+execute 'hi Type guifg='       . s:keyword2 
+execute 'hi Special guifg='    . s:number 
 execute 'hi Error guifg='      . "#ffffff" . ' guibg=#b02752'
 execute 'hi Todo guifg='       . "#ffffff" . ' guibg=#a08916'
 
@@ -76,14 +89,17 @@ execute 'hi DiffChange guibg=' . "#4a410d"
 execute 'hi DiffDelete guibg=' . "#420e09"
 execute 'hi DiffText guibg='   . "#4c4745"
 
-
-"*******************************************************************************
+" *****************************************************************************
 " Language Specific and Advanced Tweaks
 
 " Namespaces
-function! InitNamespaces() abort
+function! InitDefClassSignatures() abort
     syntax match cppNamespace "\<[a-zA-Z_][a-zA-Z0-9_]*\(::[a-zA-Z_][a-zA-Z0-9_]*\)\+"
-    execute "highlight cppNamespace guifg=" . s:defclass . " gui=bold"
+    execute "highlight cppNamespace guifg=" . s:defclass
+    
+    " Match any word preceeding a function
+    syntax match cppFunction "\<[A-Za-z_][A-Za-z0-9_]*\ze\s*("
+    execute "highlight cppFunction guifg=" . s:defclass
 endfunction
 
 " Advanced Tweaks
@@ -126,14 +142,12 @@ endfunction
 augroup MySyntaxTweaks
     autocmd!
     " Always init namespaces for all filetypes
-    autocmd Syntax * call InitNamespaces()
+    autocmd Syntax * call InitDefClassSignatures()
 
     " Only setup C keywords after filetype detection
     autocmd FileType c,cpp call s:setup_c_keywords()
 augroup END
 
-" Change popup menu background to dark blue
-highlight Pmenu ctermbg=darkblue guibg=darkblue
-highlight PmenuSel ctermbg=blue guibg=blue
+" Call again just in case function did not run
+call InitDefClassSignatures()
 
-call InitNamespaces()
