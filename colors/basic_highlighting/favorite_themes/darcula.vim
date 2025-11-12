@@ -1,57 +1,51 @@
 " ******************************************************************************
-" Name:         stack_overflow.vim
-" Description:  StackOverflow theme with function and object signatures.
-" Author:       Logan Richey
-" Date:         Nov 11, 2025
+" Name: darcula.vim
+" Description: Theme inspired by Darcula theme.
+" Author: Logan Richey
+" Date: Nov 12, 2025
 " ******************************************************************************
 
 hi clear
 if exists("syntax_on")
-    syntax reset
+     syntax reset
 endif
-let g:colors_name = "stack_overflow"
+let g:colors_name = "darcula"
 set termguicolors
 
 " ******************************************************************************
-" Color Scheme
+" DARCULA Colors ... mispelled, but still very spooky.
 
-" Main colors
-let s:white = "#e0e0e0"
-let s:white2 = "#c0c0c0"
-let s:black = "#171717"
-let s:gray2 = "#303030"
-let s:gray = "#808080"
-let s:magenta = "#ff00ff"
-
-" Main 3 colors
-let s:blue = '#538fdf'
-let s:orange = '#e48e24'
-let s:green = '#7ca929'
-
-let s:salmon = '#fa8072'
-let s:faint_yellow = '#ffffc5'
-let s:faint_purple = '#C3B1E1'
-let s:purple = '#966fd6'
+let s:gray0 = '#202020'
+let s:gray1 = '#2b2b2b'
+let s:gray2 = '#323232'
+let s:gray3 = '#808080'
+let s:orange = '#d97317'
+let s:off_white = '#a6b8c8'
+let s:purple = '#9576cb'
+let s:green = '#04c900'
+let s:yellow = '#ffc35b'
+let s:blue = '#5999bf'
+let s:brown = '#d27b50'
 
 " Mapping -> Main colors
-let s:background_primary = s:black
+let s:background_primary = s:gray0
 let s:background_secondary = s:gray2
-let s:comment = s:gray
-let s:foreground = s:white
+let s:comment = s:gray3
+let s:foreground = s:off_white
 
 " Mapping -> Keywords and Scope
-let s:keyword_control_flow = s:blue " keywords (if, not, return)
-let s:keyword_type = s:blue " types (def, int, struct, etc.)
-let s:scope_highlight = s:magenta " highlighted parentheses
+let s:keyword_control_flow = s:orange " keywords (if, not, return)
+let s:keyword_type = s:orange " types (def, int, struct, etc.)
+let s:scope_highlight = s:green " highlighted parentheses
 
 " Mapping -> Values
-let s:number = s:salmon
+let s:number = s:blue
 let s:string = s:green
 
 " Mapping -> Functions and Namespaces
-let s:function = s:orange
-let s:defclass = s:orange " def/class names
-let s:namespace = s:orange
+let s:function = s:yellow
+let s:defclass = s:yellow " def/class names
+let s:namespace = s:brown
 
 " ******************************************************************************
 " UI Elements
@@ -75,8 +69,7 @@ highlight PmenuSel ctermbg=blue guibg=blue
 " ******************************************************************************
 " Code Syntax highlighting 
 
-execute 'hi Comment guifg=' . s:comment 
-" . ' gui=italic'
+execute 'hi Comment guifg=' . s:comment . ' gui=italic'
 
 " covers char, string, numbers
 execute 'hi Constant guifg=' . s:string 
@@ -92,31 +85,31 @@ execute 'hi Keyword guifg=' . s:keyword_control_flow
 execute 'hi PreProc guifg=' . s:keyword_control_flow 
 execute 'hi Type guifg=' . s:keyword_type 
 execute 'hi Special guifg=' . s:number 
-execute 'hi Error guifg=' . "#ffffff" . ' guibg=#b02752'
-execute 'hi Todo guifg=' . "#ffffff" . ' guibg=#a08916'
+execute 'hi Error guifg=' . '#ffffff' . ' guibg=#b02752'
+execute 'hi Todo guifg=' . '#ffffff' . ' guibg=#a08916'
 
 " Additional Tweaks
 execute 'hi Title guifg=' . s:keyword_control_flow
 execute 'hi Directory guifg=' . s:defclass
-execute 'hi DiffAdd guibg=' . "#13354a"
-execute 'hi DiffChange guibg=' . "#4a410d"
-execute 'hi DiffDelete guibg=' . "#420e09"
-execute 'hi DiffText guibg=' . "#4c4745"
+execute 'hi DiffAdd guibg=' . '#13354a'
+execute 'hi DiffChange guibg=' . '#4a410d'
+execute 'hi DiffDelete guibg=' . '#420e09'
+execute 'hi DiffText guibg=' . '#4c4745'
 
 " *****************************************************************************
 " Language Specific and Advanced Tweaks
 
 " Match any word containing :: and color the entire word.
 function! InitNamespaceSyntax() abort
-    syntax match cppNamespace "\<[a-zA-Z_][a-zA-Z0-9_]*\(::[a-zA-Z_][a-zA-Z0-9_]*\)\+"
-    execute "highlight cppNamespace guifg=" . s:namespace
+    syntax match cppNamespace '\<[a-zA-Z_][a-zA-Z0-9_]*\(::[a-zA-Z_][a-zA-Z0-9_]*\)\+'
+    execute 'highlight cppNamespace guifg=' . s:namespace
 endfunction 
 
 " Match any word preceeding a function
 function! InitFunctionsSyntax() abort
     " syntax match cppFunction '\<[A-Za-z_][A-Za-z0-9_]*\ze\s*('
-    syntax match cppFunction "\<[A-Za-z_][A-Za-z0-9_]*\ze("
-    execute "highlight cppFunction guifg=" . s:function
+    syntax match cppFunction '\<[A-Za-z_][A-Za-z0-9_]*\ze('
+    execute 'highlight cppFunction guifg=' . s:function
 endfunction
 
 " Run OnStart
