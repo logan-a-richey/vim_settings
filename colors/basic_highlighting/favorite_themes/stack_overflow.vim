@@ -28,6 +28,11 @@ let s:blue = '#538fdf'
 let s:orange = '#e48e24'
 let s:green = '#7ca929'
 
+let s:salmon = '#fa8072'
+let s:faint_yellow = '#ffffc5'
+let s:faint_purple = '#C3B1E1'
+let s:purple = '#966fd6'
+
 " Mapping -> Main colors
 let s:background_primary = s:black
 let s:background_secondary = s:gray2
@@ -40,13 +45,13 @@ let s:keyword_type = s:blue " types (def, int, struct, etc.)
 let s:scope_highlight = s:magenta " highlighted parentheses
 
 " Mapping -> Values
-let s:number = s:green
+let s:number = s:salmon
 let s:string = s:green
 
 " Mapping -> Functions and Namespaces
 let s:function = s:orange
 let s:defclass = s:orange " def/class names
-let s:namespace = s:orange
+let s:namespace = s:purple
 
 " ******************************************************************************
 " UI Elements
@@ -109,7 +114,8 @@ endfunction
 
 " Match any word preceeding a function
 function! InitFunctionsSyntax() abort
-    syntax match cppFunction "\<[A-Za-z_][A-Za-z0-9_]*\ze\s*("
+    " syntax match cppFunction '\<[A-Za-z_][A-Za-z0-9_]*\ze\s*('
+    syntax match cppFunction "\<[A-Za-z_][A-Za-z0-9_]*\ze("
     execute "highlight cppFunction guifg=" . s:function
 endfunction
 

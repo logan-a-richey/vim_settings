@@ -1,13 +1,13 @@
 " ******************************************************************************
-" Name:         openai.vim
-" Description:  Theme inspired by OPENAI CODE
-" Author:       Logan Richey
-" Date:         Nov 11, 2025
+" Name: openai.vim
+" Description: Theme inspired by ChatGPT code snippet theme.
+" Author: Logan Richey
+" Date: Nov 12, 2025
 " ******************************************************************************
 
 hi clear
 if exists("syntax_on")
-    syntax reset
+     syntax reset
 endif
 let g:colors_name = "openai"
 set termguicolors
@@ -15,15 +15,15 @@ set termguicolors
 " ******************************************************************************
 " User Colors
 
-let s:gray1  = '#101010' " for background 
-let s:gray2  = '#202020' " for background current line
-let s:gray3  = '#707070' " for comments
-let s:white  = '#e0e0e0' " for normal text
-let s:blue   = '#2e95d3' " for builtin keywords
+let s:gray1 = '#101010' " for background 
+let s:gray2 = '#202020' " for background current line
+let s:gray3 = '#707070' " for comments
+let s:white = '#e0e0e0' " for normal text
+let s:blue = '#2e95d3' " for builtin keywords
 let s:orange = '#e9950c' " for builtin functions
-let s:turq   = '#06a27b' " for strings
-let s:red    = '#f22c3d' " for defname classname
-let s:pink   = '#df3079' " for numeric values
+let s:green = '#06a27b' " for strings
+let s:red = '#f22c3d' " for defname classname
+let s:pink = '#df3079' " for numeric values
 
 " Mapping -> Main colors
 let s:background_primary = s:gray1
@@ -38,7 +38,7 @@ let s:scope_highlight = s:pink " highlighted parentheses
 
 " Mapping -> Values
 let s:number = s:pink
-let s:string = s:turq
+let s:string = s:green
 
 " Mapping -> Functions and Namespaces
 let s:function = s:orange
@@ -106,7 +106,8 @@ endfunction
 
 " Match any word preceeding a function
 function! InitFunctionsSyntax() abort
-    syntax match cppFunction "\<[A-Za-z_][A-Za-z0-9_]*\ze\s*("
+    " syntax match cppFunction '\<[A-Za-z_][A-Za-z0-9_]*\ze\s*('
+    syntax match cppFunction "\<[A-Za-z_][A-Za-z0-9_]*\ze("
     execute "highlight cppFunction guifg=" . s:function
 endfunction
 
