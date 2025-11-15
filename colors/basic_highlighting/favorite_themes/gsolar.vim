@@ -26,7 +26,7 @@ let s:green = '#6b9700'
 let s:yellow = '#b4860a'
 let s:red = '#bd3f2d'
 let s:cyan = '#29a090'
-
+let s:pink = '#d33682'
 
 " Mapping -> Main colors
 let s:background_primary = s:turq1
@@ -42,6 +42,7 @@ let s:scope_highlight = s:yellow " highlighted parentheses
 " Mapping -> Values
 let s:number = s:cyan
 let s:string = s:cyan
+let s:special = s:pink 
 
 " Mapping -> Functions and Namespaces
 let s:function_name = s:green
@@ -86,7 +87,7 @@ execute 'hi Statement guifg=' . s:keyword_control_flow
 execute 'hi Keyword guifg=' . s:keyword_control_flow 
 execute 'hi PreProc guifg=' . s:keyword_control_flow 
 execute 'hi Type guifg=' . s:keyword_type 
-execute 'hi Special guifg=' . s:number 
+execute 'hi Special guifg=' . s:special 
 execute 'hi Error guifg=' . "#ffffff" . ' guibg=#b02752'
 execute 'hi Todo guifg=' . "#ffffff" . ' guibg=#a08916'
 
