@@ -141,7 +141,6 @@ augroup MySyntaxTweaks
     autocmd!
     autocmd Syntax * call InitNamespaceSyntax()
     autocmd Syntax * call InitFunctionsSyntax()
-    autocmd Syntax * call SetDarkBG()
 augroup END
 
 call InitNamespaceSyntax()
