@@ -23,8 +23,9 @@ let s:gray = '#586e75' " comments
 let s:white1 = '#8fa097' " normal text
 let s:white2 = '#9db0a8' " slightly brighter
 let s:white3 = '#aebfc7' " brighter
+let s:white3 = '#b0c0d0' " brighter
 
-let s:green = '#6b9700'
+let s:green = '#80b000'
 let s:orange = '#b4860a'
 let s:red = '#bd3f2d'
 let s:cyan = '#29a090'
