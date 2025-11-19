@@ -1,0 +1,17 @@
+{
+    "fg": "#d0d0d0",
+    "bg": "#131313",
+    "bg_sec": "#232323",
+    "comment": "#404040",
+    "pmenu_fg": "darkblue",
+    "pmenu_bg": "#232323",
+    "keyword_type": "#40a0a0",
+    "keyword_control_flow": "#a0a040",
+    "number": "#a04040",
+    "character": "#a04040",
+    "string": "#40a040",
+    "member_access": "#ffff00",
+    "function_access": "#ffa500",
+    "namespace_access": "#00ffff",
+    "operator": "#ff00ff"
+}
