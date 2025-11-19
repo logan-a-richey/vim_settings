@@ -16,7 +16,7 @@ set termguicolors
 " User Colors
 
 let s:gray1 = '#101010' " for background 
-let s:gray2 = '#202020' " for background current line
+let s:gray2 = '#303030' " for background current line
 let s:gray3 = '#707070' " for comments
 let s:white = '#e0e0e0' " for normal text
 let s:blue = '#2e95d3' " for builtin keywords
