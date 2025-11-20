@@ -27,7 +27,7 @@ def get_vim_commands(color_dict: Dict[str, str], tokens: List[str]) -> List[str]
         
     # default colors (renoise theme)
     default_color_dict = {
-        "bg": "#131313",
+        "\"bg": "#131313",
         "bg_sec": "#24262d",
         # "comment": "#47525b",
         "comment": "#404040",
@@ -294,7 +294,7 @@ call InitCustomSyntax()'''
     for k, v in vimscript_var_lookup.items():
         fh.write("let s:{} = \'{}\'\n".format(k, v))
     fh.write("\n")
-    
+        
     for cmd in cmds:
         fh.write(cmd)
         fh.write("\n")

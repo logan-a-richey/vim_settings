@@ -21,33 +21,53 @@ execute 'hi Statement gui=NONE'
 " ------------------------------------------------------------------------------
 " Variable palette
 
-let s:bg          = "#1e1e1e"
-let s:fg          = "#d4d4d4"
-let s:bg_sec      = "#2a2a2a"
-let s:comment     = "#6a6a6a"
-let s:kw_type     = "#569cd6"
-let s:stmt        = "#c586c0"
-let s:value       = "#98c379"
-let s:func_call   = "#dcdcaa"
-let s:member      = "#4ec9b0"
-let s:namespace   = "#9cdcfe"
+let s:gray1 = "#1e1e1e"
+let s:white = "#d4d4d4"
+let s:gray2 = "#2a2a2a"
+let s:gray3 = "#6a6a6a"
+let s:blue = "#569cd6"
+let s:purple = "#c586c0"
+let s:green = "#98c379"
+let s:yellow = "#dcdcaa"
+let s:cyan = "#4ec9b0"
+let s:baby_blue = "#9cdcfe"
+
+" Assignment
+let s:bg          = s:gray1 " background main
+let s:bg_sec      = s:gray2 " background current line
+let s:comment     = s:gray3 " comments
+let s:fg          = s:white " normal text
+
+let s:value       = s:green 
+let s:string      = s:green
+let s:special     = s:cyan
+
+let s:stmt        = s:purple " for control flow keywords (if, else)
+let s:kw_type     = s:blue  " for type keywords (int, bool, class)
+
+let s:func_call   = s:yellow
+let s:member      = s:cyan
+let s:namespace   = s:baby_blue
 
 " ------------------------------------------------------------------------------
 " Custom theme groups
 
 " TODO edit these colors 
 
-execute 'hi MinimalNormal guifg='   . s:fg      . ' guibg=s:bg gui=NONE'
+execute 'hi MinimalNormal guifg='   . s:fg      . ' guibg=' . s:bg . ' gui=NONE'
 execute 'hi MinimalComment guifg='  . s:comment . ' guibg=NONE gui=NONE'
 execute 'hi MinimalKeyword guifg='  . s:kw_type . ' guibg=NONE gui=NONE'
 execute 'hi MinimalType guifg='     . s:kw_type . ' guibg=NONE gui=NONE'
 execute 'hi MinimalStatement guifg='. s:stmt    . ' guibg=NONE gui=NONE'
 execute 'hi MinimalValue guifg='    . s:value   . ' guibg=NONE gui=NONE'
+execute 'hi MinimalString guifg=' . s:string . ' guibg=NONE gui=NONE'
+execute 'hi MinimalSpecial guifg=' . s:special . ' guibg=NONE gui=NONE'
 
 " Custom structural syntax groups
 execute 'hi MinimalFunctionCall guifg=' . s:func_call ' gui=NONE'
 execute 'hi MinimalMemberAccess guifg=' . s:member    ' gui=NONE'
 execute 'hi MinimalNamespace guifg='    . s:namespace ' gui=NONE'
+
 
 " UI groups
 execute 'hi CursorLine guibg=' . s:bg_sec
@@ -55,6 +75,9 @@ execute 'hi LineNr guifg=' . "#4e4e4e" . ' guibg=' . s:bg
 execute 'hi CursorLineNr guifg=' . "#cccccc" . ' guibg=' . s:bg_sec
 highlight Pmenu ctermbg=darkblue guibg=darkblue
 highlight PmenuSel ctermbg=blue guibg=blue
+
+execute 'hi pythonExceptions guifg=' . s:kw_type . ' guibg=NONE gui=NONE'
+execute 'hi pythonKeyword guifg=' . s:stmt . ' guibg=NONE gui=NONE'
 
 " ------------------------------------------------------------------------------
 " Link to builtin
@@ -72,11 +95,12 @@ hi! link Statement   MinimalStatement
 hi! link PreProc     MinimalStatement
 
 " Values
-hi! link String      MinimalValue
+hi! link String      MinimalString
 hi! link Character   MinimalValue
 hi! link Number      MinimalValue
 hi! link Boolean     MinimalValue
 hi! link Constant    MinimalValue
+hi! link Special     MinimalSpecial 
 
 " Identifiers / default
 hi! link Identifier  MinimalNormal
