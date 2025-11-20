@@ -1,8 +1,8 @@
 " ==============================================================================
-" Name:         gsolar.vim
-" Description:  Theme inspired by Solarized. Gedit variation.
+" Name:         naysayer.vim
+" Description:  Theme inspired by Emacs Naysayer
 " Author:       Logan Richey
-" Date:         Nov 16, 2025
+" Date:         Nov 20, 2025
 " ==============================================================================
 
 " Reset previous theme settings
@@ -11,7 +11,7 @@ hi clear
 if exists('syntax_on')
      syntax reset
 endif
-let g:colors_name = 'gsolar'
+let g:colors_name = 'naysayer'
 
 set termguicolors
 set cursorline
