@@ -81,8 +81,14 @@ def get_vim_commands(color_dict: Dict[str, str], tokens: List[str]) -> List[str]
     # TODO - instead of subbing in the color hex directly, sub in s:VAR_NAME for easier vim editting.
     # loop over token types in spec file
     cmds = []
-
+    
+    language_names = ["c", "cpp", "cs", "vim", "python", "lua", "rust", "html", "javascript", "java", "js", "bash", "sh"]
     for token in tokens:
+        # ignore language - specific commands, as they link to more general ones. 
+        # for example, cppFunction maps to Function
+        
+        print("Scanning token: {}".format(token))
+
         if (token == "Pmenu"):
             cmd = "highlight Pmenu ctermbg=darkblue guibg=darkblue"
             cmds.append(cmd)
@@ -124,6 +130,7 @@ def get_vim_commands(color_dict: Dict[str, str], tokens: List[str]) -> List[str]
         elif (token == "StatusLineNC"):
             cmd = "execute \'hi StatusLineNC guifg=\' . s:fg . \' guibg=\' . s:bg_sec . \' gui=NONE\'"
             cmds.append(cmd)
+
         elif (token == "Comment"):
             cmd = "execute \'hi Comment guifg=\' . s:comment . \' gui=NONE\' " 
             cmds.append(cmd)
@@ -148,17 +155,17 @@ def get_vim_commands(color_dict: Dict[str, str], tokens: List[str]) -> List[str]
         elif (token == "Function"):
             cmd = "execute \'hi Function guifg=\' . s:fg  . \' gui=NONE\'" 
             cmds.append(cmd)
-        elif (token == "Statement"):
-            cmd = "execute \'hi Statement guifg=\' . s:kw_flow  . \' gui=NONE\'" 
+        elif ("Statement" in token):
+            cmd = "execute \'hi {} guifg=\' . s:kw_flow  . \' gui=NONE\'".format(token)
             cmds.append(cmd)
-        elif (token == "Keyword"):
-            cmd = "execute \'hi Keyword guifg=\' . s:kw_flow  . \' gui=NONE\'" 
+        elif ("Keyword" in token):
+            cmd = "execute \'hi {} guifg=\' . s:kw_flow  . \' gui=NONE\'".format(token)
             cmds.append(cmd)
         elif (token == "PreProc"):
             cmd = "execute \'hi PreProc guifg=\' . s:kw_flow  . \' gui=NONE\'" 
             cmds.append(cmd)
-        elif (token == "Type"):
-            cmd = "execute \'hi Type guifg=\' . s:kw_type  . \' gui=NONE\'" 
+        elif ("Type" in token):
+            cmd = "execute \'hi {} guifg=\' . s:kw_type  . \' gui=NONE\'".format(token)
             cmds.append(cmd)
         elif (token == "Special"):
             cmd = "execute \'hi Special guifg=\' . s:special  . \' gui=NONE\'" 
@@ -175,27 +182,46 @@ def get_vim_commands(color_dict: Dict[str, str], tokens: List[str]) -> List[str]
         elif (token == "Directory"):
             cmd = "execute \'hi Directory guifg=\' . s:class . \' gui=NONE\'" 
             cmds.append(cmd)
-        elif (token == "DiffAdd"):
-            cmd = "execute \'hi DiffAdd guibg=#13354a gui=NONE\'" 
+        
+        elif ("Diff" in token):
+            cmd = "execute \'hi {} guibg=\' . s:special . \' gui=NONE\'".format(token)
+
+#        elif (token == "DiffAdd"):
+#            cmd = "execute \'hi DiffAdd guibg=#13354a gui=NONE\'" 
+#            cmds.append(cmd)
+#        elif (token == "DiffChange"):
+#            cmd = "execute \'hi DiffChange guibg=#4a410d gui=NONE\'" 
+#            cmds.append(cmd)
+#        elif (token == "DiffDelete"):
+#            cmd = "execute \'hi DiffDelete guibg=#420e09 gui=NONE\'" 
+#            cmds.append(cmd)
+#        elif (token == "DiffText"):
+#            cmd = "execute \'hi DiffText guibg=#4c4745 gui=NONE\'" 
+#            cmds.append(cmd)
+        
+        elif (token == "Include"):
+            cmd = "execute \'hi Include guifg=\' . s:kw_flow . \' guibg=\' . s:bg . \' gui=NONE\'" 
             cmds.append(cmd)
-        elif (token == "DiffChange"):
-            cmd = "execute \'hi DiffChange guibg=#4a410d gui=NONE\'" 
+        elif (token == "IncludeSystem"):
+            cmd = "execute \'hi Include guifg=\' . s:string . \' guibg=\' . s:bg . \' gui=NONE\'" 
             cmds.append(cmd)
-        elif (token == "DiffDelete"):
-            cmd = "execute \'hi DiffDelete guibg=#420e09 gui=NONE\'" 
-            cmds.append(cmd)
-        elif (token == "DiffText"):
-            cmd = "execute \'hi DiffText guibg=#4c4745 gui=NONE\'" 
-            cmds.append(cmd)
+        
         else:
+            for lang in language_names:
+                if token.startswith(lang):
+                    continue
+            
             generic_fg = "s:fg"
             generic_bg = "s:bg"
             generic_mode = "NONE"
+            
+            # note that underline and error are independent events
             if ("Underline" in token):
                 #if "underline_blue" not in vimscript_var_lookup:
                 #    vimscript_var_lookup["underline_blue"] = "#0000ff"
                 generic_fg = "s:underline_blue"
                 generic_mode = "underline"
+            
             if ("Error" in token):
                 #if "error_fg" not in vimscript_var_lookup:
                 #    vimscript_var_lookup["error_fg"] = "#e0e0e0"
@@ -203,10 +229,8 @@ def get_vim_commands(color_dict: Dict[str, str], tokens: List[str]) -> List[str]
                 #    vimscript_var_lookup["error_bg"] = "#b02752"
                 generic_fg = "s:error_fg"
                 generic_bg = "s:error_bg"
-            cmd = "execute \'hi {} guifg=\' . {} . \' guibg=\' . {} . \' gui={}\'".format(
-                token, generic_fg, generic_bg, generic_mode
-            )
-            pass
+            cmd = "execute \'hi {} guifg=\' . {} . \' guibg=\' . {} . \' gui={}\'".format(token, generic_fg, generic_bg, generic_mode)
+            cmds.append(cmd)
         
     cmds.sort()
     return cmds, vimscript_var_lookup
@@ -234,8 +258,8 @@ def write_output(color_dict: dict, output_path: str) -> None:
 
     vim_closer = r'''" Custom Tweaks
 function! InitCustomSyntax() abort
-    \"syntax match ClassName /\v<(class|struct)\s+\zs\w+/
-    \"execute 'highlight ClassName guifg=' . s:class
+    "syntax match ClassName /\v<(class|struct)\s+\zs\w+/
+    "execute 'highlight ClassName guifg=' . s:class
 
     syntax match cppNamespace '\<[a-zA-Z_][a-zA-Z0-9_]*\(::[a-zA-Z_][a-zA-Z0-9_]*\)\+'
     execute 'highlight cppNamespace guifg=' . s:namespace
@@ -341,7 +365,7 @@ def main() -> int:
     write_output(color_dict, output_path)
 
     # print newly created file for sanity checking
-    print_output_file(output_path)
+    # print_output_file(output_path)
     
     return 0
 
