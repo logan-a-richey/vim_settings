@@ -18,3 +18,37 @@
 
 ## Generator
 * Python generator that reads in a .json file and outputs the correct vimscript file.
+
+## Regex Planning:
+
+### match function call
+**TODO** - negative look-behind to ensure :: does precede expression.
+```vimscript
+:%s/\(~\?[a-zA-Z_][a-zA-Z0-9_]*\)\((\)/\1\2
+```
+
+### match member access
+**TODO** - negative look-behind to ensure :: does precede expression.
+```vimscript
+:%s/\(->\|\.\)\([a-zA-Z_][a-zA-Z0-9_]*\)/\1\2 
+```
+
+### match namespace access
+**TODO** - positive look-ahead to not match on a namspeace function call.
+```vimscript
+:%s/\([a-zA-Z_][a-zA-Z0-9_]*\)\(::[a-zA-Z_][a-zA-Z0-9_]*\(\?\!\\)\)\+
+```
+
+### match namespace function call
+**TODO** - positive look-behind to not match
+```vimscript
+:%s/\(::\)\([a-zA-Z_][a-zA-Z0-9_]*\)\((\)/\1\2\3 
+```
+
+### match paren
+```vimscript
+:%s/\([()\[\]\{\}]\)/\1/g
+```
+
+**NOTE** All of these match groups should not match inside of comment blocks 
+
