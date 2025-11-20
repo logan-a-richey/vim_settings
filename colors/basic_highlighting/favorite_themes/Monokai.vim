@@ -1,40 +1,40 @@
 " ******************************************************************************
-" Name:         monk2.vim
+" Name:         Monokai.vim
 " Description:  Monokai Theme that recognizes object and function signatures.
 " Author:       Logan Richey
 " Date:         Nov 11, 2025
 " ******************************************************************************
 
 hi clear
-if exists("syntax_on")
+if exists('syntax_on')
     syntax reset
 endif
-let g:colors_name = "monokai2"
+let g:colors_name = 'monokai2'
 set termguicolors
 
 " ******************************************************************************
 " Color Scheme
-let s:gray1 = "#101010"
-let s:gray2 = "#202020"
-let s:gray3 = "#707070"
-let s:blue = "#65d3ee"
-let s:green = "#ade132"
-let s:red = "#f2266c"
-let s:purple = "#ab82ef"
-let s:white = "#fafae0"
-let s:yellow = "#e6db74"
-let s:magenta = "#ff00ff"
-let s:orange = "#ef7215"
+let s:gray1 = '#202020'
+let s:gray2 = '#303030'
+let s:gray3 = '#707070'
+let s:blue = '#65d3ee'
+let s:green = '#ade132'
+let s:red = '#f2266c'
+let s:purple = '#ab82ef'
+let s:white = '#fafae0'
+let s:yellow = '#e8dc66'
+let s:magenta = '#ff00ff'
+let s:orange = '#ef7215'
 
 " Mapping -> Color Mapping
-let s:background_primary    = s:gray1
-let s:background_secondary  = s:gray2
+let s:bg    = s:gray1
+let s:bg_sec  = s:gray2
 let s:comment               = s:gray3
-let s:foreground            = s:white
+let s:fg            = s:white
 
 " Mapping -> Keywords and Values
-let s:keyword_control_flow  = s:red 
-let s:keyword_type          = s:blue 
+let s:stmt  = s:red 
+let s:kw_type          = s:blue 
 let s:number                = s:purple 
 let s:string                = s:purple 
 
@@ -47,17 +47,17 @@ let s:function_call_color   = s:yellow
 " ******************************************************************************
 " UI Elements
 
-execute 'hi Normal guifg=' . s:foreground . ' guibg=' . s:background_primary
-execute 'hi CursorLine guibg=' . s:background_secondary
-execute 'hi CursorLineNr guifg=' . s:keyword_type
+execute 'hi Normal guifg=' . s:fg . ' guibg=' . s:bg
+execute 'hi CursorLine guibg=' . s:bg_sec
+execute 'hi CursorLineNr guifg=' . s:kw_type
 execute 'hi LineNr guifg=' . "#444444"
 execute 'hi Visual guibg=' . "#49483E"
-execute 'hi Search guifg=' . s:background_primary . ' guibg=' . s:keyword_type
-execute 'hi IncSearch guifg=' . s:background_primary . ' guibg=' . s:keyword_control_flow
+execute 'hi Search guifg=' . s:bg . ' guibg=' . s:kw_type
+execute 'hi IncSearch guifg=' . s:bg . ' guibg=' . s:stmt
 execute 'hi MatchParen guifg=' . s:scope_highlight . ' guibg=' . "#49483E"
-execute 'hi VertSplit guifg=' . "#3e3d32" . ' guibg=' . s:background_primary
-execute 'hi StatusLine guifg=' . s:foreground . ' guibg=' . s:background_secondary
-execute 'hi StatusLineNC guifg=' . "#666666". ' guibg=' . s:background_secondary
+execute 'hi VertSplit guifg=' . "#3e3d32" . ' guibg=' . s:bg
+execute 'hi StatusLine guifg=' . s:fg . ' guibg=' . s:bg_sec
+execute 'hi StatusLineNC guifg=' . "#666666". ' guibg=' . s:bg_sec
 
 " Change popup menu background to dark blue
 highlight Pmenu ctermbg=darkblue guibg=darkblue
@@ -78,16 +78,16 @@ execute 'hi Number guifg=' . s:number
 execute 'hi Boolean guifg=' . s:number 
 execute 'hi Identifier guifg=' . s:defclass 
 execute 'hi Function guifg=' . s:defclass 
-execute 'hi Statement guifg=' . s:keyword_control_flow 
-execute 'hi Keyword guifg=' . s:keyword_control_flow 
-execute 'hi PreProc guifg=' . s:keyword_control_flow 
-execute 'hi Type guifg=' . s:keyword_type 
+execute 'hi Statement guifg=' . s:stmt 
+execute 'hi Keyword guifg=' . s:stmt 
+execute 'hi PreProc guifg=' . s:stmt 
+execute 'hi Type guifg=' . s:kw_type 
 execute 'hi Special guifg=' . s:number 
 execute 'hi Error guifg=' . "#ffffff" . ' guibg=#b02752'
 execute 'hi Todo guifg=' . "#ffffff" . ' guibg=#a08916'
 
 " Additional Tweaks
-execute 'hi Title guifg=' . s:keyword_control_flow
+execute 'hi Title guifg=' . s:stmt
 execute 'hi Directory guifg=' . s:defclass
 execute 'hi DiffAdd guibg=' . "#13354a"
 execute 'hi DiffChange guibg=' . "#4a410d"
@@ -97,23 +97,44 @@ execute 'hi DiffText guibg=' . "#4c4745"
 " *****************************************************************************
 " Language Specific and Advanced Tweaks
 
+" Disable bold for all highlight groups
+function! DisableGuiBold() abort
+    for group in getcompletion('', 'highlight')
+        if group =~# '^\w\+$' " Only process valid highlight group names
+            try
+                " Get current highlight settings for the group
+                redir => l:current_settings
+                silent! execute "highlight " . group
+                redir END
+
+                " If 'gui=bold' is present, set gui to NONE
+                if l:current_settings =~# 'gui=bold'
+                    execute "highlight " . group . " gui=NONE"
+                endif
+            catch /E28: No such highlight group/
+                " Ignore errors for non-existent groups (shouldn't happen with getcompletion)
+            endtry
+        endif
+    endfor
+endfunction
+
 " Match any word containing :: and color the entire word.
 function! InitNamespaceSyntax() abort
-    syntax match cppNamespace "\<[a-zA-Z_][a-zA-Z0-9_]*\(::[a-zA-Z_][a-zA-Z0-9_]*\)\+"
-    execute "highlight cppNamespace guifg=" . s:namespace_color
+    syntax match myNamespace "\<[a-zA-Z_][a-zA-Z0-9_]*\(::[a-zA-Z_][a-zA-Z0-9_]*\)\+"
+    execute "highlight myNamespace guifg=" . s:namespace_color
 endfunction 
 
 " Match any word preceeding a function
 function! InitFunctionsSyntax() abort
-    " syntax match cppFunction '\<[A-Za-z_][A-Za-z0-9_]*\ze\s*('
-    syntax match cppFunction '\<[A-Za-z_][A-Za-z0-9_]*\ze('
-    execute "highlight cppFunction guifg=" . s:function_call_color
+    syntax match myFunctionCall '\v~?[A-Za-z_]\w*\ze\('
+    execute "highlight myFunctionCall guifg=" . s:function_call_color
 endfunction
 
 " Run OnStart
 augroup MySyntaxTweaks
     autocmd!
     " Always init namespaces for all filetypes
+    autocmd Syntax * call DisableGuiBold()
     autocmd Syntax * call InitNamespaceSyntax()
     autocmd Syntax * call InitFunctionsSyntax()
 augroup END
