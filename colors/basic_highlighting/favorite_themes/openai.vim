@@ -42,7 +42,7 @@ let s:scope_highlight = s:pink " highlighted parentheses
 let s:number = s:pink
 let s:string = s:green
 
-" Mapping -> Functions and Namespaces
+" Mapping -> Function and Namespaces
 let s:function = s:orange
 let s:defclass = s:light_red " def/class names
 let s:namespace = s:light_red
@@ -128,7 +128,7 @@ function! InitNamespaceSyntax() abort
 endfunction 
 
 " Match any word preceeding a function
-function! InitFunctionsSyntax() abort
+function! InitFunctionSyntax() abort
   " syntax match cppFunction '\<[A-Za-z_][A-Za-z0-9_]*\ze\s*('
   syntax match cppFunction "\<[A-Za-z_][A-Za-z0-9_]*\ze("
   execute "highlight cppFunction guifg=" . s:function
@@ -142,10 +142,10 @@ endfunction
 augroup MySyntaxTweaks
   autocmd!
   autocmd Syntax * call InitNamespaceSyntax()
-  autocmd Syntax * call InitFunctionsSyntax()
+  autocmd Syntax * call InitFunctionSyntax()
   autocmd Syntax * call DisableGuiBold()
 augroup END
 
 call InitNamespaceSyntax()
-call InitFunctionsSyntax()
+call InitFunctionSyntax()
 

@@ -1,7 +1,7 @@
 " Name: renoise_theme.vim
 " Description: Theme inspired by Famitracker Renoise 
 " Author: Logan Richey
-" Date: Nov 18, 2025
+" Date: Nov 20, 2025
 
 " set new theme
 hi clear
@@ -26,13 +26,13 @@ endfunction
 call s:disable_bold_in_highlights()
 
 " user colors
-let s:gray1 		= '#131313'
-let s:gray2 		= '#24262d'
-let s:gray3 		= '#47525b'
+let s:gray1 		= '#202020'
+let s:gray2 		= '#272727'
+let s:gray3 		= '#707070'
 let s:white         = '#ceced1'
 let s:red 	    = '#ff8080'
 let s:purple 	= '#8080ff'
-let s:green 	= '#80ff80'
+let s:green 	= '#80dd80'
 let s:yellow 		= '#d0d000'
 let s:light_blue 	= '#7ac1ff'
 let s:deep_red 		= '#681b28'
@@ -45,9 +45,9 @@ let s:fg 		    = s:white
 let s:kw_type 		= s:red
 let s:kw_flow 		= s:red
 let s:scope 		= s:red
-let s:number 		= s:purple
+let s:number 		= s:yellow
 let s:string 		= s:purple
-let s:special 		= s:green
+let s:special 		= s:yellow
 let s:class 		= s:light_blue
 let s:function 		= s:yellow
 let s:namespace 	= s:light_blue
@@ -93,25 +93,50 @@ execute 'hi DiffChange guibg=' . "#4a410d"
 execute 'hi DiffDelete guibg=' . "#420e09"
 execute 'hi DiffText guibg=' . "#4c4745"
 
-function! InitCustomSyntax() abort
-    "syntax match ClassName /\v<(class|struct)\s+\zs\w+/
-    "execute 'highlight ClassName guifg=' . s:class
-    
-    syntax match cppNamespace '\<[a-zA-Z_][a-zA-Z0-9_]*\(::[a-zA-Z_][a-zA-Z0-9_]*\)\+'
-    execute "highlight cppNamespace guifg=" . s:namespace
+" *****************************************************************************
+" Language Specific and Advanced Tweaks
 
-    syntax match VarAccess /\v(\.|->)\zs\w+/
-    execute 'highlight VarAccess guifg=' . s:var_access
-    
-    syntax match FunctionName /\v[~\w]\+\ze\s*\(/
-    execute 'highlight FunctionName guifg=' . s:function
+" Disable bold for all highlight groups
+function! DisableGuiBold() abort
+  for group in getcompletion('', 'highlight')
+    if group =~# '^\w\+$' " Only process valid highlight group names
+      try
+        " Get current highlight settings for the group
+        redir => l:current_settings
+        silent! execute "highlight " . group
+        redir END
 
+        " If 'gui=bold' is present, set gui to NONE
+        if l:current_settings =~# 'gui=bold'
+          execute "highlight " . group . " gui=NONE"
+        endif
+      catch /E28: No such highlight group/
+        " Ignore errors for non-existent groups (shouldn't happen with getcompletion)
+      endtry
+    endif
+  endfor
 endfunction
 
-" Run OnStart
-augroup MySyntaxTweaks
-    autocmd!
-    autocmd Syntax * call InitCustomSyntax()
+" Match any word containing :: and color the entire word.
+function! InitNamespaceSyntax() abort
+  syntax match myNamespace "\<[a-zA-Z_][a-zA-Z0-9_]*\(::[a-zA-Z_][a-zA-Z0-9_]*\)\+"
+  execute "highlight myNamespace guifg=" . s:namespace
+endfunction 
+
+" Match any word preceeding a function
+function! InitFunctionsSyntax() abort
+  " syntax match cppFunction '\<[A-Za-z_][A-Za-z0-9_]*\ze\s*('
+  syntax match cppFunction "\<[A-Za-z_][A-Za-z0-9_]*\ze("
+  execute "highlight cppFunction guifg=" . s:function
+endfunction
+
+augroup OnStart
+  autocmd!
+  " autocmd Syntax * call InitNamespaceSyntax()
+  autocmd Syntax * call InitFunctionsSyntax()
+  autocmd Syntax * call DisableGuiBold()
 augroup END
 
-call InitCustomSyntax()
+" call InitNamespaceSyntax()
+call InitFunctionsSyntax()
+call DisableGuiBold()

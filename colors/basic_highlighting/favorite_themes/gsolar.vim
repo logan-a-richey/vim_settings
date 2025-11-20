@@ -33,6 +33,7 @@ let s:white3 = '#b0c0d0' " brighter
 
 let s:green = '#80b000'
 let s:orange = '#b4860a'
+let s:red_orange = '#c94b1a'
 let s:red = '#bd3f2d'
 let s:cyan = '#29a090'
 let s:pink = '#d33682'
@@ -53,7 +54,7 @@ let s:number = s:cyan
 let s:string = s:cyan
 let s:special = s:pink 
 
-" Mapping -> Functions and Namespaces
+" Mapping -> Function and Namespaces
 let s:function_name = s:green
 let s:defclass = s:green " def/class names
 let s:namespace = s:green
@@ -124,7 +125,7 @@ function! InitNamespaceSyntax() abort
 endfunction 
 
 " Syntax change function : color word that precede a (, to signal a function call
-function! InitFunctionsSyntax() abort
+function! InitFunctionSyntax() abort
     syntax match cppFunction '\<[A-Za-z_][A-Za-z0-9_]*\ze('
     execute 'highlight cppFunction guifg=' . s:function_name
 endfunction
@@ -164,11 +165,11 @@ endfunction
 " Run OnStart
 augroup MySyntaxTweaks
     autocmd!
-    autocmd Syntax * call InitNamespaceSyntax()
-    autocmd Syntax * call InitFunctionsSyntax()
+    " autocmd Syntax * call InitNamespaceSyntax()
+    autocmd Syntax * call InitFunctionSyntax()
     autocmd Syntax * call DisableGuiBold()
 augroup END
 
-call InitNamespaceSyntax()
-call InitFunctionsSyntax()
+call InitFunctionSyntax()
+call DisableGuiBold()
 
