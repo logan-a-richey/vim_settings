@@ -72,7 +72,7 @@ def get_vim_commands(color_dict: Dict[str, str], tokens: List[str]) -> List[str]
         "underline_blue": "#0000ff"
     }
     
-    
+ 
     # reocurring colors so we do not need to instantiate the string every iteration
     color = ""
     primary_fg = color_dict.get("fg", default_color_dict["fg"])
@@ -86,6 +86,9 @@ def get_vim_commands(color_dict: Dict[str, str], tokens: List[str]) -> List[str]
     for token in tokens:
         # ignore language - specific commands, as they link to more general ones. 
         # for example, cppFunction maps to Function
+        for lang in language_names:
+            if token.startswith(lang):
+                continue
         
         print("Scanning token: {}".format(token))
 
@@ -207,9 +210,6 @@ def get_vim_commands(color_dict: Dict[str, str], tokens: List[str]) -> List[str]
             cmds.append(cmd)
         
         else:
-            for lang in language_names:
-                if token.startswith(lang):
-                    continue
             
             generic_fg = "s:fg"
             generic_bg = "s:bg"
@@ -255,6 +255,7 @@ def write_output(color_dict: dict, output_path: str) -> None:
         "let g:colors_name = \'{}\'".format(output_basename_without_extension),
         "set termguicolors",
     ]
+    
 
     vim_closer = r'''" Custom Tweaks
 function! InitCustomSyntax() abort

@@ -1,0 +1,30 @@
+# regex planning 
+
+# namespace
+# ([a-zA-Z_][a-zA-Z_0-9]*::~?[a-zA-Z0-9_:\<\>]+)
+# is namespace access color. 
+# note that the second half of the regex is pretty flexible 
+# as we are just checking for one : instead of pairs of ::
+# this just makes the regex a bit easier
+
+# function 
+# (~?[a-zA-Z_][a-zA-Z_0-9]*)(\()
+# $1 is function access color 
+# $2 is normal text 
+
+# member access : a variable name following a . or a ->
+# (.|\->)([a-zA-Z_][a-zA-Z_0-9]*)
+# $1 is normal text 
+# $2 is member access color 
+
+# function access overrides member access 
+# (.|->)([a-zA-Z_][a-zA-Z0-9]*)(\()
+# $1 is normal text 
+# $2 is function access color 
+# $3 is normal text 
+
+# function access with a namespace overrides 
+# (::)([a-zA-Z_][a-zA-Z0-9]*)(\()
+# $1 remains namespace color 
+# $2 is function access color
+# $3 is normal text
