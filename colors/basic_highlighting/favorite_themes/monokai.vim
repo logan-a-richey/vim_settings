@@ -1,5 +1,5 @@
 " ******************************************************************************
-" Name:         Monokai.vim
+" Name:         monokai.vim
 " Description:  Monokai Theme that recognizes object and function signatures.
 " Author:       Logan Richey
 " Date:         Nov 11, 2025
@@ -9,7 +9,7 @@ hi clear
 if exists('syntax_on')
     syntax reset
 endif
-let g:colors_name = 'monokai2'
+let g:colors_name = 'monokai'
 set termguicolors
 
 " ******************************************************************************
