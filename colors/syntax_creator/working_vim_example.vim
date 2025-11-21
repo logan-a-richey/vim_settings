@@ -20,9 +20,6 @@ set cursorline
 " ==============================================================================
 " User Colors
 
-let s:bg_gray = '#202020'
-let s:bg_gray_sec = '#272727'
-
 let s:turq = '#002b36'
 let s:turq_sec = '#073642'
 
@@ -67,18 +64,6 @@ let s:select_bg = s:orange
 " ==============================================================================
 " UI Elements
 
-execute 'hi Normal guifg=' . s:fg . ' guibg=' . s:bg
-execute 'hi CursorLine guibg=' . s:bg_sec
-execute 'hi CursorLineNr guifg=' . s:kw_type
-execute 'hi LineNr guifg=' . s:comment
-execute 'hi Visual guifg=' . s:select_fg . ' guibg=' . s:select_bg 
-execute 'hi Search guifg=' . s:select_fg . ' guibg=' . s:select_bg 
-execute 'hi IncSearch guifg=' . s:bg . ' guibg=' . s:kw_stmt
-execute 'hi MatchParen guifg=' . s:scope . ' guibg=#49483E'
-
-execute 'hi VertSplit guifg=' . s:bg_sec . ' guibg=' . s:bg
-execute 'hi StatusLineNC guifg=' . s:bg_sec . ' guibg=' . s:comment
-execute 'hi StatusLine guifg=' . s:bg . ' guibg=' . s:fg
 
 " Change popup menu background to dark blue
 highlight Pmenu ctermbg=darkblue guibg=darkblue
@@ -167,7 +152,6 @@ augroup MySyntaxTweaks
     autocmd Syntax * call DisableGuiBold()
 augroup END
 
-" call InitFunctionSyntax()
+" call InitNamespaceSyntax()
 call InitFunctionSyntax()
 call DisableGuiBold()
-
