@@ -21,39 +21,35 @@ set nowrap
 " User Colors
 
 " Main colors
-let s:bg 		    = '#0b2329'
-let s:bg_sec 		= '#081c20'
-let s:fg 	        = '#ceb799' " tan ish
-let s:fg_alt        = '#81735c' " tan ish (darker)
+" ---- Core BG + FG ----
+let s:bg       = '#0b2329'
+let s:bg_sec   = '#081c20'
+let s:bg_ter   = '#112e33'
 
-let s:string 		= '#56b146' " brighter green
-" let s:string        = '#4ebf9d'
-let s:comment    = '#376b2d' " frog green
+let s:fg       = '#ceb799'   " KEEP (tan)
+let s:fg_alt   = '#81735c'   " KEEP (tan darker)
 
-" Other colors
-let s:mint_green    = '#96dd97'
-let s:greenish      = '#84dd97'
-let s:blueish       = '#86d0c6'
-let s:white 		= '#e0e0e0' " for keywords
-let s:purple 		= '#9d77c2'
+" ---- Comments & Strings ----
+let s:comment  = '#3f5a45'   " muted moss green
+let s:string   = '#5c9a52'   " soft desaturated green
 
-" Mapping -> Keywords and Scope
-let s:kw_stmt = s:white         " keywords (if, not, return)
-let s:kw_type = s:mint_green    " types (def, int, struct, etc.)
-let s:scope = s:purple          " highlighted parentheses
+" ---- Keyword / Type / Meta ----
+let s:kw_stmt  = '#d4c6aa'   " warm light parchment
+let s:kw_type  = '#8cc8a8'   " muted aqua-green
+let s:kw_meta  = '#a78ec9'   " dusty lavender
 
-" Mapping -> Values
-let s:number = s:blueish " blue ish
-let s:special = s:purple " green ish (darker)
+" ---- Values ----
+let s:number   = '#7fb8c1'   " soft cyan-blue
+let s:special  = '#a78ec9'   " lavender
 
-" Mapping -> Function and Namespaces
-let s:function = s:fg_alt
-let s:defclass = s:mint_green " def/class names
-let s:namespace = s:fg_alt
+" ---- Function / Namespace ----
+let s:function = '#a38d6f'   " muted tan-gray
+let s:namespace= '#97886d'
+let s:defclass = '#9acaa5'   " muted green
 
-" Visual select and Search and Replace
-let s:select_fg = s:bg
+" ---- Visual selection ----
 let s:select_bg = s:fg
+let s:select_fg = s:bg
 
 " ==============================================================================
 " UI Elements
@@ -65,7 +61,7 @@ execute 'hi LineNr guifg=' . s:comment
 execute 'hi Visual guifg=' . s:select_fg . ' guibg=' . s:select_bg 
 execute 'hi Search guifg=' . s:select_fg . ' guibg=' . s:select_bg 
 execute 'hi IncSearch guifg=' . s:bg . ' guibg=' . s:kw_stmt
-execute 'hi MatchParen guifg=' . s:scope . ' guibg=#49483E'
+execute 'hi MatchParen guifg=' . s:kw_meta . ' guibg=#49483E'
 execute 'hi VertSplit guifg=' . '#3e3d32' . ' guibg=' . s:bg
 
 " TODO fix me 
