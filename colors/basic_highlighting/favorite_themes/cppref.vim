@@ -121,18 +121,6 @@ function! InitFunctionSyntax() abort
     execute 'highlight cppFunction guifg=' . s:function_name
 endfunction
 
-" Background change function
-function! SetDarkBG() abort 
-    execute 'hi Normal guifg=' . s:fg . ' guibg=' . s:bg_gray
-    execute 'hi CursorLine guibg=' . s:bg_gray_sec
-endfunction 
-
-" Background change function
-function! SetNormalBG() abort
-    execute 'hi Normal guifg=' . s:fg . ' guibg=' . s:turq
-    execute 'hi CursorLine guibg=' . s:turq_sec
-endfunction 
-
 function! DisableGuiBold() abort
   for group in getcompletion('', 'highlight')
     if group =~# '^\w\+$' " Only process valid highlight group names
