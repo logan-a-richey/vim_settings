@@ -1,0 +1,18 @@
+{
+    "bg"            : "#202020",
+    "bg_cursorline" : "#272727",
+    "comment"       : "#707070",
+    "fg"            : "#e0e0e0",
+    "keyword_type"  : "#e0e0e0",
+    "keyword_flow"  : "#e0e0e0",
+    "paren"         : "#e0e0e0",
+    "select_fg"     : "#e0e0e0",
+    "number"        : "#e0e0e0",
+    "char"          : "#e0e0e0",
+    "escape_chars"  : "#e0e0e0",
+    "string"        : "#e0e0e0",
+    "member_access" : "#e0e0e0",
+    "function_call" : "#e0e0e0",
+    "namespace"     : "#e0e0e0",
+    "py_defclass"   : "#e0e0e0"
+}
