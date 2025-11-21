@@ -1,4 +1,7 @@
 # TODO
+The themes in the `tested/` folder are *battle-tested* and ready to go.<br>
+The other themes, after some introspection, are dubious at best. <br>
+I am becoming officially cracked at `vimscript`. I can now color my terminal in ever more creative ways. <br>
 
 ## Themes
 * Monokai           (variation of VsCode theme)
@@ -17,7 +20,7 @@
 
 
 ## Generator
-* Python generator that reads in a .json file and outputs the correct vimscript file.
+* Python generator that reads in a .json file and outputs the correct `vimscript` file.
 
 ## Regex Planning:
 
