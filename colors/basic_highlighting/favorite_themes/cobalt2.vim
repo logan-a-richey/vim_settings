@@ -28,22 +28,22 @@ let s:yellow = "#ffdd00" " other
 let s:purple = "#4b0082" " classdef
 
 " Mapping -> Main colors
-let s:background_primary = s:blue1
-let s:background_secondary = s:blue2
+let s:bg = s:blue1
+let s:bg_sec = s:blue2
 let s:comment = s:blue3
-let s:foreground = s:white
+let s:fg = s:white
 
 " Mapping -> Keywords and Scope
 let s:keyword_control_flow = s:orange " keywords (if, not, return)
 let s:keyword_type = s:orange " types (def, int, struct, etc.)
-let s:scope_highlight = s:yellow " highlighted parentheses
+let s:scope = s:yellow " highlighted parentheses
 
 " Mapping -> Values
 let s:number = s:red " numbers
 let s:string = s:green 
 let s:special = s:pink
 
-" Mapping -> Functions and Namespaces
+" Mapping -> Function and Namespaces
 let s:defclass = s:cyan " def/class names
 let s:function_name = s:cyan
 let s:namespace = s:cyan 
@@ -51,17 +51,17 @@ let s:namespace = s:cyan
 " ******************************************************************************
 " UI Elements
 
-execute 'hi Normal guifg=' . s:foreground . ' guibg=' . s:background_primary
-execute 'hi CursorLine guibg=' . s:background_secondary
+execute 'hi Normal guifg=' . s:fg . ' guibg=' . s:bg
+execute 'hi CursorLine guibg=' . s:bg_sec
 execute 'hi CursorLineNr guifg=' . s:keyword_type
 execute 'hi LineNr guifg=' . '#444444'
 execute 'hi Visual guibg=' . '#49483E'
-execute 'hi Search guifg=' . s:background_primary . ' guibg=' . s:keyword_type
-execute 'hi IncSearch guifg=' . s:background_primary . ' guibg=' . s:keyword_control_flow
-execute 'hi MatchParen guifg=' . s:scope_highlight . ' guibg=' . '#49483E'
-execute 'hi VertSplit guifg=' . '#3e3d32' . ' guibg=' . s:background_primary
-execute 'hi StatusLine guifg=' . s:foreground . ' guibg=' . s:background_secondary
-execute 'hi StatusLineNC guifg=' . '#666666'. ' guibg=' . s:background_secondary
+execute 'hi Search guifg=' . s:bg . ' guibg=' . s:keyword_type
+execute 'hi IncSearch guifg=' . s:bg . ' guibg=' . s:keyword_control_flow
+execute 'hi MatchParen guifg=' . s:scope . ' guibg=' . '#49483E'
+execute 'hi VertSplit guifg=' . '#3e3d32' . ' guibg=' . s:bg
+execute 'hi StatusLine guifg=' . s:fg . ' guibg=' . s:bg_sec
+execute 'hi StatusLineNC guifg=' . '#666666'. ' guibg=' . s:bg_sec
 
 " Change popup menu background to dark blue
 highlight Pmenu ctermbg=darkblue guibg=darkblue
@@ -71,10 +71,7 @@ highlight PmenuSel ctermbg=blue guibg=blue
 " Code Syntax highlighting 
 
 execute 'hi Comment guifg=' . s:comment . ' gui=italic'
-
-" covers char, string, numbers
 execute 'hi Constant guifg=' . s:string . ' gui=bold'
-
 execute 'hi String guifg=' . s:string . ' gui=bold'
 execute 'hi Character guifg=' . s:string . ' gui=bold'
 execute 'hi Number guifg=' . s:number . ' gui=bold'
@@ -107,19 +104,42 @@ function! InitNamespaceSyntax() abort
 endfunction 
 
 " Match any word preceeding a function
-function! InitFunctionsSyntax() abort
+function! InitFunctionSyntax() abort
   " syntax match cppFunction '\<[A-Za-z_][A-Za-z0-9_]*\ze\s*('
   syntax match cppFunction "\<[A-Za-z_][A-Za-z0-9_]*\ze("
   execute "highlight cppFunction guifg=" . s:function_name
 endfunction
 
+" Disable bold for all syntax groups
+function! DisableGuiBold() abort
+    for group in getcompletion('', 'highlight')
+        " Only process valid highlight group names
+        if group =~# '^\w\+$' 
+            try
+                " Get current highlight settings for the group
+                redir => l:current_settings
+                silent! execute 'highlight ' . group
+                redir END
+
+                " If 'gui=bold' is present, set gui to NONE
+                if l:current_settings =~# 'gui=bold'
+                    execute 'highlight ' . group . ' gui=NONE'
+                endif
+            catch /E28: No such highlight group/
+                " Ignore errors for non-existent groups (shouldn't happen with getcompletion)
+            endtry
+        endif
+    endfor
+endfunction
+
 " Run OnStart
 augroup MySyntaxTweaks
-  autocmd!
-  autocmd Syntax * call InitNamespaceSyntax()
-  autocmd Syntax * call InitFunctionsSyntax()
+    autocmd!
+    " autocmd Syntax * call InitNamespaceSyntax()
+    autocmd Syntax * call InitFunctionSyntax()
+    autocmd Syntax * call DisableGuiBold()
 augroup END
 
-call InitNamespaceSyntax()
-call InitFunctionsSyntax()
+call InitFunctionSyntax()
+call DisableGuiBold()
 

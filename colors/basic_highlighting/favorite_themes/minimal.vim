@@ -1,18 +1,20 @@
-" ============================================================
-" Minimal Theme (clean, stable, predictable)
-" ============================================================
+" ------------------------------------------------------------------------------
+" Name:         minimal.vim
+" Description:  Minimal theme. Experimenting with custom Syntax groups.
+" Author:       Logan Richey
+" ------------------------------------------------------------------------------
 
-if exists("syntax_on")
-  syntax reset
+if exists('syntax_on')
+    syntax reset
 endif
-let g:colors_name = "minimal"
+let g:colors_name = 'minimal'
 
 set background=dark
 set cursorline
 
-" -------------------------------
-" Palette
-" -------------------------------
+" ------------------------------------------------------------------------------
+" ** colors **
+
 let s:bg          = '#1e1e1e'
 let s:bg_sec      = '#2a2a2a'
 let s:fg          = '#d4d4d4'
@@ -27,9 +29,8 @@ let s:func_call   = '#dcdcaa'
 let s:member      = '#4ec9b0'
 let s:namespace   = '#9cdcfe'
 
-" ============================================================
-" 1) Define our own highlight groups
-" ============================================================
+" ------------------------------------------------------------------------------
+" ** highlight groups **
 
 " Core
 execute 'hi MyNormal      guifg=' . s:fg      . ' guibg=' . s:bg      . ' gui=NONE'
@@ -51,9 +52,9 @@ execute 'hi LineNr        guifg=' . s:comment . ' guibg=' . s:bg
 execute 'hi CursorLine    guibg=' . s:bg_sec
 execute 'hi CursorLineNr  guifg=' . s:comment . ' guibg=' . s:bg_sec
 
-" ============================================================
-" 2) Link built-ins to our theme
-" ============================================================
+" ------------------------------------------------------------------------------
+" ** link custom groups **
+
 hi! link Normal       MyNormal
 hi! link Comment      MyComment
 hi! link Keyword      MyKeyword
@@ -69,24 +70,20 @@ hi! link Special      MySpecial
 hi! link Identifier   MyNormal
 hi! link Function     MyNormal
 
-" ============================================================
-" 3) Custom regex-based syntax rules
-" ============================================================
+" ------------------------------------------------------------------------------
+" ** regex custom groups **
 
-" ---- Function call: name followed by '(' (supports destructors)
+" Function call: name followed by '(' (supports destructors)
 syntax match MyFunctionCall /\v~?[A-Za-z_]\w*\ze\(/
 
-" ---- Member access: .foo  or ->foo
+" Member access: .foo  or ->foo
 syntax match MyMemberAccess /\v(\.|->)\zs[A-Za-z_]\w*/
 
-" ---- Namespace: aaaa::bbbb::cccc
+" Namespace: aaaa::bbbb::cccc
 syntax match MyNamespace /\v[A-Za-z_]\w*(::[A-Za-z_]\w*)+/
 
-" ============================================================
-" 4) Disable bold anywhere it may leak through
-" ============================================================
-
+" Disable bold
 for group in getcompletion('', 'highlight')
-  execute 'hi ' . group . ' gui=NONE'
+    execute 'hi ' . group . ' gui=NONE'
 endfor
 

@@ -5,49 +5,60 @@
 " Date:     Oct 28, 2025
 " ------------------------------------------------------------------------------
 
+" TODO - make this theme more like cppref
+
 hi clear
-if exists("syntax_on")
+if exists('syntax_on')
     syntax reset
 endif
-let g:colors_name = "traffic_light"
+let g:colors_name = 'traffic_light'
 set termguicolors
+set cursorline 
 
-let s:darker_gray = "#101010"
-let s:dark_gray = "#202020"
-let s:gray = "#707070"
-let s:white = "#d0d0d0"
-let s:green = "#00aa00"
-let s:yellow = "#d0d000"
-let s:cyan = "#00d0d0"
-let s:orange = "#d05000"
-let s:purple = "#600dad"
-let s:red = "#dd0000"
-let s:pink = "#dd00dd"
+let s:darker_gray = '#101010'
+let s:dark_gray = '#202020'
+let s:gray = '#707070'
+let s:white = '#d0d0d0'
+let s:green = '#00aa00'
+let s:yellow = '#d0d000'
+let s:cyan = '#00d0d0'
+let s:orange = '#d05000'
+let s:purple = '#600dad'
+let s:red = '#dd0000'
+let s:pink = '#dd00dd'
 
 " Color Mapping
 let s:bg = s:darker_gray
 let s:bg_sec = s:dark_gray 
 let s:comment = s:gray
 let s:fg = s:white
-let s:keyword1 = s:green
-let s:keyword2 = s:green
-let s:number = s:red
+
+let s:kw_flow = s:green
+let s:kw_type = s:green
 let s:paren = s:red
-let s:defclass = s:cyan
+
+let s:number = s:red
 let s:string = s:yellow
+let s:char = s:number
+let s:special = s:number 
+
+let s:function_name = s:cyan 
+let s:defclass = s:cyan
+let s:namespace = s:cyan
 
 " UI Elements
 execute 'hi Normal guifg=' . s:fg . ' guibg=' . s:bg
 execute 'hi CursorLine guibg=' . s:bg_sec
-execute 'hi CursorLineNr guifg=' . s:keyword2
-execute 'hi LineNr guifg=' . "#444444"
-execute 'hi Visual guibg=' . "#49483E"
-execute 'hi Search guifg=' . s:bg . ' guibg=' . s:keyword2
-execute 'hi IncSearch guifg=' . s:bg . ' guibg=' . s:keyword1
-execute 'hi MatchParen guifg=' . s:paren . ' guibg=' . "#49483E"
-execute 'hi VertSplit guifg=' . "#3e3d32" . ' guibg=' . s:bg
-execute 'hi StatusLine guifg=' . s:fg . ' guibg=' . s:bg_sec
-execute 'hi StatusLineNC guifg=' . "#666666". ' guibg=' . s:bg_sec
+execute 'hi CursorLineNr guifg=' . s:kw_type
+execute 'hi LineNr guifg=' . '#444444'
+execute 'hi Visual guibg=' . '#49483E'
+execute 'hi Search guifg=' . s:bg . ' guibg=' . s:kw_type
+execute 'hi IncSearch guifg=' . s:bg . ' guibg=' . s:kw_flow
+execute 'hi MatchParen guifg=' . s:paren . ' guibg=' . '#49483E'
+
+execute 'hi VertSplit guifg=' . s:bg_sec . ' guibg=' . s:bg
+execute 'hi StatusLineNC guifg=' . s:bg_sec . ' guibg=' . s:comment
+execute 'hi StatusLine guifg=' . s:bg . ' guibg=' . s:fg
 
 " Change popup menu background to dark blue
 highlight Pmenu ctermbg=darkblue guibg=darkblue
@@ -57,26 +68,24 @@ highlight PmenuSel ctermbg=blue guibg=blue
 " Code Syntax highlighting 
 
 execute 'hi Comment guifg=' . s:comment
-
-" covers char, string, numbers
 execute 'hi Constant guifg=' . s:string 
-
 execute 'hi String guifg=' . s:string 
 execute 'hi Character guifg=' . s:string 
 execute 'hi Number guifg=' . s:number 
 execute 'hi Boolean guifg=' . s:number 
 execute 'hi Identifier guifg=' . s:defclass 
 execute 'hi Function guifg=' . s:defclass 
-execute 'hi Statement guifg=' . s:keyword1 
-execute 'hi Keyword guifg=' . s:keyword1 
-execute 'hi PreProc guifg=' . s:keyword1 
-execute 'hi Type guifg=' . s:keyword2 
-execute 'hi Special guifg=' . s:number 
-execute 'hi Error guifg=' . "#ffffff" . ' guibg=#b02752'
-execute 'hi Todo guifg=' . "#ffffff" . ' guibg=#a08916'
+execute 'hi Statement guifg=' . s:kw_flow 
+execute 'hi Keyword guifg=' . s:kw_flow 
+execute 'hi PreProc guifg=' . s:kw_flow 
+execute 'hi Type guifg=' . s:kw_type 
+execute 'hi Special guifg=' . s:special 
+
+execute 'hi Error guifg=#ffffff guibg=#b02752'
+execute 'hi Todo guifg=#ffffff guibg=#a08916'
 
 " Additional Tweaks
-execute 'hi Title guifg=' . s:keyword1
+execute 'hi Title guifg=' . s:kw_flow
 execute 'hi Directory guifg=' . s:defclass
 execute 'hi DiffAdd guibg=' . "#13354a"
 execute 'hi DiffChange guibg=' . "#4a410d"
@@ -86,60 +95,60 @@ execute 'hi DiffText guibg=' . "#4c4745"
 " ------------------------------------------------------------------------------
 " Language Specific and Advanced Tweaks
 
-" Namespaces
-" Any word containing :: will be highlighed as a defclass
-function! InitNamespaces() abort
-    syntax match cppNamespace "\<[a-zA-Z_][a-zA-Z0-9_]*\(::[a-zA-Z_][a-zA-Z0-9_]*\)\+"
-    execute "highlight cppNamespace guifg=" . s:defclass
+" Syntax change function : color entire word containing ::
+function! InitNamespaceSyntax() abort
+    syntax match cppNamespace '\<[a-zA-Z_][a-zA-Z0-9_]*\(::[a-zA-Z_][a-zA-Z0-9_]*\)\+'
+    execute 'highlight cppNamespace guifg=' . s:namespace
+endfunction 
+
+" Syntax change function : color word that precede a (, to signal a function call
+function! InitFunctionSyntax() abort
+    syntax match cppFunction '\<[A-Za-z_][A-Za-z0-9_]*\ze('
+    execute 'highlight cppFunction guifg=' . s:function_name
 endfunction
 
-" ------------------------------------------------------------------------------
-" Highlight words from C standard headers
+" Background change function
+function! SetDarkBG() abort 
+    execute 'hi Normal guifg=' . s:fg . ' guibg=' . s:bg_gray
+    execute 'hi CursorLine guibg=' . s:bg_gray_sec
+endfunction 
 
-function! s:SetupCLib() abort
-    " <stdlib.h>
-    for item in ["abs", "atof", "atoi", "atol", "atoll", "calloc", "div", "exit", "free", "malloc", "qsort", "rand", "realloc", "srand" ]
-        execute "syntax match MyKeyword '\\<" . item . "\\>'"
-    endfor
+" Background change function
+function! SetNormalBG() abort
+    execute 'hi Normal guifg=' . s:fg . ' guibg=' . s:turq
+    execute 'hi CursorLine guibg=' . s:turq_sec
+endfunction 
 
-    " <string.h>
-    for item in ["memchr", "memcmp", "memcpy", "memmove", "memset", "strcat", "strchr", "strcmp", "strcoll", "strcpy", "strcspn", "strerror", "strlen", "strncat", "strncmp", "strncpy", "strpbrk", "strrchr", "strspn", "strstr", "strtok", "strxfrm" ]
-        execute "syntax match MyKeyword '\\<" . item . "\\>'"
-    endfor
-    
-    " <stdio.h>
-    for item in ["fclose", "feof", "ferror", "fgetc", "fgets", "fopen", "fprintf", "fputc", "fputs", "fread", "fscanf", "fseek", "ftell", "fwrite", "getc", "getchar", "printf", "putc", "putchar", "puts", "remove", "rename", "rewind", "scanf", "snprintf", "sprintf", "sscanf"]
-        execute "syntax match MyKeyword '\\<" . item . "\\>'"
-    endfor
-    
-    " <math.h>
-    for item in ["acos", "acosh", "asin", "asinh", "atan", "atan2", "atanh", "cbrt", "ceil", "copysign", "cos", "cosh", "exp", "exp2", "expm1", "erf", "erfc", "fabs", "fdim", "floor", "fma", "fmax", "fmin", "fmod", "frexp", "hypot", "ilogb", "ldexp", "lgamma", "llrint", "llround", "log", "log10", "log1p", "log2", "logb", "lrint", "lround", "modf", "nan", "nearbyint", "nextafter", "nexttoward", "pow", "remainder", "remquo", "rint", "round", "scalbln", "scalbn", "sin", "sinh", "sqrt", "tan", "tanh", "tgamma", "trunc"]
-        execute "syntax match MyKeyword '\\<" . item . "\\>'"
-    endfor
-    
-    " <ctype.h>
-    for item in ["isalnum","isalpha","isblank","iscntrl","isdigit","isgraph","islower","isprint","ispunct","isspace","isupper","isxdigit","tolower","toupper"]
-        execute "syntax match MyKeyword '\\<" . item . "\\>'"
-    endfor
-    
-    " <time.h>
-    for item in ["time","localtime","gmtime","ctime","asctime","strftime","difftime","mktime","clock"]
-        execute "syntax match MyKeyword '\\<" . item . "\\>'"
-    endfor
+" Disable bold for all syntax groups
+function! DisableGuiBold() abort
+    for group in getcompletion('', 'highlight')
+        if group =~# '^\w\+$' " Only process valid highlight group names
+            try
+                " Get current highlight settings for the group
+                redir => l:current_settings
+                silent! execute 'highlight ' . group
+                redir END
 
-    " Define highlight keyword groups once
-    execute "highlight MyKeyword guifg=" . s:defclass
+                " If 'gui=bold' is present, set gui to NONE
+                if l:current_settings =~# 'gui=bold'
+                    execute 'highlight ' . group . ' gui=NONE'
+                endif
+            catch /E28: No such highlight group/
+                " Ignore errors for non-existent groups (shouldn't happen with getcompletion)
+            endtry
+        endif
+    endfor
 endfunction
 
-" ------------------------------------------------------------------------------
-" Init Advanced tweaks on startup
-
+" Run OnStart
 augroup MySyntaxTweaks
     autocmd!
-    autocmd Syntax * call InitNamespaces()
-    autocmd FileType c,cpp call s:SetupCLib()
+    " autocmd Syntax * call InitNamespaceSyntax()
+    autocmd Syntax * call InitFunctionSyntax()
+    autocmd Syntax * call DisableGuiBold()
 augroup END
 
-" In case Namespaces does not load, simply call the function again.
-call InitNamespaces()
+" call InitFunctionSyntax()
+call InitFunctionSyntax()
+call DisableGuiBold()
 

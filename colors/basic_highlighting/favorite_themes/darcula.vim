@@ -42,7 +42,7 @@ let s:scope_highlight = s:green " highlighted parentheses
 let s:number = s:blue
 let s:string = s:green
 
-" Mapping -> Functions and Namespaces
+" Mapping -> Function and Namespaces
 let s:function = s:yellow
 let s:defclass = s:yellow " def/class names
 let s:namespace = s:brown
@@ -69,11 +69,9 @@ highlight PmenuSel ctermbg=blue guibg=blue
 " ******************************************************************************
 " Code Syntax highlighting 
 
-execute 'hi Comment guifg=' . s:comment . ' gui=italic'
-
-" covers char, string, numbers
+execute 'hi Comment guifg=' . s:comment 
+" . ' gui=italic'
 execute 'hi Constant guifg=' . s:string 
-
 execute 'hi String guifg=' . s:string 
 execute 'hi Character guifg=' . s:string 
 execute 'hi Number guifg=' . s:number 
@@ -106,19 +104,43 @@ function! InitNamespaceSyntax() abort
 endfunction 
 
 " Match any word preceeding a function
-function! InitFunctionsSyntax() abort
+function! InitFunctionSyntax() abort
     " syntax match cppFunction '\<[A-Za-z_][A-Za-z0-9_]*\ze\s*('
     syntax match cppFunction '\<[A-Za-z_][A-Za-z0-9_]*\ze('
     execute 'highlight cppFunction guifg=' . s:function
 endfunction
 
+" Disable bold for all syntax groups
+function! DisableGuiBold() abort
+    for group in getcompletion('', 'highlight')
+        if group =~# '^\w\+$' " Only process valid highlight group names
+            try
+                " Get current highlight settings for the group
+                redir => l:current_settings
+                silent! execute 'highlight ' . group
+                redir END
+
+                " If 'gui=bold' is present, set gui to NONE
+                if l:current_settings =~# 'gui=bold'
+                    execute 'highlight ' . group . ' gui=NONE'
+                endif
+            catch /E28: No such highlight group/
+                " Ignore errors for non-existent groups (shouldn't happen with getcompletion)
+            endtry
+        endif
+    endfor
+endfunction
+
+
 " Run OnStart
 augroup MySyntaxTweaks
     autocmd!
-    autocmd Syntax * call InitNamespaceSyntax()
-    autocmd Syntax * call InitFunctionsSyntax()
+    " autocmd Syntax * call InitNamespaceSyntax()
+    autocmd Syntax * call InitFunctionSyntax()
+    autocmd Syntax * call DisableGuiBold()
 augroup END
 
-call InitNamespaceSyntax()
-call InitFunctionsSyntax()
+" call InitNamespaceSyntax()
+call InitFunctionSyntax()
+call DisableGuiBold()
 

@@ -121,24 +121,25 @@ function! InitFunctionSyntax() abort
     execute 'highlight cppFunction guifg=' . s:function_name
 endfunction
 
+" Disable bold for all syntax groups
 function! DisableGuiBold() abort
-  for group in getcompletion('', 'highlight')
-    if group =~# '^\w\+$' " Only process valid highlight group names
-      try
-        " Get current highlight settings for the group
-        redir => l:current_settings
-        silent! execute 'highlight ' . group
-        redir END
+    for group in getcompletion('', 'highlight')
+        if group =~# '^\w\+$' " Only process valid highlight group names
+            try
+                " Get current highlight settings for the group
+                redir => l:current_settings
+                silent! execute 'highlight ' . group
+                redir END
 
-        " If 'gui=bold' is present, set gui to NONE
-        if l:current_settings =~# 'gui=bold'
-          execute 'highlight ' . group . ' gui=NONE'
+                " If 'gui=bold' is present, set gui to NONE
+                if l:current_settings =~# 'gui=bold'
+                    execute 'highlight ' . group . ' gui=NONE'
+                endif
+            catch /E28: No such highlight group/
+                " Ignore errors for non-existent groups (shouldn't happen with getcompletion)
+            endtry
         endif
-      catch /E28: No such highlight group/
-        " Ignore errors for non-existent groups (shouldn't happen with getcompletion)
-      endtry
-    endif
-  endfor
+    endfor
 endfunction
 
 " Run OnStart
@@ -149,6 +150,7 @@ augroup MySyntaxTweaks
     autocmd Syntax * call DisableGuiBold()
 augroup END
 
+" call InitNamespaceSyntax()
 call InitFunctionSyntax()
 call DisableGuiBold()
 

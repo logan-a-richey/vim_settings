@@ -9,7 +9,7 @@
 hi clear
 
 if exists('syntax_on')
-     syntax reset
+    syntax reset
 endif
 let g:colors_name = 'gsolar'
 
@@ -47,7 +47,7 @@ let s:fg = s:white2
 " Mapping -> Keywords and Scope
 let s:kw_stmt = s:orange " keywords (if, not, return)
 let s:kw_type = s:orange " types (def, int, struct, etc.)
-let s:scope_highlight = s:orange " highlighted parentheses
+let s:scope = s:orange " highlighted parentheses
 
 " Mapping -> Values
 let s:number = s:cyan
@@ -69,19 +69,13 @@ let s:select_bg = s:orange
 execute 'hi Normal guifg=' . s:fg . ' guibg=' . s:bg
 execute 'hi CursorLine guibg=' . s:bg_sec
 execute 'hi CursorLineNr guifg=' . s:kw_type
-
-" execute 'hi LineNr guifg=' . '#444444'
 execute 'hi LineNr guifg=' . s:comment
-
-" execute 'hi Visual guibg=' . '#49483E'
-" execute 'hi Search guifg=' . s:bg . ' guibg=' . s:kw_type
 execute 'hi Visual guifg=' . s:select_fg . ' guibg=' . s:select_bg 
 execute 'hi Search guifg=' . s:select_fg . ' guibg=' . s:select_bg 
-
 execute 'hi IncSearch guifg=' . s:bg . ' guibg=' . s:kw_stmt
-execute 'hi MatchParen guifg=' . s:scope_highlight . ' guibg=#49483E'
-execute 'hi VertSplit guifg=' . '#3e3d32' . ' guibg=' . s:bg
+execute 'hi MatchParen guifg=' . s:scope . ' guibg=#49483E'
 
+execute 'hi VertSplit guifg=' . s:bg_sec . ' guibg=' . s:bg
 execute 'hi StatusLineNC guifg=' . s:bg_sec . ' guibg=' . s:comment
 execute 'hi StatusLine guifg=' . s:bg . ' guibg=' . s:fg
 
@@ -143,24 +137,25 @@ function! SetNormalBG() abort
     execute 'hi CursorLine guibg=' . s:turq_sec
 endfunction 
 
+" Disable bold for all syntax groups
 function! DisableGuiBold() abort
-  for group in getcompletion('', 'highlight')
-    if group =~# '^\w\+$' " Only process valid highlight group names
-      try
-        " Get current highlight settings for the group
-        redir => l:current_settings
-        silent! execute 'highlight ' . group
-        redir END
+    for group in getcompletion('', 'highlight')
+        if group =~# '^\w\+$' " Only process valid highlight group names
+            try
+                " Get current highlight settings for the group
+                redir => l:current_settings
+                silent! execute 'highlight ' . group
+                redir END
 
-        " If 'gui=bold' is present, set gui to NONE
-        if l:current_settings =~# 'gui=bold'
-          execute 'highlight ' . group . ' gui=NONE'
+                " If 'gui=bold' is present, set gui to NONE
+                if l:current_settings =~# 'gui=bold'
+                    execute 'highlight ' . group . ' gui=NONE'
+                endif
+            catch /E28: No such highlight group/
+                " Ignore errors for non-existent groups (shouldn't happen with getcompletion)
+            endtry
         endif
-      catch /E28: No such highlight group/
-        " Ignore errors for non-existent groups (shouldn't happen with getcompletion)
-      endtry
-    endif
-  endfor
+    endfor
 endfunction
 
 " Run OnStart
@@ -171,6 +166,7 @@ augroup MySyntaxTweaks
     autocmd Syntax * call DisableGuiBold()
 augroup END
 
+" call InitFunctionSyntax()
 call InitFunctionSyntax()
 call DisableGuiBold()
 
