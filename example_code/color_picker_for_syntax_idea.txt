@@ -1,0 +1,32 @@
+TODO 
+
+My idea:
+I have a script that generates a vimscript color syntax file.
+I want to create a simple web app that allows me to pick colors and see the syntax preview in the browser. When satisfied, I can click a "download" button and download the file created by my script.
+To do this, I was thinking of using Flask on the backend and simple HTML+CSS+JS in the frontend.
+
+Gui would look like this:
+
+--------------------------------------------------
+<Vimscript Color Creator>
+    
+    <button: file upload existing json template>
+    <combobox: pick an existing template theme to start with>
+
+    <div for syntax preview> | <div for color picker menu menu>
+    
+    <button: call backend and download generated file>
+
+--------------------------------------------------
+
+detail about each section:
+
+<div for syntax preview>: 
+A block of code text, dynamic html updating the color of the text foreground and background. Predetermined text, so no need for speical code syntax highlighting. 
+
+<div for color picker menu>: 
+<text: "color fg: " <field: hex string> <field: color rect> <field: color picker>
+<text: "color bg: " <field: hex string> <field: color rect> <field: color picker>
+...
+
+
