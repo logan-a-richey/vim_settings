@@ -72,12 +72,12 @@ execute 'hi IncSearch guifg=' . s:bg . ' guibg=' . s:kw_stmt
 execute 'hi MatchParen guifg=' . s:scope_highlight . ' guibg=#49483E'
 execute 'hi VertSplit guifg=' . '#3e3d32' . ' guibg=' . s:bg
 
-execute 'hi StatusLineNC guifg=' . s:bg_sec . ' guibg=' . s:comment
+execute 'hi StatusLineNC guifg=' . s:bg_sec . ' guibg=' . s:fg
 execute 'hi StatusLine guifg=' . s:bg . ' guibg=' . s:fg
 
 " Change popup menu background to dark blue
-highlight Pmenu ctermbg=darkblue guibg=darkblue
-highlight PmenuSel ctermbg=blue guibg=blue
+" highlight Pmenu ctermbg=darkblue guibg=darkblue
+" highlight PmenuSel ctermbg=blue guibg=blue
 
 " ==============================================================================
 " Code Syntax highlighting 
