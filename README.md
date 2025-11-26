@@ -6,45 +6,25 @@
 
 # Color Showcase
 
-## cobalt2.vim
-Inspired from Gedit's blue theme, *Cobalt*.
-![Screenshot](screenshots/theme_cobalt2.png)
+## Gedit Solarized
+Theme inspired by Solarized Dark (Linux Gedit variation).
+![Screenshot](screenshots/theme_gsolar.png)
 
+## Monokai Dark
+Theme inspired by VSCode Monokai Dark
+![Screenshot](screenshots/theme_monokai_dark.png)
 
-## glacier.vim
-Custom theme composed of cool blue colors. 
-Experiment by using yellow for strings and numbers instead of green.
-![Screenshot](screenshots/theme_glacier.png)
+## Naysayer
+Theme inspired by Johnathan Blow's favorite theme.
+![Screenshot](screenshots/theme_naysayer.png)
 
-## monokai.vim
-Theme inspired by VSCode Monokai.
-![Screenshot](screenshots/theme_monokai.png)
-
-## openai.vim
+## OpenAI
 Theme inspired by ChatGPT code snippets.
 ![Screenshot](screenshots/theme_openai.png)
 
-## solar2.vim
-Theme inspired by Solarized.
-![Screenshot](screenshots/theme_solar2.png)
-
-## traffic_light.vim
-Minimalistic color theme, composed primarily of red, yellow, and green.
-Gray for comments. 
-Cyan for namespaces and classdefs.
-![Screenshot](screenshots/theme_traffic.png)
-
-## tsoding.vim
-Theme inspired by the YouTuber *TsodingDaily*. Experimenting with making namespaces a faint red, similar to the theme *Zenburn*.
-![Screenshot](screenshots/theme_tsoding.png)
-
-## visual_studio.vim
-Theme inspired by Visual Studio
-![Screenshot](screenshots/theme_vs.png)
-
-## yaru.vim
-Theme inspired by the dark Gedit theme, *Yaru*. I found it unqiue that comments were in purple.
-![Screenshot](screenshots/theme_yaru.png)
+## VSCodeDark
+Theme inspired by VSCode's default dark C++ theme.
+![Screenshot](screenshots/theme_vs_code_dark.png)
 
 ---
 
