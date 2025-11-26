@@ -1,4 +1,4 @@
-" Name: GEDIT COBALT
+" Name: DRACULA
 " Date: 2025-11-26
 
 " ============================================================
@@ -6,51 +6,50 @@ hi clear
 if exists('syntax_on')
     syntax reset
 endif
-let g:colors_name = 'cobalt'
+let g:colors_name = 'dracula'
 set termguicolors
 set cursorline
 
 " ============================================================
 " Colors 
 
-let s:cobalt_bg = '#001b33'
-let s:cobalt_bg_sec = '#003b70'
-let s:cobalt_comment = '#0088fe'
-let s:cobalt_white = '#fcfbe4'
-let s:cobalt_baby_blue = '#aac9c5'
-let s:cobalt_orange = '#ff9d00'
-let s:cobalt_green = '#38a81e'
-let s:cobalt_turqoise = '#61fabb'
-let s:cobalt_red = '#da0a39'
-let s:cobalt_highlight = '#4f94cd'
-let s:colbalt_yellow = '#faed7d'
-let s:white = '#d0d0d0'
-let s:white_depressed = '#a0a0a0'
+let s:dracula_bg = '#282a36'
+let s:dracula_bg_sec = '#44475a'
+let s:dracula_comment = '#6272a4'
+let s:dracula_fg = '#f8f8f2'
 
-let s:bg 			= s:cobalt_bg
-let s:bg_sec        = s:cobalt_bg_sec
-let s:cursor_line 	= s:bg_sec
-let s:fg 			= s:white
-let s:comment 		= s:cobalt_comment
+let s:dracula_cyan = '#8be9fd'
+let s:dracula_green = '#50fa7b'
+let s:dracula_orange = '#ffb86c'
+let s:dracula_pink = '#ff79c6'
+let s:dracula_purple = '#bd93f9'
+let s:dracula_red = '#ff5555'
+let s:dracula_yellow = '#f1fa8c'
+
+let s:bg 			= s:dracula_bg
+let s:bg_sec        = s:dracula_bg_sec
+let s:cursor_line 	= s:dracula_bg_sec
+let s:fg 			= s:dracula_fg
+let s:comment 		= s:dracula_comment
 
 let s:line_nr_above = s:comment
 let s:line_nr_below = s:comment
-let s:line_nr       = s:cobalt_orange
+let s:line_nr       = s:dracula_pink
 
-let s:statement 	= s:cobalt_orange
-let s:type 			= s:cobalt_turqoise
+let s:statement 	= s:dracula_pink
+let s:type 			= s:dracula_cyan
 
-let s:function 		= s:cobalt_yellow
-let s:namespace 	= s:cobalt_yellow
-let s:defclass      = s:cobalt_red
+let s:function 		= s:dracula_green
+let s:defclass      = s:dracula_green
+let s:namespace 	= s:dracula_green
 
-let s:preproc 		= s:cobalt_green
-let s:number 		= s:cobalt_red
-let s:string 		= s:cobalt_green
-let s:character 	= s:cobalt_green
-let s:special 		= s:cobalt_red
-let s:paren         = s:cobalt_highlight
-let s:visual_select = s:cobalt_highlight
+let s:preproc 		= s:dracula_pink
+let s:number 		= s:dracula_yellow
+let s:string 		= s:dracula_yellow
+let s:character 	= s:dracula_yellow
+let s:special 		= s:dracula_orange
+let s:paren         = s:dracula_purple
+let s:visual_select = s:dracula_orange
 
 " ============================================================
 " VIM UI Syntax 
