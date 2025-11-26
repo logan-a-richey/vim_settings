@@ -23,7 +23,7 @@ let s:cobalt_green = '#38a81e'
 let s:cobalt_turqoise = '#61fabb'
 let s:cobalt_red = '#da0a39'
 let s:cobalt_highlight = '#4f94cd'
-let s:colbalt_yellow = '#faed7d'
+let s:cobalt_yellow = '#faed7d'
 let s:white = '#d0d0d0'
 let s:white_depressed = '#a0a0a0'
 
