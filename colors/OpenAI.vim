@@ -1,4 +1,4 @@
-" Name: VSCODE DARK
+" Name: OPEN AI GPT CODE THEME
 " Date: 2025-11-25
 
 " ============================================================
@@ -6,47 +6,51 @@ hi clear
 if exists('syntax_on')
     syntax reset
 endif
-let g:colors_name = 'vs_code_dark'
+let g:colors_name = 'openai'
 set termguicolors
 set cursorline
 
 " ============================================================
 " Colors 
 
-let s:code_blue     = '#569cd6'
-let s:code_red      = '#ce8f5e'
-let s:code_green    = '#b0cea8'
-let s:code_yellow   = '#dcdc98'
-let s:code_purple   = '#c586c0'
-let s:code_purple2  = '#c584a6'
-let s:code_pink     = '#da70d6'
-let s:code_turq     = '#4bc9b0'
+let s:open_gray1 = '#202020' " for background 
+let s:open_gray2 = '#272727' " for background current line
+let s:open_gray3 = '#707070' " for comments
+let s:open_white = '#e0e0e0' " for normal text
+let s:open_white2 = '#c0c0c0'
 
-let s:bg 			= '#202020' " gray
-let s:bg_sec        = '#272727' " gray
-let s:cursor_line 	= s:bg_sec
-let s:fg 			= '#9cdcfe' " off white - light blue 
-let s:comment 		= '#659955' " green 
+let s:open_blue = '#2e95d3' " for builtin keywords
+let s:open_orange = '#e9950c' " for builtin functions
+let s:open_green = '#06a27b' " for strings
+let s:open_red = '#f22c3d' " for defname classnamea
+let s:open_pink = '#df3079' " for numeric values
+let s:yellow = '#e6db74'
+let s:cyan = '#00aaaa'
+let s:magenta = '#aa00aa'
 
-let s:line_nr_above = '#858585' " gray
-let s:line_nr_below = '#858585' " gray
-" let s:line_nr 	= '#c6c6c6' " light gray
-let s:line_nr       = s:code_blue
+let s:bg 			= s:open_gray1
+let s:bg_sec        = s:open_gray2
+let s:cursor_line 	= s:open_gray2
+let s:comment 		= s:open_gray3
+let s:fg 			= s:open_white
 
-let s:statement 	= s:code_purple2
-let s:type 			= s:code_blue
+let s:line_nr_above = s:comment
+let s:line_nr_below = s:comment
+let s:line_nr 		= s:open_blue
+let s:statement 	= s:open_blue
+let s:type 			= s:open_blue
 
-let s:function 		= s:code_yellow
-let s:defclass      = s:code_yellow
-let s:namespace 	= s:code_turq
+let s:function 		= s:open_orange
+let s:namespace 	= s:cyan
+let s:defclass      = s:open_red
 
-let s:preproc 		= s:code_purple
-let s:number 		= s:code_green
-let s:string 		= s:code_red
-let s:character 	= s:code_red
-let s:special 		= s:code_green
-let s:paren         = s:code_pink
-let s:visual_select = s:code_green
+let s:preproc 		= s:magenta
+let s:number 		= s:open_pink
+let s:string 		= s:open_green
+let s:character 	= s:open_green
+let s:special 		= s:open_pink
+let s:paren         = s:yellow
+let s:visual_select = s:open_green
 
 " ============================================================
 " VIM UI Syntax 
