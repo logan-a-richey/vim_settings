@@ -6,6 +6,10 @@
 
 # Color Showcase
 
+## Gedit Cobalt
+Theme inspired by Gedit Cobalt (blue theme).
+![Screenshot](screenshots/theme_cobalt.png)
+
 ## Gedit Solarized
 Theme inspired by Solarized Dark (Linux Gedit variation).
 ![Screenshot](screenshots/theme_gsolar.png)
@@ -25,6 +29,7 @@ Theme inspired by ChatGPT code snippets.
 ## VSCodeDark
 Theme inspired by VSCode's default dark C++ theme.
 ![Screenshot](screenshots/theme_vs_code_dark.png)
+
 
 ---
 
