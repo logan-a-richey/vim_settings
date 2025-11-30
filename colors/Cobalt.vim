@@ -1,5 +1,7 @@
 " Name: GEDIT COBALT
+" Descripton: Inspired by Gedit Cobalt blue theme.
 " Date: 2025-11-26
+" Author: Logan Richey
 
 " ============================================================
 hi clear

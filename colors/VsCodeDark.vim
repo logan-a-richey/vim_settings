@@ -1,5 +1,7 @@
 " Name: VSCODE DARK
+" Descripton: Inspired by VSCode default C++ dark theme.
 " Date: 2025-11-25
+" Author: Logan Richey 
 
 " ============================================================
 hi clear

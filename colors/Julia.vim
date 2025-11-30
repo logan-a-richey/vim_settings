@@ -1,6 +1,6 @@
-" Name: GEDIT SOLARIZED
-" Descripton: Inspired by Solarized theme, Gedit variation.
-" Date: 2025-11-25
+" Name: JULIA
+" Descripton: Inspired by Julia logo colors.
+" Date: 2025-11-30
 " Author: Logan Richey
 
 " ============================================================
@@ -8,52 +8,47 @@ hi clear
 if exists('syntax_on')
     syntax reset
 endif
-let g:colors_name = 'gedit_solarized'
+let g:colors_name = 'julia'
 set termguicolors
 set cursorline
 
 " ============================================================
 " Colors 
 
-let s:solarized_turq        = '#002b36'
-let s:solarized_turq_sec    = '#073642'
-let s:solarized_gray        = '#586e75'
-let s:solarized_white       = '#aebfc7'
+"let s:julia_blue = '#3f64b2'
+let s:julia_blue = '#4d79d6'
+let s:julia_green = '#00993b'
+let s:julia_yellow_green = '#7d9900'
+let s:julia_pink = '#a558a6'
+let s:julia_purple = '#380099'
+let s:julia_tomato = '#ea3931'
+let s:julia_cyan = '#009996'
 
-let s:solarized_yellow      = '#b58900'
-let s:solarized_orange      = '#cb4b16'
-let s:solarized_red         = '#dc322f'
-let s:solarized_pink        = '#d33682'
-
-let s:solarized_violet      = '#6c71c4'
-let s:solarized_violet2     = '#868be3'
-let s:solarized_cyan        = '#2aa198'
-let s:solarized_blue        = '#268bd2'
-let s:solarized_green       = '#859900'
-
-let s:bg 			= s:solarized_turq
-let s:bg_sec        = s:solarized_turq_sec
+let s:bg 			= '#202020'
+let s:bg_sec        = '#272727'
 let s:cursor_line 	= s:bg_sec
-let s:fg 			= s:solarized_white
-let s:comment 		= s:solarized_gray
+let s:fg 			= '#e0e0e0'
+let s:comment 		= '#7a7a7a'
 
 let s:line_nr_above = s:comment
 let s:line_nr_below = s:comment
 let s:line_nr 		= s:fg
-let s:statement 	= s:solarized_green
-let s:type 			= s:solarized_yellow
+"let s:statement 	= s:julia_blue
+"let s:type 		= s:julia_cyan
+let s:statement 	= s:julia_pink
+let s:type 			= s:julia_blue
 
-let s:function 		= s:solarized_yellow
-let s:namespace 	= s:solarized_yellow
-let s:defclass      = s:solarized_blue
+let s:function 		= s:julia_pink
+let s:namespace 	= s:julia_pink
+let s:defclass      = s:julia_pink
 
-let s:preproc 		= s:solarized_orange
-let s:number 		= s:solarized_cyan
-let s:string 		= s:solarized_cyan
-let s:character 	= s:solarized_cyan
-let s:special 		= s:solarized_pink
-let s:paren         = s:solarized_violet2
-let s:visual_select = s:solarized_violet2
+let s:preproc 		= s:julia_pink
+let s:number 		= s:julia_green
+let s:string 		= s:julia_green
+let s:character 	= s:julia_green
+let s:special 		= s:julia_yellow_green
+let s:paren         = s:julia_pink
+let s:visual_select = s:julia_green
 
 " ============================================================
 " VIM UI Syntax 
@@ -92,7 +87,7 @@ execute 'hi Keyword guifg=' . s:statement
 execute 'hi PreProc guifg=' . s:preproc 
 execute 'hi Type guifg=' . s:type 
 execute 'hi Special guifg=' . s:special 
-
+execute 'hi MatchParen guibg=#ff0000'
 execute 'hi Error guifg=#d0d0d0 guibg=#dd0000'
 execute 'hi Todo guifg=#000000 guibg=#dddd00'
 

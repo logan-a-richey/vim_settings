@@ -1,5 +1,7 @@
 " Name: DRACULA
+" Descripton: Inspired by Dracula theme.
 " Date: 2025-11-26
+" Author: Logan Richey 
 
 " ============================================================
 hi clear

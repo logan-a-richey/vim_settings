@@ -1,5 +1,7 @@
-" Name: OPEN AI GPT CODE THEME
+" Name: OPENAI
+" Descripton: Inspired by ChatGPT code snippets syntax theme.
 " Date: 2025-11-25
+" Author: Logan Richey
 
 " ============================================================
 hi clear

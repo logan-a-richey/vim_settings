@@ -1,5 +1,7 @@
 " Name: NAYSAYER
+" Description: Inspired by Naysayer Emacs / Johnathan Blow's favorite theme.
 " Date: 2025-11-25
+" Author: Logan Richey
 
 " ============================================================
 hi clear

@@ -1,5 +1,7 @@
 " Name: MONOKAI DARK
+" Descripton: Inspired by VSCode Monokai
 " Date: 2025-11-25
+" Author: Logan Richey
 
 " ============================================================
 hi clear
