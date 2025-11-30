@@ -1,52 +1,53 @@
-" Name: VSCODE DARK
-" Date: 2025-11-25
+" Name: CUSTOM
+" Date: 2025-11-26
 
 " ============================================================
 hi clear
 if exists('syntax_on')
     syntax reset
 endif
-let g:colors_name = 'vs_code_dark'
+let g:colors_name = 'custom'
 set termguicolors
 set cursorline
 
 " ============================================================
 " Colors 
 
-let s:code_blue     = '#569cd6'
-let s:code_red      = '#ce8f5e'
-let s:code_green    = '#b0cea8'
-let s:code_yellow   = '#dcdc98'
-let s:code_purple   = '#c586c0'
-let s:code_purple2  = '#c584a6'
-let s:code_pink     = '#da70d6'
-let s:code_turq     = '#4bc9b0'
+let s:custom_navy   = '#04111c'
+let s:custom_navy2  = '#061726'
+let s:custom_swamp_green = '#6f8d55'
+let s:custom_white = '#e0e0e0'
+let s:custom_gray = '#909090'
+let s:custom_blue = '#00acfc'
+let s:custom_orange = '#f3a138'
+let s:custom_mint = '#b8ee9b'
+let s:custom_bright_green = '#7fde11'
+let s:custom_pastel_blue = '#8cacc1'
 
-let s:bg 			= '#202020' " gray
-let s:bg_sec        = '#272727' " gray
-let s:cursor_line 	= s:bg_sec
-let s:fg 			= '#9cdcfe' " off white - light blue 
-let s:comment 		= '#659955' " green 
+let s:bg 			= s:custom_navy
+let s:bg_sec        = s:custom_navy2
+let s:cursor_line 	= s:custom_navy2
+let s:fg 			= s:custom_white
+let s:comment 		= s:custom_swamp_green
 
-let s:line_nr_above = '#858585' " gray
-let s:line_nr_below = '#858585' " gray
-" let s:line_nr 	= '#c6c6c6' " light gray
-let s:line_nr       = s:code_blue
+let s:line_nr_above = s:custom_gray
+let s:line_nr_below = s:custom_gray
+let s:line_nr       = s:custom_orange
 
-let s:statement 	= s:code_purple2
-let s:type 			= s:code_blue
+let s:statement 	= s:custom_blue
+let s:type 			= s:custom_blue
 
-let s:function 		= s:code_yellow
-let s:defclass      = s:code_yellow
-let s:namespace 	= s:code_turq
+let s:function 		= s:custom_orange
+let s:namespace 	= s:custom_orange
+let s:defclass      = s:custom_orange
 
-let s:preproc 		= s:code_purple
-let s:number 		= s:code_green
-let s:string 		= s:code_red
-let s:character 	= s:code_red
-let s:special 		= s:code_green
-let s:paren         = s:code_pink
-let s:visual_select = s:code_green
+let s:preproc 		= s:custom_blue
+let s:number 		= s:custom_mint
+let s:string 		= s:custom_mint
+let s:character 	= s:custom_mint
+let s:special 		= s:custom_bright_green
+let s:paren         = s:custom_pastel_blue
+let s:visual_select = s:custom_mint
 
 " ============================================================
 " VIM UI Syntax 
@@ -145,14 +146,14 @@ endfunction
 " Run OnStart
 augroup MySyntaxTweaks
     autocmd!
-    "autocmd Syntax * call InitNamespaceSyntax()
-    "autocmd Syntax * call InitFunctionSyntax()
+    " autocmd Syntax * call InitNamespaceSyntax()
+    " autocmd Syntax * call InitFunctionSyntax()
     autocmd Syntax * call InitScopeSyntax()
     autocmd Syntax * call DisableGuiBold()
 augroup END
 
-"call InitNamespaceSyntax()
-"call InitFunctionSyntax()
+" call InitNamespaceSyntax()
+" call InitFunctionSyntax()
 call InitScopeSyntax()
 call DisableGuiBold()
 

@@ -13,13 +13,25 @@ public:
     unsigned int age;
 public:
     Person() = delete;
-    Person(const std::string& n, int a) : name(n), age(a) {}
-    std::string to_str(void) const {
-        std::ostringstream oss;
-        oss << "{" << "\"name\": " << name << ", \"age\": " << age << "}";
-        return oss.str();
-    }
+    Person(const std::string& n, int a);
+    ~Person();
+    std::string to_str(void) const;
 };
+
+Person::Person(const std::string& n, int a) {
+    std::cout << "Person CTOR called." << std::endl;
+    this->name = n;
+    this->age = a;
+}
+
+Person::~Person() {
+    std::cout << "Person DTOR called." << std::endl;
+}
+std::string Person::to_str(void) const {
+    std::ostringstream oss;
+    oss << "{" << "\"name\": " << name << ", \"age\": " << age << "}";
+    return oss.str();
+}
 
 int main() {
     std::vector<Person> people;

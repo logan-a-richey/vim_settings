@@ -150,14 +150,14 @@ endfunction
 " Run OnStart
 augroup MySyntaxTweaks
     autocmd!
-    autocmd Syntax * call InitNamespaceSyntax()
-    autocmd Syntax * call InitFunctionSyntax()
+    "autocmd Syntax * call InitNamespaceSyntax()
+    "autocmd Syntax * call InitFunctionSyntax()
     autocmd Syntax * call InitScopeSyntax()
     autocmd Syntax * call DisableGuiBold()
 augroup END
 
-call InitNamespaceSyntax()
-call InitFunctionSyntax()
+"call InitNamespaceSyntax()
+"call InitFunctionSyntax()
 call InitScopeSyntax()
 call DisableGuiBold()
 

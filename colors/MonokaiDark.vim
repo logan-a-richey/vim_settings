@@ -110,7 +110,7 @@ endfunction
 
 " Syntax change function : color word that precede a (, to signal a function call
 function! InitFunctionSyntax() abort
-    syntax match myFunction '\<[A-Za-z_][A-Za-z0-9_]*\ze('
+    syntax match myFunction '\<\~\?[A-Za-z_][A-Za-z0-9_]*\ze('
     execute 'highlight myFunction guifg=' . s:function
 endfunction
 
@@ -145,14 +145,14 @@ endfunction
 " Run OnStart
 augroup MySyntaxTweaks
     autocmd!
-    autocmd Syntax * call InitNamespaceSyntax()
-    autocmd Syntax * call InitFunctionSyntax()
+    " autocmd Syntax * call InitNamespaceSyntax()
+    "autocmd Syntax * call InitFunctionSyntax()
     autocmd Syntax * call InitScopeSyntax()
     autocmd Syntax * call DisableGuiBold()
 augroup END
 
-call InitNamespaceSyntax()
-call InitFunctionSyntax()
+" call InitNamespaceSyntax()
+"call InitFunctionSyntax()
 call InitScopeSyntax()
 call DisableGuiBold()
 

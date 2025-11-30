@@ -44,7 +44,7 @@ let s:function 		= s:open_orange
 let s:namespace 	= s:cyan
 let s:defclass      = s:open_red
 
-let s:preproc 		= s:magenta
+let s:preproc 		= s:open_pink
 let s:number 		= s:open_pink
 let s:string 		= s:open_green
 let s:character 	= s:open_green
@@ -149,14 +149,14 @@ endfunction
 " Run OnStart
 augroup MySyntaxTweaks
     autocmd!
-    autocmd Syntax * call InitNamespaceSyntax()
-    autocmd Syntax * call InitFunctionSyntax()
+    "autocmd Syntax * call InitNamespaceSyntax()
+    "autocmd Syntax * call InitFunctionSyntax()
     autocmd Syntax * call InitScopeSyntax()
     autocmd Syntax * call DisableGuiBold()
 augroup END
 
-call InitNamespaceSyntax()
-call InitFunctionSyntax()
+"call InitNamespaceSyntax()
+"call InitFunctionSyntax()
 call InitScopeSyntax()
 call DisableGuiBold()
 
