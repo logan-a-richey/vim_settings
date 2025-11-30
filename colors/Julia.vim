@@ -38,9 +38,9 @@ let s:line_nr 		= s:fg
 let s:statement 	= s:julia_pink
 let s:type 			= s:julia_blue
 
-let s:function 		= s:julia_pink
-let s:namespace 	= s:julia_pink
-let s:defclass      = s:julia_pink
+let s:function 		= s:julia_cyan
+let s:namespace 	= s:julia_cyan
+let s:defclass      = s:julia_blue
 
 let s:preproc 		= s:julia_pink
 let s:number 		= s:julia_green
