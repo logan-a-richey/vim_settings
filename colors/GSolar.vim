@@ -36,8 +36,8 @@ let s:solarized_green 	= '#859900'
 let s:bg 			= s:solarized_base03
 let s:bg_sec        = s:solarized_base02
 let s:cursor_line 	= s:bg_sec
-let s:fg 			= s:solarized_base2
-let s:comment 		= s:solarized_base01
+let s:fg 			= '#d0d0d0'
+let s:comment 		= '#707070'
 
 let s:line_nr_above = s:comment
 let s:line_nr_below = s:comment
