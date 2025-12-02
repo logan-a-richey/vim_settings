@@ -3,8 +3,11 @@
 " Date: 2025-11-25
 " Author: Logan Richey
 
-" ============================================================
 hi clear
+hi clear myFunction
+hi clear myNamespace
+hi clear myScope
+
 if exists('syntax_on')
     syntax reset
 endif
@@ -12,30 +15,29 @@ let g:colors_name = 'gedit_solarized'
 set termguicolors
 set cursorline
 
-" ============================================================
 " Colors 
+let s:solarized_base03 	= '#002b36'
+let s:solarized_base02 	= '#073642'
+let s:solarized_base01 	= '#586e75'
+let s:solarized_base00 	= '#657b83'
+let s:solarized_base0 	= '#839496'
+let s:solarized_base1 	= '#93a1a1'
+let s:solarized_base2 	= '#eee8d5'
+let s:solarized_base3 	= '#fdf6e3'
+let s:solarized_yellow 	= '#b58900'
+let s:solarized_orange 	= '#cb4b16'
+let s:solarized_red 	= '#dc322f'
+let s:solarized_magenta = '#d33682'
+let s:solarized_violet 	= '#6c71c4'
+let s:solarized_blue 	= '#268bd2'
+let s:solarized_cyan 	= '#2aa198'
+let s:solarized_green 	= '#859900'
 
-let s:solarized_turq        = '#002b36'
-let s:solarized_turq_sec    = '#073642'
-let s:solarized_gray        = '#586e75'
-let s:solarized_white       = '#aebfc7'
-
-let s:solarized_yellow      = '#b58900'
-let s:solarized_orange      = '#cb4b16'
-let s:solarized_red         = '#dc322f'
-let s:solarized_pink        = '#d33682'
-
-let s:solarized_violet      = '#6c71c4'
-let s:solarized_violet2     = '#868be3'
-let s:solarized_cyan        = '#2aa198'
-let s:solarized_blue        = '#268bd2'
-let s:solarized_green       = '#859900'
-
-let s:bg 			= s:solarized_turq
-let s:bg_sec        = s:solarized_turq_sec
+let s:bg 			= s:solarized_base03
+let s:bg_sec        = s:solarized_base02
 let s:cursor_line 	= s:bg_sec
-let s:fg 			= s:solarized_white
-let s:comment 		= s:solarized_gray
+let s:fg 			= s:solarized_base2
+let s:comment 		= s:solarized_base01
 
 let s:line_nr_above = s:comment
 let s:line_nr_below = s:comment
@@ -44,16 +46,16 @@ let s:statement 	= s:solarized_green
 let s:type 			= s:solarized_yellow
 
 let s:function 		= s:solarized_yellow
-let s:namespace 	= s:solarized_yellow
-let s:defclass      = s:solarized_blue
+let s:namespace 	= s:solarized_blue
+let s:defclass      = s:solarized_magenta
 
 let s:preproc 		= s:solarized_orange
 let s:number 		= s:solarized_cyan
 let s:string 		= s:solarized_cyan
 let s:character 	= s:solarized_cyan
-let s:special 		= s:solarized_pink
-let s:paren         = s:solarized_violet2
-let s:visual_select = s:solarized_violet2
+let s:special 		= s:solarized_cyan
+let s:paren         = s:solarized_violet
+let s:visual_select = s:solarized_green
 
 " ============================================================
 " VIM UI Syntax 
@@ -152,14 +154,10 @@ endfunction
 " Run OnStart
 augroup MySyntaxTweaks
     autocmd!
-    "autocmd Syntax * call InitNamespaceSyntax()
-    "autocmd Syntax * call InitFunctionSyntax()
     autocmd Syntax * call InitScopeSyntax()
     autocmd Syntax * call DisableGuiBold()
 augroup END
 
-"call InitNamespaceSyntax()
-"call InitFunctionSyntax()
 call InitScopeSyntax()
 call DisableGuiBold()
 
