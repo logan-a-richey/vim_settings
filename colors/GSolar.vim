@@ -54,7 +54,7 @@ let s:number 		= s:solarized_cyan
 let s:string 		= s:solarized_cyan
 let s:character 	= s:solarized_cyan
 let s:special 		= s:solarized_cyan
-let s:paren         = s:solarized_blue
+let s:paren         = s:solarized_violet
 let s:visual_select = s:solarized_green
 
 " ============================================================
@@ -94,6 +94,7 @@ execute 'hi Keyword guifg=' . s:statement
 execute 'hi PreProc guifg=' . s:preproc 
 execute 'hi Type guifg=' . s:type 
 execute 'hi Special guifg=' . s:special 
+execute 'hi MatchParen guibg=' . s:paren 
 
 execute 'hi Error guifg=#d0d0d0 guibg=#dd0000'
 execute 'hi Todo guifg=#000000 guibg=#dddd00'
