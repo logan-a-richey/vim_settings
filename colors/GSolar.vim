@@ -42,19 +42,19 @@ let s:comment 		= '#707070'
 let s:line_nr_above = s:comment
 let s:line_nr_below = s:comment
 let s:line_nr 		= s:fg
-let s:statement 	= s:solarized_green
+let s:statement 	= s:solarized_yellow
 let s:type 			= s:solarized_yellow
 
-let s:function 		= s:solarized_yellow
-let s:namespace 	= s:solarized_blue
-let s:defclass      = s:solarized_magenta
+let s:function 		= s:solarized_red
+let s:namespace 	= s:solarized_green
+let s:defclass      = s:solarized_green
 
-let s:preproc 		= s:solarized_orange
+let s:preproc 		= s:solarized_magenta
 let s:number 		= s:solarized_cyan
 let s:string 		= s:solarized_cyan
 let s:character 	= s:solarized_cyan
 let s:special 		= s:solarized_cyan
-let s:paren         = s:solarized_violet
+let s:paren         = s:solarized_blue
 let s:visual_select = s:solarized_green
 
 " ============================================================
@@ -113,7 +113,7 @@ execute 'hi DiffText guibg=' . '#4c4745'
 
 " Syntax change function : color entire word containing ::
 function! InitNamespaceSyntax() abort
-    syntax match myNamespace '\<[a-zA-Z_][a-zA-Z0-9_]*\(::[a-zA-Z_][a-zA-Z0-9_]*\)\+'
+    syntax match myNamespace '\<[a-zA-Z_][a-zA-Z0-9_]*\(::[~a-zA-Z_][a-zA-Z0-9_]*\)\+'
     execute 'highlight myNamespace guifg=' . s:namespace
 endfunction 
 
@@ -154,10 +154,12 @@ endfunction
 " Run OnStart
 augroup MySyntaxTweaks
     autocmd!
+    autocmd Syntax * call InitNamespaceSyntax()
     autocmd Syntax * call InitScopeSyntax()
     autocmd Syntax * call DisableGuiBold()
 augroup END
 
+call InitNamespaceSyntax()
 call InitScopeSyntax()
 call DisableGuiBold()
 
