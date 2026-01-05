@@ -1,6 +1,6 @@
-" Name: DESERT
-" Descripton: Inspired by my dad's favorite coding theme.
-" Date: 2025-12-01
+" Name: Tango
+" Descripton: Linux Theme
+" Date: 2026_01_04
 " Author: Logan Richey
 
 hi clear
@@ -11,48 +11,47 @@ hi clear myScope
 if exists('syntax_on')
     syntax reset
 endif
-let g:colors_name = 'desert'
+let g:colors_name = 'Tango'
 set termguicolors
 set nocursorline
 
-let s:dark_purple 	= '#300a24' " background 
-let s:dark_purple2 	= '#2c0921' " bg sec
+let s:gray1 = '#202020'
+let s:gray2 = '#303030'
+let s:gray3 = '#606060'
 
-let s:white 		= '#eef1f8' " foreground
-let s:white2        = '#cccccc'
-let s:gray          = '#909090'
+let s:white = '#bdc8c8'
+let s:green = '#88e234'
+let s:blue = '#729fcf'
+let s:red = '#cf7285'
+let s:yellow = '#cfc372'
+let s:purple = '#6a50b3'
+let s:orange = '#c97253'
 
-let s:green 		= '#87ffaf' " types
-let s:yellow 		= '#fce94f' " control flow
-let s:light_purple 	= '#a97ba0' " values
-let s:salmon_pink 	= '#fbd2ce' " special
-let s:blue 		    = '#34e2e2' " comments
-let s:orange        = '#f8c8b0' " paren
-
-let s:bg 			= s:dark_purple
-let s:bg_sec        = s:dark_purple2
-let s:cursor_line 	= s:dark_purple2
+let s:bg 			= s:gray1
+let s:bg_sec        = s:gray2
+let s:cursor_line 	= s:gray2
 let s:fg 			= s:white
-let s:comment 		= s:blue
+let s:comment 		= s:purple
 
-let s:line_nr_above = s:gray
-let s:line_nr_below = s:gray
-let s:line_nr       = s:yellow
+let s:line_nr_above = s:gray3
+let s:line_nr_below = s:gray3
+let s:line_nr       = s:white
 
-let s:statement 	= s:yellow
-let s:type 			= s:green
+let s:statement 	= s:blue
+let s:type 			= s:blue
 
-let s:function 		= s:white2
-let s:namespace 	= s:white2
-let s:defclass      = s:blue
+let s:paren         = s:red
 
-let s:preproc 		= s:green
-let s:number 		= s:light_purple
-let s:string 		= s:light_purple
-let s:character 	= s:light_purple
-let s:special 		= s:salmon_pink
-let s:paren         = s:orange
-let s:visual_select = s:green
+let s:preproc 		= s:red
+let s:number 		= s:green
+let s:string 		= s:green
+let s:character 	= s:green
+let s:special 		= s:yellow
+let s:visual_select = s:gray3 
+
+let s:function 		= s:white
+let s:namespace 	= s:white
+let s:defclass      = s:orange
 
 " ============================================================
 " VIM UI Syntax 
@@ -70,7 +69,7 @@ execute 'hi Search guifg=' . s:bg . ' guibg=' . s:visual_select
 execute 'hi IncSearch guifg=' . s:bg . ' guibg=' . s:visual_select
 
 execute 'hi VertSplit guifg=' . s:bg_sec . ' guibg=' . s:bg
-execute 'hi StatusLineNC guifg=' . s:bg_sec . ' guibg=' . s:white2
+execute 'hi StatusLineNC guifg=' . s:bg_sec . ' guibg=' . s:gray3
 execute 'hi StatusLine guifg=' . s:bg . ' guibg=' . s:fg
 
 highlight Pmenu ctermbg=darkblue guibg=darkblue
