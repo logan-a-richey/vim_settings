@@ -10,7 +10,7 @@ if exists('syntax_on')
 endif
 let g:colors_name = 'cobalt'
 set termguicolors
-set cursorline
+set nocursorline
 
 " ============================================================
 " Colors 
@@ -27,7 +27,7 @@ let s:cobalt_red = '#da0a39'
 let s:cobalt_highlight = '#4f94cd'
 let s:cobalt_yellow = '#faed7d'
 let s:white = '#d0d0d0'
-let s:white_depressed = '#a0a0a0'
+let s:white_depressed = '#909090'
 
 let s:bg 			= s:cobalt_bg
 let s:bg_sec        = s:cobalt_bg_sec
@@ -51,7 +51,8 @@ let s:number 		= s:cobalt_red
 let s:string 		= s:cobalt_green
 let s:character 	= s:cobalt_green
 let s:special 		= s:cobalt_red
-let s:paren         = s:cobalt_highlight
+"let s:paren         = s:cobalt_highlight
+let s:paren         = s:cobalt_yellow
 let s:visual_select = s:cobalt_highlight
 
 " ============================================================

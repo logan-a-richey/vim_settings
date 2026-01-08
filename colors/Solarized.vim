@@ -11,7 +11,7 @@ hi clear myScope
 if exists('syntax_on')
     syntax reset
 endif
-let g:colors_name = 'gedit_solarized'
+let g:colors_name = 'solarized'
 set termguicolors
 set cursorline
 
@@ -36,25 +36,25 @@ let s:solarized_green 	= '#859900'
 let s:bg 			= s:solarized_base03
 let s:bg_sec        = s:solarized_base02
 let s:cursor_line 	= s:bg_sec
-let s:fg 			= '#d0d0d0'
-let s:comment 		= '#707070'
+let s:fg 			= s:solarized_base2
+let s:comment 		= s:solarized_base01
 
 let s:line_nr_above = s:comment
 let s:line_nr_below = s:comment
 let s:line_nr 		= s:fg
-let s:statement 	= s:solarized_yellow
+let s:statement 	= s:solarized_green
 let s:type 			= s:solarized_yellow
 
 let s:function 		= s:solarized_red
-let s:namespace 	= s:solarized_green
-let s:defclass      = s:solarized_green
+let s:namespace 	= s:solarized_blue
+let s:defclass      = s:solarized_blue
 
-let s:preproc 		= s:solarized_magenta
+let s:preproc 		= s:solarized_orange
 let s:number 		= s:solarized_cyan
 let s:string 		= s:solarized_cyan
 let s:character 	= s:solarized_cyan
-let s:special 		= s:solarized_cyan
-let s:paren         = s:solarized_violet
+let s:special 		= s:solarized_orange
+let s:paren         = s:solarized_base3
 let s:visual_select = s:solarized_green
 
 " ============================================================
