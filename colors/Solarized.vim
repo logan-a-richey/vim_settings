@@ -67,13 +67,17 @@ execute 'hi LineNr guifg=' . s:line_nr
 execute 'hi LineNrAbove guifg=' . s:line_nr_above
 execute 'hi LineNrBelow guifg=' . s:line_nr_below
 
+" visual select && search and replace
 execute 'hi Visual guifg=' . s:bg . ' guibg=' . s:visual_select 
 execute 'hi Search guifg=' . s:bg . ' guibg=' . s:visual_select 
 execute 'hi IncSearch guifg=' . s:bg . ' guibg=' . s:visual_select
 
+" current window
+execute 'hi StatusLine guifg=' . s:bg . ' guibg=' . s:comment
+" not active window
+execute 'hi StatusLineNC guifg=' . s:bg_sec . ' guibg=' . s:bg
+" in between windows
 execute 'hi VertSplit guifg=' . s:bg_sec . ' guibg=' . s:bg
-execute 'hi StatusLineNC guifg=' . s:bg_sec . ' guibg=' . s:comment
-execute 'hi StatusLine guifg=' . s:bg . ' guibg=' . s:fg
 
 highlight Pmenu ctermbg=darkblue guibg=darkblue
 highlight PmenuSel ctermbg=blue guibg=blue
