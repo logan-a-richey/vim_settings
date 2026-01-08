@@ -1,59 +1,61 @@
-" Name: GEDIT COBALT
-" Descripton: Inspired by Gedit Cobalt blue theme.
-" Date: 2025-11-26
+" Name: GEDIT SOLARIZED
+" Descripton: Inspired by Solarized theme, Gedit variation.
+" Date: 2025-11-25
 " Author: Logan Richey
 
-" ============================================================
 hi clear
+hi clear myFunction
+hi clear myNamespace
+hi clear myScope
+
 if exists('syntax_on')
     syntax reset
 endif
-let g:colors_name = 'cobalt'
+let g:colors_name = 'solarized'
 set termguicolors
-set nocursorline
+set cursorline
 
-" ============================================================
 " Colors 
+let s:solarized_base03 	= '#002b36'
+let s:solarized_base02 	= '#073642'
+let s:solarized_base01 	= '#586e75'
+let s:solarized_base00 	= '#657b83'
+let s:solarized_base0 	= '#839496'
+let s:solarized_base1 	= '#93a1a1'
+let s:solarized_base2 	= '#eee8d5'
+let s:solarized_base3 	= '#fdf6e3'
+let s:solarized_yellow 	= '#b58900'
+let s:solarized_orange 	= '#cb4b16'
+let s:solarized_red 	= '#dc322f'
+let s:solarized_magenta = '#d33682'
+let s:solarized_violet 	= '#6c71c4'
+let s:solarized_blue 	= '#268bd2'
+let s:solarized_cyan 	= '#2aa198'
+let s:solarized_green 	= '#859900'
 
-let s:cobalt_bg = '#001b33'
-let s:cobalt_bg_sec = '#003b70'
-let s:cobalt_comment = '#0088fe'
-let s:cobalt_white = '#fcfbe4'
-let s:cobalt_baby_blue = '#aac9c5'
-let s:cobalt_orange = '#ff9d00'
-let s:cobalt_green = '#38a81e'
-let s:cobalt_turqoise = '#61fabb'
-let s:cobalt_red = '#da0a39'
-let s:cobalt_highlight = '#4f94cd'
-let s:cobalt_yellow = '#faed7d'
-let s:white = '#d0d0d0'
-let s:white_depressed = '#909090'
-
-let s:bg 			= s:cobalt_bg
-let s:bg_sec        = s:cobalt_bg_sec
+let s:bg 			= s:solarized_base03
+let s:bg_sec        = s:solarized_base02
 let s:cursor_line 	= s:bg_sec
-let s:fg 			= s:white
-let s:comment 		= s:cobalt_comment
+let s:fg 			= s:solarized_base2
+let s:comment 		= s:solarized_base01
 
 let s:line_nr_above = s:comment
 let s:line_nr_below = s:comment
-let s:line_nr       = s:cobalt_orange
+let s:line_nr 		= s:fg
+let s:statement 	= s:solarized_green
+let s:type 			= s:solarized_yellow
 
-let s:statement 	= s:cobalt_orange
-let s:type 			= s:cobalt_turqoise
+let s:function 		= s:solarized_red
+let s:namespace 	= s:solarized_blue
+let s:defclass      = s:solarized_blue
 
-let s:function 		= s:cobalt_yellow
-let s:namespace 	= s:cobalt_yellow
-let s:defclass      = s:cobalt_red
-
-let s:preproc 		= s:cobalt_green
-let s:number 		= s:cobalt_red
-let s:string 		= s:cobalt_green
-let s:character 	= s:cobalt_green
-let s:special 		= s:cobalt_red
-"let s:paren         = s:cobalt_highlight
-let s:paren         = s:cobalt_yellow
-let s:visual_select = s:cobalt_highlight
+let s:preproc 		= s:solarized_orange
+let s:number 		= s:solarized_cyan
+let s:string 		= s:solarized_cyan
+let s:character 	= s:solarized_cyan
+let s:special 		= s:solarized_orange
+let s:paren         = s:solarized_base3
+let s:visual_select = s:solarized_green
 
 " ============================================================
 " VIM UI Syntax 
@@ -92,6 +94,7 @@ execute 'hi Keyword guifg=' . s:statement
 execute 'hi PreProc guifg=' . s:preproc 
 execute 'hi Type guifg=' . s:type 
 execute 'hi Special guifg=' . s:special 
+execute 'hi MatchParen guibg=' . s:paren 
 
 execute 'hi Error guifg=#d0d0d0 guibg=#dd0000'
 execute 'hi Todo guifg=#000000 guibg=#dddd00'
@@ -111,7 +114,7 @@ execute 'hi DiffText guibg=' . '#4c4745'
 
 " Syntax change function : color entire word containing ::
 function! InitNamespaceSyntax() abort
-    syntax match myNamespace '\<[a-zA-Z_][a-zA-Z0-9_]*\(::[a-zA-Z_][a-zA-Z0-9_]*\)\+'
+    syntax match myNamespace '\<[a-zA-Z_][a-zA-Z0-9_]*\(::[~a-zA-Z_][a-zA-Z0-9_]*\)\+'
     execute 'highlight myNamespace guifg=' . s:namespace
 endfunction 
 
@@ -152,14 +155,12 @@ endfunction
 " Run OnStart
 augroup MySyntaxTweaks
     autocmd!
-    " autocmd Syntax * call InitNamespaceSyntax()
-    " autocmd Syntax * call InitFunctionSyntax()
+    autocmd Syntax * call InitNamespaceSyntax()
     autocmd Syntax * call InitScopeSyntax()
     autocmd Syntax * call DisableGuiBold()
 augroup END
 
-" call InitNamespaceSyntax()
-" call InitFunctionSyntax()
+call InitNamespaceSyntax()
 call InitScopeSyntax()
 call DisableGuiBold()
 

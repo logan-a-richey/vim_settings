@@ -1,61 +1,57 @@
-" Name: GEDIT SOLARIZED
-" Descripton: Inspired by Solarized theme, Gedit variation.
-" Date: 2025-11-25
+" Name: Tango
+" Descripton: Linux Theme
+" Date: 2026_01_04
 " Author: Logan Richey
 
 hi clear
-hi clear myFunction
-hi clear myNamespace
+hi clear myNamespace 
+hi clear myFunction 
 hi clear myScope
 
 if exists('syntax_on')
     syntax reset
 endif
-let g:colors_name = 'gedit_solarized'
+let g:colors_name = 'Tango'
 set termguicolors
-set cursorline
+set nocursorline
 
-" Colors 
-let s:solarized_base03 	= '#002b36'
-let s:solarized_base02 	= '#073642'
-let s:solarized_base01 	= '#586e75'
-let s:solarized_base00 	= '#657b83'
-let s:solarized_base0 	= '#839496'
-let s:solarized_base1 	= '#93a1a1'
-let s:solarized_base2 	= '#eee8d5'
-let s:solarized_base3 	= '#fdf6e3'
-let s:solarized_yellow 	= '#b58900'
-let s:solarized_orange 	= '#cb4b16'
-let s:solarized_red 	= '#dc322f'
-let s:solarized_magenta = '#d33682'
-let s:solarized_violet 	= '#6c71c4'
-let s:solarized_blue 	= '#268bd2'
-let s:solarized_cyan 	= '#2aa198'
-let s:solarized_green 	= '#859900'
+let s:gray1 = '#202020'
+let s:gray2 = '#303030'
+let s:gray3 = '#606060'
 
-let s:bg 			= s:solarized_base03
-let s:bg_sec        = s:solarized_base02
-let s:cursor_line 	= s:bg_sec
-let s:fg 			= '#d0d0d0'
-let s:comment 		= '#707070'
+let s:white = '#bdc8c8'
+let s:green = '#88e234'
+let s:blue = '#729fcf'
+let s:red = '#cf7285'
+let s:yellow = '#cfc372'
+let s:purple = '#6a50b3'
+let s:orange = '#c97253'
 
-let s:line_nr_above = s:comment
-let s:line_nr_below = s:comment
-let s:line_nr 		= s:fg
-let s:statement 	= s:solarized_yellow
-let s:type 			= s:solarized_yellow
+let s:bg 			= s:gray1
+let s:bg_sec        = s:gray2
+let s:cursor_line 	= s:gray2
+let s:fg 			= s:white
+let s:comment 		= s:purple
 
-let s:function 		= s:solarized_red
-let s:namespace 	= s:solarized_green
-let s:defclass      = s:solarized_green
+let s:line_nr_above = s:gray3
+let s:line_nr_below = s:gray3
+let s:line_nr       = s:white
 
-let s:preproc 		= s:solarized_magenta
-let s:number 		= s:solarized_cyan
-let s:string 		= s:solarized_cyan
-let s:character 	= s:solarized_cyan
-let s:special 		= s:solarized_cyan
-let s:paren         = s:solarized_violet
-let s:visual_select = s:solarized_green
+let s:statement 	= s:blue
+let s:type 			= s:blue
+
+let s:paren         = s:red
+
+let s:preproc 		= s:red
+let s:number 		= s:green
+let s:string 		= s:green
+let s:character 	= s:green
+let s:special 		= s:yellow
+let s:visual_select = s:gray3 
+
+let s:function 		= s:white
+let s:namespace 	= s:white
+let s:defclass      = s:orange
 
 " ============================================================
 " VIM UI Syntax 
@@ -66,13 +62,14 @@ execute 'hi CursorLineNr guifg=' . s:line_nr
 execute 'hi LineNr guifg=' . s:line_nr
 execute 'hi LineNrAbove guifg=' . s:line_nr_above
 execute 'hi LineNrBelow guifg=' . s:line_nr_below
+execute 'hi NonText guifg=' . s:line_nr_below
 
 execute 'hi Visual guifg=' . s:bg . ' guibg=' . s:visual_select 
 execute 'hi Search guifg=' . s:bg . ' guibg=' . s:visual_select 
 execute 'hi IncSearch guifg=' . s:bg . ' guibg=' . s:visual_select
 
 execute 'hi VertSplit guifg=' . s:bg_sec . ' guibg=' . s:bg
-execute 'hi StatusLineNC guifg=' . s:bg_sec . ' guibg=' . s:comment
+execute 'hi StatusLineNC guifg=' . s:bg_sec . ' guibg=' . s:gray3
 execute 'hi StatusLine guifg=' . s:bg . ' guibg=' . s:fg
 
 highlight Pmenu ctermbg=darkblue guibg=darkblue
@@ -94,7 +91,6 @@ execute 'hi Keyword guifg=' . s:statement
 execute 'hi PreProc guifg=' . s:preproc 
 execute 'hi Type guifg=' . s:type 
 execute 'hi Special guifg=' . s:special 
-execute 'hi MatchParen guibg=' . s:paren 
 
 execute 'hi Error guifg=#d0d0d0 guibg=#dd0000'
 execute 'hi Todo guifg=#000000 guibg=#dddd00'
@@ -114,7 +110,7 @@ execute 'hi DiffText guibg=' . '#4c4745'
 
 " Syntax change function : color entire word containing ::
 function! InitNamespaceSyntax() abort
-    syntax match myNamespace '\<[a-zA-Z_][a-zA-Z0-9_]*\(::[~a-zA-Z_][a-zA-Z0-9_]*\)\+'
+    syntax match myNamespace '\<[a-zA-Z_][a-zA-Z0-9_]*\(::[a-zA-Z_][a-zA-Z0-9_]*\)\+'
     execute 'highlight myNamespace guifg=' . s:namespace
 endfunction 
 
@@ -156,11 +152,13 @@ endfunction
 augroup MySyntaxTweaks
     autocmd!
     autocmd Syntax * call InitNamespaceSyntax()
+    " autocmd Syntax * call InitFunctionSyntax()
     autocmd Syntax * call InitScopeSyntax()
     autocmd Syntax * call DisableGuiBold()
 augroup END
 
 call InitNamespaceSyntax()
+" call InitFunctionSyntax()
 call InitScopeSyntax()
 call DisableGuiBold()
 

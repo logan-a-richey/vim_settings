@@ -52,7 +52,11 @@ let s:string 		= s:light_purple
 let s:character 	= s:light_purple
 let s:special 		= s:salmon_pink
 let s:paren         = s:orange
+<<<<<<< HEAD
 let s:visual_select = '#a0a0a0'
+=======
+let s:visual_select = s:green
+>>>>>>> 9674082e96146d047cc9d5860b99891d6a156c52
 
 " ============================================================
 " VIM UI Syntax 
