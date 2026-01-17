@@ -45,7 +45,7 @@ let s:line_nr 		= s:fg
 let s:statement 	= s:solarized_green
 let s:type 			= s:solarized_yellow
 
-let s:function 		= s:solarized_red
+let s:function 		= s:solarized_orange
 let s:namespace 	= s:solarized_blue
 let s:defclass      = s:solarized_blue
 
@@ -53,7 +53,7 @@ let s:preproc 		= s:solarized_orange
 let s:number 		= s:solarized_cyan
 let s:string 		= s:solarized_cyan
 let s:character 	= s:solarized_cyan
-let s:special 		= s:solarized_orange
+let s:special 		= s:solarized_magenta
 let s:paren         = s:solarized_violet
 let s:visual_select = s:solarized_yellow
 
@@ -95,7 +95,7 @@ execute 'hi Keyword guifg=' . s:statement
 execute 'hi PreProc guifg=' . s:preproc 
 execute 'hi Type guifg=' . s:type 
 execute 'hi Special guifg=' . s:special 
-execute 'hi MatchParen guibg=' . s:solarized_red . 'guifg=' . s:bg
+execute 'hi MatchParen guibg=' . s:solarized_magenta . 'guifg=' . s:bg
 
 execute 'hi Error guifg=#d0d0d0 guibg=#dd0000'
 execute 'hi Todo guifg=#000000 guibg=#dddd00'
@@ -158,13 +158,13 @@ augroup MySyntaxTweaks
     autocmd!
     autocmd Syntax * call InitNamespaceSyntax()
     autocmd Syntax * call InitScopeSyntax()
-    "autocmd Syntax * call InitFunctionSyntax()
+    autocmd Syntax * call InitFunctionSyntax()
     autocmd Syntax * call DisableGuiBold()
 augroup END
 
 call InitNamespaceSyntax()
 call InitScopeSyntax()
-" call InitFunctionSyntax 
+call InitFunctionSyntax()
 call DisableGuiBold()
 
 execute 'hi MatchParen guifg=' . s:solarized_red 
