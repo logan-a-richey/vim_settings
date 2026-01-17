@@ -16,7 +16,7 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " map CAPS lock key to ESC key
-setxkbmap -option caps:escape
+" setxkbmap -option caps:escape
 
 "===============================================================================
 " Editing

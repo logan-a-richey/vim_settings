@@ -54,8 +54,8 @@ let s:number 		= s:solarized_cyan
 let s:string 		= s:solarized_cyan
 let s:character 	= s:solarized_cyan
 let s:special 		= s:solarized_orange
-let s:paren         = s:solarized_base3
-let s:visual_select = s:solarized_green
+let s:paren         = s:solarized_violet
+let s:visual_select = s:solarized_yellow
 
 " ============================================================
 " VIM UI Syntax 
@@ -66,6 +66,7 @@ execute 'hi CursorLineNr guifg=' . s:line_nr
 execute 'hi LineNr guifg=' . s:line_nr
 execute 'hi LineNrAbove guifg=' . s:line_nr_above
 execute 'hi LineNrBelow guifg=' . s:line_nr_below
+execute 'hi NonText guifg=' . s:solarized_blue
 
 execute 'hi Visual guifg=' . s:bg . ' guibg=' . s:visual_select 
 execute 'hi Search guifg=' . s:bg . ' guibg=' . s:visual_select 
@@ -94,7 +95,7 @@ execute 'hi Keyword guifg=' . s:statement
 execute 'hi PreProc guifg=' . s:preproc 
 execute 'hi Type guifg=' . s:type 
 execute 'hi Special guifg=' . s:special 
-execute 'hi MatchParen guibg=' . s:paren 
+execute 'hi MatchParen guibg=' . s:solarized_red . 'guifg=' . s:bg
 
 execute 'hi Error guifg=#d0d0d0 guibg=#dd0000'
 execute 'hi Todo guifg=#000000 guibg=#dddd00'
@@ -157,10 +158,14 @@ augroup MySyntaxTweaks
     autocmd!
     autocmd Syntax * call InitNamespaceSyntax()
     autocmd Syntax * call InitScopeSyntax()
+    "autocmd Syntax * call InitFunctionSyntax()
     autocmd Syntax * call DisableGuiBold()
 augroup END
 
 call InitNamespaceSyntax()
 call InitScopeSyntax()
+" call InitFunctionSyntax 
 call DisableGuiBold()
+
+execute 'hi MatchParen guifg=' . s:solarized_red 
 
