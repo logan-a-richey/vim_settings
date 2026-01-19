@@ -123,6 +123,13 @@ function! InitScopeSyntax() abort
     execute 'highlight myScope guifg=' . s:paren . ' ctermfg=magenta' 
 endfunction
 
+function! HighlightSelfKeyword()
+    if &filetype ==# 'python'
+        syntax match mySelf '\<self'
+        execute 'highlight mySelf guifg=' . s:blue
+    endif
+endfunction
+
 function! DisableGuiBold() abort
     for group in getcompletion('', 'highlight')
         " Only process valid highlight group names
@@ -151,10 +158,12 @@ augroup MySyntaxTweaks
     "autocmd Syntax * call InitFunctionSyntax()
     autocmd Syntax * call InitScopeSyntax()
     autocmd Syntax * call DisableGuiBold()
+    autocmd Syntax * call HighlightSelfKeyword()
 augroup END
 
 " call InitNamespaceSyntax()
 "call InitFunctionSyntax()
 call InitScopeSyntax()
 call DisableGuiBold()
+call HighlightSelfKeyword()
 

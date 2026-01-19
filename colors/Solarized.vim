@@ -132,6 +132,13 @@ function! InitScopeSyntax() abort
     execute 'highlight myScope guifg=' . s:paren . ' ctermfg=magenta' 
 endfunction
 
+function! HighlightSelfKeyword()
+    if &filetype ==# 'python'
+        syntax match mySelf '\<self'
+        execute 'highlight mySelf guifg=' . s:solarized_yellow
+    endif
+endfunction
+
 function! DisableGuiBold() abort
     for group in getcompletion('', 'highlight')
         " Only process valid highlight group names
@@ -166,6 +173,7 @@ call InitNamespaceSyntax()
 call InitScopeSyntax()
 call InitFunctionSyntax()
 call DisableGuiBold()
+call HighlightSelfKeyword()
 
 execute 'hi MatchParen guifg=' . s:solarized_red 
 
