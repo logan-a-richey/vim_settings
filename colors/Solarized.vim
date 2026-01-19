@@ -67,6 +67,7 @@ execute 'hi LineNr guifg=' . s:line_nr
 execute 'hi LineNrAbove guifg=' . s:line_nr_above
 execute 'hi LineNrBelow guifg=' . s:line_nr_below
 execute 'hi NonText guifg=' . s:solarized_blue
+execute 'hi pythonBuiltin guifg=' . s:solarized_yellow
 
 execute 'hi Visual guifg=' . s:bg . ' guibg=' . s:visual_select 
 execute 'hi Search guifg=' . s:bg . ' guibg=' . s:visual_select 
@@ -135,7 +136,7 @@ endfunction
 function! HighlightSelfKeyword()
     if &filetype ==# 'python'
         syntax match mySelf '\<self'
-        execute 'highlight mySelf guifg=' . s:solarized_yellow
+        execute 'highlight mySelf guifg=' . s:solarized_magenta
     endif
 endfunction
 

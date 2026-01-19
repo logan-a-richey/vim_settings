@@ -88,6 +88,9 @@ execute 'hi PreProc guifg=' . s:preproc
 execute 'hi Type guifg=' . s:type 
 execute 'hi Special guifg=' . s:special 
 
+execute 'hi pythonBuiltin guifg=' . s:blue 
+execute 'hi NonText guifg=' . s:comment
+
 execute 'hi Error guifg=#d0d0d0 guibg=#dd0000'
 execute 'hi Todo guifg=#000000 guibg=#dddd00'
 
@@ -106,7 +109,7 @@ execute 'hi DiffText guibg=' . '#4c4745'
 
 " Syntax change function : color entire word containing ::
 function! InitNamespaceSyntax() abort
-    syntax match myNamespace '\<[a-zA-Z_][a-zA-Z0-9_]*\(::[a-zA-Z_][a-zA-Z0-9_]*\)\+'
+    syntax match myNamespace '\<[a-zA-Z_][a-zA-Z0-9_]*\(::[~a-zA-Z_][a-zA-Z0-9_]*\)\+'
     execute 'highlight myNamespace guifg=' . s:namespace
 endfunction 
 
