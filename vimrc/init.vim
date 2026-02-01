@@ -1,13 +1,13 @@
-"===============================================================================
-" Name: init.vim / .vimrc
-" Description: Basic vim setup. Contains tab-stop logic and window navigation.
+" init.vim
 
-"===============================================================================
-" Navigation
+" ==============================================================================
+" Shortcuts
 
-" Line numbers
-set relativenumber  
-set number          
+" Put yank and cut into system clipboard
+set clipboard+=unnamedplus
+
+" Set Caps Lock to ESC key
+" execute 'setxkbmap -option caps:escape'
 
 " vim window change
 nnoremap <C-h> <C-w>h
@@ -15,30 +15,31 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" map CAPS lock key to ESC key
-" setxkbmap -option caps:escape
+" ==============================================================================
+" Formatting
 
-"===============================================================================
-" Editing
+" Line numbers 
+set relativenumber  
+set number          
+set wrap
+set linebreak
+set nolist
+set breakindent
 
-" Any yanked and deleted lines are copied to system clipboard:
-set clipboard+=unnamedplus
-
-" Smart indentation:
+" Disable smart indentation
 filetype plugin indent on
 set smartindent
 set smarttab
 set expandtab
-
 let s:my_spacing = 4
-
 execute 'set shiftwidth=' . s:my_spacing
 execute 'set tabstop=' . s:my_spacing
 execute 'set softtabstop=' . s:my_spacing
 
-"===============================================================================
-" Default Colorscheme
+" ==============================================================================
+" Syntax
 
+set nocursorline
 syntax enable
-colorscheme darkvs
+colorscheme monokai
 

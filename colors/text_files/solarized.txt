@@ -1,0 +1,39 @@
+# solarized_theme
+
+name, swatch, l*, a*, b*, hex, r, g, b, code, name, 
+base03, 15, −12, −12, #002b36, 0, 43, 54, 234, brblack, background, tones
+base02, 20, −12, −12, #073642, 7, 54, 66, 235, black
+base01, 45, −07, −07, #586e75, 88, 110, 117, 240, brgreen, content, tones
+base00, 50, −07, −07, #657b83, 101, 123, 131, 241, bryellow
+base0, 60, −06, −03, #839496, 131, 148, 150, 244, brblue
+base1, 65, −05, −02, #93a1a1, 147, 161, 161, 245, brcyan
+base2, 92, −00, 10, #eee8d5, 238, 232, 213, 254, white, background, tones
+base3, 97, 00, 10, #fdf6e3, 253, 246, 227, 230, brwhite
+yellow, 60, 10, 65, #b58900, 181, 137, 0, 136, yellow, accent, tones
+orange, 50, 50, 55, #cb4b16, 203, 75, 22, 166, brred
+red, 50, 65, 45, #dc322f, 220, 50, 47, 160, red
+magenta, 50, 65, −05, #d33682, 211, 54, 130, 125, magenta
+violet, 50, 15, −45, #6c71c4, 108, 113, 196, 61, brmagenta
+blue, 55, −10, −45, #268bd2, 38, 139, 210, 33, blue
+cyan, 60, −35, −05, #2aa198, 42, 161, 152, 37, cyan
+green, 60, −20, 65, #859900, 133, 153, 0, 64, green
+
+# color name to hex
+name, swatch, l*, a*, b*, hex, r, g, b, code, name, 
+let s:solarized_base03 = '#002b36'
+let s:solarized_base02 = '#073642'
+let s:solarized_base01 = '#586e75'
+let s:solarized_base00 = '#657b83'
+let s:solarized_base0 = '#839496'
+let s:solarized_base1 = '#93a1a1'
+let s:solarized_base2 = '#eee8d5'
+let s:solarized_base3 = '#fdf6e3'
+let s:solarized_yellow = '#b58900'
+let s:solarized_orange = '#cb4b16'
+let s:solarized_red = '#dc322f'
+let s:solarized_magenta = '#d33682'
+let s:solarized_violet = '#6c71c4'
+let s:solarized_blue = '#268bd2'
+let s:solarized_cyan = '#2aa198'
+let s:solarized_green = '#859900'
+

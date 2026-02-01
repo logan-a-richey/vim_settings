@@ -1,4 +1,4 @@
-// main.cpp
+:colo	// main.cpp
 // cpp example
 
 // import statements

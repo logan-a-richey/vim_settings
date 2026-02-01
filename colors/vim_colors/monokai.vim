@@ -1,6 +1,6 @@
-" Name: JULIA
-" Descripton: Inspired by Julia logo colors.
-" Date: 2025-11-30
+" Name: MONOKAI DARK
+" Descripton: Inspired by VSCode Monokai
+" Date: 2025-11-25
 " Author: Logan Richey
 
 " ============================================================
@@ -8,47 +8,49 @@ hi clear
 if exists('syntax_on')
     syntax reset
 endif
-let g:colors_name = 'julia'
+let g:colors_name = 'monokai_dark'
 set termguicolors
-set cursorline
+" set cursorline
 
 " ============================================================
-" Colors 
+" Basic Tones
+let s:monokai_foreground = '#cdf2ff'
+let s:monokai_comment = '#95906f'
+" let s:monokai_background_1 = '#2a2c24'
+" let s:monokai_background_2 = '#444235'
+let s:monokai_background_1 = "#202020"
+let s:monokai_background_2 = "#303030"
+let s:monokai_pink = '#ec0c6c'
+let s:monokai_purple = '#a76eff'
+let s:monokai_blue = '#56e4ff'
+let s:monokai_orange = '#ff8900'
+let s:monokai_yellow = '#fdef6c'
+let s:monokai_green = '#9df814'
 
-"let s:julia_blue = '#3f64b2'
-let s:julia_blue = '#4d79d6'
-let s:julia_green = '#00993b'
-let s:julia_yellow_green = '#7d9900'
-let s:julia_pink = '#a558a6'
-let s:julia_purple = '#380099'
-let s:julia_tomato = '#ea3931'
-let s:julia_cyan = '#009996'
-
-let s:bg 			= '#202020'
-let s:bg_sec        = '#272727'
+" Mapping
+let s:bg 			= s:monokai_background_1
+let s:bg_sec        = s:monokai_background_2
 let s:cursor_line 	= s:bg_sec
-let s:fg 			= '#e0e0e0'
-let s:comment 		= '#7a7a7a'
+let s:fg 			= s:monokai_foreground
+let s:comment 		= s:monokai_comment
 
-let s:line_nr_above = s:comment
-let s:line_nr_below = s:comment
-let s:line_nr 		= s:fg
-"let s:statement 	= s:julia_blue
-"let s:type 		= s:julia_cyan
-let s:statement 	= s:julia_pink
-let s:type 			= s:julia_blue
+let s:line_nr_above = s:monokai_background_2
+let s:line_nr_below = s:monokai_background_2
+let s:line_nr 		= s:monokai_blue
+let s:statement 	= s:monokai_pink
+let s:type 			= s:monokai_blue
 
-let s:function 		= s:julia_cyan
-let s:namespace 	= s:julia_cyan
-let s:defclass      = s:julia_blue
+let s:function 		= s:monokai_orange
+let s:namespace 	= s:monokai_green
+let s:defclass      = s:monokai_green
 
-let s:preproc 		= s:julia_pink
-let s:number 		= s:julia_green
-let s:string 		= s:julia_green
-let s:character 	= s:julia_green
-let s:special 		= s:julia_yellow_green
-let s:paren         = s:julia_pink
-let s:visual_select = s:julia_green
+let s:preproc 		= s:monokai_pink
+let s:number 		= s:monokai_purple
+let s:string 		= s:monokai_purple
+let s:character 	= s:monokai_purple
+let s:special 		= s:monokai_yellow
+let s:paren         = s:monokai_yellow
+let s:visual_select = s:monokai_green
 
 " ============================================================
 " VIM UI Syntax 
@@ -87,7 +89,10 @@ execute 'hi Keyword guifg=' . s:statement
 execute 'hi PreProc guifg=' . s:preproc 
 execute 'hi Type guifg=' . s:type 
 execute 'hi Special guifg=' . s:special 
-execute 'hi MatchParen guibg=#ff0000'
+
+" execute 'hi pythonBuiltin guifg=' . s:monokai_green
+execute 'hi NonText guifg=' . s:comment
+
 execute 'hi Error guifg=#d0d0d0 guibg=#dd0000'
 execute 'hi Todo guifg=#000000 guibg=#dddd00'
 
@@ -106,13 +111,13 @@ execute 'hi DiffText guibg=' . '#4c4745'
 
 " Syntax change function : color entire word containing ::
 function! InitNamespaceSyntax() abort
-    syntax match myNamespace '\<[a-zA-Z_][a-zA-Z0-9_]*\(::[a-zA-Z_][a-zA-Z0-9_]*\)\+'
+    syntax match myNamespace '\<[a-zA-Z_][a-zA-Z0-9_]*\(::[~a-zA-Z_][a-zA-Z0-9_]*\)\+'
     execute 'highlight myNamespace guifg=' . s:namespace
 endfunction 
 
 " Syntax change function : color word that precede a (, to signal a function call
 function! InitFunctionSyntax() abort
-    syntax match myFunction '\<[A-Za-z_][A-Za-z0-9_]*\ze('
+    syntax match myFunction '\<\~\?[A-Za-z_][A-Za-z0-9_]*\ze('
     execute 'highlight myFunction guifg=' . s:function
 endfunction
 
@@ -121,6 +126,13 @@ function! InitScopeSyntax() abort
     "syntax match myScope '[\(\)\{\}\[\]\<\>]'
     syntax match myScope '[\(\)\{\}\[\]]'
     execute 'highlight myScope guifg=' . s:paren . ' ctermfg=magenta' 
+endfunction
+
+function! HighlightSelfKeyword()
+    if &filetype ==# 'python'
+        syntax match mySelf '\<self'
+        execute 'highlight mySelf guifg=' . s:monokai_blue
+    endif
 endfunction
 
 function! DisableGuiBold() abort
@@ -147,14 +159,16 @@ endfunction
 " Run OnStart
 augroup MySyntaxTweaks
     autocmd!
-    "autocmd Syntax * call InitNamespaceSyntax()
+    autocmd Syntax * call InitNamespaceSyntax()
     "autocmd Syntax * call InitFunctionSyntax()
     autocmd Syntax * call InitScopeSyntax()
     autocmd Syntax * call DisableGuiBold()
+    autocmd Syntax * call HighlightSelfKeyword()
 augroup END
 
-"call InitNamespaceSyntax()
+call InitNamespaceSyntax()
 "call InitFunctionSyntax()
 call InitScopeSyntax()
 call DisableGuiBold()
+call HighlightSelfKeyword()
 

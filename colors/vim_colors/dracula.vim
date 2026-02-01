@@ -1,70 +1,61 @@
-" Name: GEDIT SOLARIZED
-" Descripton: Inspired by Solarized theme, Gedit variation.
-" Date: 2025-11-25
-" Author: Logan Richey
+" Name: DRACULA
+" Descripton: Inspired by Dracula theme.
+" Date: 2025-11-26
+" Author: Logan Richey 
 
+" ============================================================
 hi clear
-hi clear myFunction
-hi clear myNamespace
-hi clear myScope
-
 if exists('syntax_on')
     syntax reset
 endif
-let g:colors_name = 'gedit_solarized'
+let g:colors_name = 'dracula'
 set termguicolors
-set cursorline
+" set cursorline
 
+" ============================================================
 " Colors 
-let s:black = '#100f0f'
-let s:gray1 = '#1c1b1b'
-let s:gray2 = '#282726'
-let s:gray3 = '#343331'
-let s:gray4 = '#403e3c'
-let s:gray5 = '#55524e'
-let s:gray6 = '#878580'
-let s:gray7 = '#cecdc3'
+let s:dracula_background = '#282a36'
+let s:dracula_current = '#44475a'
+let s:dracula_foreground = '#f8f8f2'
+let s:dracula_comment = '#6272a4'
+let s:dracula_cyan = '#8be9fd'
+let s:dracula_green = '#50fa7b'
+let s:dracula_orange = '#ffb86c'
+let s:dracula_pink = '#ff79c6'
+let s:dracula_purple = '#bd93f9'
+let s:dracula_red = '#ff5555'
+let s:dracula_yellow = '#f1fa8c'
 
-let s:red1 = '#af3029'
-let s:red2 = '#d14d41'
-let s:orange1 = '#bc5215'
-let s:orange2 = '#da702c'
-let s:yellow1 = '#ad8301'
-let s:yellow2 = '#d0a215'
-let s:green1 = '#66800b'
-let s:green2 = '#879a39'
-let s:cyan1 = '#24837b'
-let s:cyan2 = '#3aa99f'
-let s:blue1 = '#205ea6'
-let s:blue2 = '#4385be'
-let s:purple1 = '#5e409d'
-let s:purple2 = '#8b7ec8'
-let s:pink1 = '#a02f6f'
-let s:pink2 = '#ce5d97'
+let s:bg = s:dracula_background
+let s:bg_sec = s:dracula_comment
+let s:cursor_line = s:dracula_current
+let s:fg = s:dracula_foreground
+let s:comment = s:dracula_comment
 
-let s:bg 			= s:gray1
-let s:bg_sec        = s:gray2
-let s:cursor_line 	= s:bg_sec
-let s:fg 			= '#a0a0a0'
-let s:comment 		= s:red1
+let s:line_nr_above = s:comment
+let s:line_nr_below = s:comment
+let s:line_nr = s:dracula_pink
 
-let s:line_nr_above = s:gray4
-let s:line_nr_below = s:gray4
-let s:line_nr 		= s:green2
-let s:statement 	= s:yellow2
-let s:type 			= s:cyan2
+let s:statement = s:dracula_pink
+let s:type = s:dracula_pink
 
-let s:function 		= s:orange2
-let s:namespace 	= s:gray6
-let s:defclass      = s:cyan2
+let s:defclass = s:dracula_purple
 
-let s:preproc 		= s:purple2
-let s:number 		= s:green1
-let s:string 		= s:green1
-let s:character 	= s:green1
-let s:special 		= s:green2
-let s:paren         = s:gray7
-let s:visual_select = s:purple2
+let s:py_function = s:dracula_purple
+let s:py_builtin = s:dracula_green
+let s:py_exceptions = s:dracula_red
+
+let s:my_function = s:dracula_green 
+let s:my_namespace = s:dracula_purple
+let s:my_scope = s:dracula_red 
+
+let s:preproc = s:dracula_pink
+let s:number = s:dracula_yellow
+let s:string = s:dracula_yellow
+let s:character = s:dracula_yellow
+let s:special = s:dracula_orange
+" let s:my_scope = s:dracula_red
+let s:visual_select = s:dracula_orange
 
 " ============================================================
 " VIM UI Syntax 
@@ -81,8 +72,9 @@ execute 'hi Search guifg=' . s:bg . ' guibg=' . s:visual_select
 execute 'hi IncSearch guifg=' . s:bg . ' guibg=' . s:visual_select
 
 execute 'hi VertSplit guifg=' . s:bg_sec . ' guibg=' . s:bg
-execute 'hi StatusLineNC guifg=' . s:bg_sec . ' guibg=' . s:line_nr_above
+execute 'hi StatusLineNC guifg=' . s:bg_sec . ' guibg=' . s:comment
 execute 'hi StatusLine guifg=' . s:bg . ' guibg=' . s:fg
+
 
 highlight Pmenu ctermbg=darkblue guibg=darkblue
 highlight PmenuSel ctermbg=blue guibg=blue
@@ -104,6 +96,12 @@ execute 'hi PreProc guifg=' . s:preproc
 execute 'hi Type guifg=' . s:type 
 execute 'hi Special guifg=' . s:special 
 
+execute 'hi pythonFunction guifg=' . s:dracula_purple
+execute 'hi pythonBuiltin guifg=' . s:dracula_green
+execute 'hi pythonExceptions guifg=' . s:dracula_cyan
+
+execute 'hi NonText guifg=' . s:comment
+
 execute 'hi Error guifg=#d0d0d0 guibg=#dd0000'
 execute 'hi Todo guifg=#000000 guibg=#dddd00'
 
@@ -122,21 +120,21 @@ execute 'hi DiffText guibg=' . '#4c4745'
 
 " Syntax change function : color entire word containing ::
 function! InitNamespaceSyntax() abort
-    syntax match myNamespace '\<[a-zA-Z_][a-zA-Z0-9_]*\(::[a-zA-Z_][a-zA-Z0-9_]*\)\+'
-    execute 'highlight myNamespace guifg=' . s:namespace
+    syntax match myNamespace '\<[a-zA-Z_][a-zA-Z0-9_]*\(::[\~a-zA-Z_][a-zA-Z0-9_]*\)\+'
+    execute 'highlight myNamespace guifg=' . s:my_namespace
 endfunction 
 
 " Syntax change function : color word that precede a (, to signal a function call
 function! InitFunctionSyntax() abort
-    syntax match myFunction '\<[A-Za-z_\~][A-Za-z0-9_]*\ze('
-    execute 'highlight myFunction guifg=' . s:function
+    syntax match myFunction '\<[\~A-Za-z_][A-Za-z0-9_]*\ze('
+    execute 'highlight myFunction guifg=' . s:my_function
 endfunction
 
 function! InitScopeSyntax() abort
     silent! syntax clear myScope
     "syntax match myScope '[\(\)\{\}\[\]\<\>]'
     syntax match myScope '[\(\)\{\}\[\]]'
-    execute 'highlight myScope guifg=' . s:paren . ' ctermfg=magenta' 
+    execute 'highlight myScope guifg=' . s:my_scope . ' ctermfg=magenta' 
 endfunction
 
 function! DisableGuiBold() abort
@@ -163,12 +161,14 @@ endfunction
 " Run OnStart
 augroup MySyntaxTweaks
     autocmd!
-    autocmd Syntax * call InitNamespaceSyntax()
+    "autocmd Syntax * call InitNamespaceSyntax()
+    "autocmd Syntax * call InitFunctionSyntax()
     autocmd Syntax * call InitScopeSyntax()
     autocmd Syntax * call DisableGuiBold()
 augroup END
 
-call InitNamespaceSyntax()
+"call InitNamespaceSyntax()
+"call InitFunctionSyntax()
 call InitScopeSyntax()
 call DisableGuiBold()
 
