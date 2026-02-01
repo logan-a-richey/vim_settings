@@ -183,7 +183,7 @@ augroup MySyntaxTweaks
     autocmd Syntax * call InitNamespaceSyntax()
     "autocmd Syntax * call InitScopeSyntax()
     "autocmd Syntax * call InitFunctionSyntax()
-    autocmd Syntax * call HighlightSelfKeyword
+    autocmd Syntax * call HighlightSelfKeyword()
     autocmd Syntax * call DisableGuiBold()
 augroup END
 

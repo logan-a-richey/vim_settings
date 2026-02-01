@@ -16,17 +16,18 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " ==============================================================================
-" Formatting
-
-" Line numbers 
+" --- Line numbers ---
 set relativenumber  
 set number          
+
 set wrap
 set linebreak
 set nolist
-set breakindent
+set textwidth=0
+set wrapmargin=0
 
-" Disable smart indentation
+" --- Indentation ---
+" set breakindent
 filetype plugin indent on
 set smartindent
 set smarttab
@@ -41,5 +42,6 @@ execute 'set softtabstop=' . s:my_spacing
 
 set nocursorline
 syntax enable
-colorscheme monokai
+" colorscheme monokai
+colorscheme solarized
 
