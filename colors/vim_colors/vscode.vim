@@ -10,45 +10,48 @@ if exists('syntax_on')
 endif
 let g:colors_name = 'vs_code_dark'
 set termguicolors
-set cursorline
+" set cursorline
 
 " ============================================================
 " Colors 
 
-let s:code_blue     = '#569cd6'
-let s:code_red      = '#ce8f5e'
-let s:code_green    = '#b0cea8'
-let s:code_yellow   = '#dcdc98'
-let s:code_purple   = '#c586c0'
-let s:code_purple2  = '#c584a6'
-let s:code_pink     = '#da70d6'
-let s:code_turq     = '#4bc9b0'
+let s:vscode_blue     = '#569cd6'
+let s:vscode_red      = '#ce8f5e'
+let s:vscode_green    = '#b0cea8'
+let s:vscode_yellow   = '#dcdc98'
+let s:vscode_purple   = '#c586c0'
+let s:vscode_purple2  = '#c584a6'
+let s:vscode_pink     = '#da70d6'
+let s:vscode_turq     = '#4bc9b0'
 
-let s:bg 			= '#202020' " gray
-let s:bg_sec        = '#272727' " gray
-let s:cursor_line 	= s:bg_sec
+let s:gray1 = "#202020"
+let s:gray2 = "#272727"
+let s:gray3 = "#858585"
+
+let s:bg 			= s:gray1
+let s:bg_sec        = s:gray2
+let s:cursor_line 	= s:gray2
 let s:fg 			= '#9cdcfe' " off white - light blue 
 let s:comment 		= '#659955' " green 
 
-let s:line_nr_above = '#858585' " gray
-let s:line_nr_below = '#858585' " gray
-" let s:line_nr 	= '#c6c6c6' " light gray
-let s:line_nr       = s:code_blue
+let s:line_nr_above = s:gray3
+let s:line_nr_below = s:gray3
+let s:line_nr       = s:vscode_blue
 
-let s:statement 	= s:code_purple2
-let s:type 			= s:code_blue
+let s:statement 	= s:vscode_purple2
+let s:type 			= s:vscode_blue
 
-let s:function 		= s:code_yellow
-let s:defclass      = s:code_yellow
-let s:namespace 	= s:code_turq
+let s:function 		= s:vscode_yellow
+let s:defclass      = s:vscode_yellow
+let s:namespace 	= s:vscode_turq
 
-let s:preproc 		= s:code_purple
-let s:number 		= s:code_green
-let s:string 		= s:code_red
-let s:character 	= s:code_red
-let s:special 		= s:code_green
-let s:paren         = s:code_pink
-let s:visual_select = s:code_green
+let s:preproc 		= s:vscode_purple
+let s:number 		= s:vscode_green
+let s:string 		= s:vscode_red
+let s:character 	= s:vscode_red
+let s:special 		= s:vscode_green
+let s:paren         = s:vscode_pink
+let s:visual_select = s:vscode_green
 
 " ============================================================
 " VIM UI Syntax 
@@ -112,7 +115,8 @@ endfunction
 
 " Syntax change function : color word that precede a (, to signal a function call
 function! InitFunctionSyntax() abort
-    syntax match myFunction '\<[A-Za-z_][A-Za-z0-9_]*\ze('
+    " syntax match myFunction '\<[A-Za-z_][A-Za-z0-9_]*\ze('
+    syntax match myFunction '[~a-zA-Z_][A-Za-z0-9_]*\ze('
     execute 'highlight myFunction guifg=' . s:function
 endfunction
 

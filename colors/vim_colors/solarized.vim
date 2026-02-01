@@ -1,7 +1,7 @@
-" Name: GEDIT SOLARIZED
-" Descripton: Inspired by Solarized theme, Gedit variation.
-" Date: 2025-11-25
-" Author: Logan Richey
+" Name:         GEDIT SOLARIZED
+" Descripton:   Inspired by Solarized theme, Gedit variation.
+" Date:         2026-02-01
+" Author:       Logan A Richey
 
 hi clear
 hi clear myFunction
@@ -13,31 +13,32 @@ if exists('syntax_on')
 endif
 let g:colors_name = 'solarized'
 set termguicolors
-set cursorline
 
-" Colors 
-let s:solarized_base03 	= '#002b36'
-let s:solarized_base02 	= '#073642'
-let s:solarized_base01 	= '#586e75'
-let s:solarized_base00 	= '#657b83'
-let s:solarized_base0 	= '#839496'
-let s:solarized_base1 	= '#93a1a1'
-let s:solarized_base2 	= '#eee8d5'
-let s:solarized_base3 	= '#fdf6e3'
-let s:solarized_yellow 	= '#b58900'
-let s:solarized_orange 	= '#cb4b16'
-let s:solarized_red 	= '#dc322f'
-let s:solarized_magenta = '#d33682'
-let s:solarized_violet 	= '#6c71c4'
-let s:solarized_blue 	= '#268bd2'
-let s:solarized_cyan 	= '#2aa198'
-let s:solarized_green 	= '#859900'
+" --- Colors ---
+let s:solarized_base03 = '#002f3b'
+let s:solarized_base02 = '#003948'
+let s:solarized_base01 = '#5c7780'
+let s:solarized_base00 = '#6a8590'
+let s:solarized_base0 = '#8ca2a5'
+let s:solarized_base1 = '#9fb1b1'
+let s:solarized_base2 = '#fff7e0'
+let s:solarized_base3 = '#fff6e0'
+let s:solarized_yellow = '#c79600'
+let s:solarized_orange = '#df4100'
+let s:solarized_red = '#f21a17'
+let s:solarized_magenta = '#e82181'
+let s:solarized_purple = '#686ed7'
+let s:solarized_blue = '#0d8de7'
+let s:solarized_cyan = '#1ab1a5'
+let s:solarized_green = '#92a800'
 
+
+" --- Mapping ---
 let s:bg 			= s:solarized_base03
 let s:bg_sec        = s:solarized_base02
 let s:cursor_line 	= s:bg_sec
 let s:fg 			= s:solarized_base2
-let s:comment 		= s:solarized_base01
+let s:comment 		= "#676767"
 
 let s:line_nr_above = s:comment
 let s:line_nr_below = s:comment
@@ -45,16 +46,22 @@ let s:line_nr 		= s:fg
 let s:statement 	= s:solarized_green
 let s:type 			= s:solarized_yellow
 
-let s:function 		= s:solarized_orange
-let s:namespace 	= s:solarized_blue
 let s:defclass      = s:solarized_blue
+
+let s:my_function 		= s:solarized_orange
+let s:my_namespace 	= s:solarized_blue
+let s:my_scope = s:fg
+
+let s:py_function = s:solarized_purple
+let s:py_builtin = s:solarized_green
+let s:py_exceptions = s:solarized_red
 
 let s:preproc 		= s:solarized_orange
 let s:number 		= s:solarized_cyan
 let s:string 		= s:solarized_cyan
 let s:character 	= s:solarized_cyan
 let s:special 		= s:solarized_magenta
-let s:paren         = s:solarized_violet
+let s:paren         = s:solarized_purple
 let s:visual_select = s:solarized_yellow
 
 " ============================================================
@@ -83,7 +90,7 @@ highlight PmenuSel ctermbg=blue guibg=blue
 " ============================================================
 " Code syntax 
 
-execute 'hi Comment guifg=' . s:comment 
+execute 'hi Comment guifg=' . s:comment
 execute 'hi Constant guifg=' . s:string 
 execute 'hi String guifg=' . s:string 
 execute 'hi Character guifg=' . s:string 
@@ -98,6 +105,13 @@ execute 'hi Type guifg=' . s:type
 execute 'hi Special guifg=' . s:special 
 execute 'hi MatchParen guibg=' . s:solarized_magenta . 'guifg=' . s:bg
 
+execute 'hi NonText guifg=' . s:comment
+
+execute 'hi pythonFunction guifg=' . s:py_function
+execute 'hi pythonBuiltin guifg=' . s:py_builtin
+execute 'hi pythonExceptions guifg=' . s:py_exceptions
+
+execute 'hi NonText guifg=' . s:comment
 execute 'hi Error guifg=#d0d0d0 guibg=#dd0000'
 execute 'hi Todo guifg=#000000 guibg=#dddd00'
 
@@ -117,26 +131,27 @@ execute 'hi DiffText guibg=' . '#4c4745'
 " Syntax change function : color entire word containing ::
 function! InitNamespaceSyntax() abort
     syntax match myNamespace '\<[a-zA-Z_][a-zA-Z0-9_]*\(::[~a-zA-Z_][a-zA-Z0-9_]*\)\+'
-    execute 'highlight myNamespace guifg=' . s:namespace
+    execute 'highlight myNamespace guifg=' . s:my_namespace
 endfunction 
 
 " Syntax change function : color word that precede a (, to signal a function call
 function! InitFunctionSyntax() abort
-    syntax match myFunction '\<[A-Za-z_][A-Za-z0-9_]*\ze('
-    execute 'highlight myFunction guifg=' . s:function
+    " syntax match myFunction '\<[~a-zA-Z_][A-Za-z0-9_]*\ze('
+    syntax match myFunction '[~a-zA-Z_][A-Za-z0-9_]*\ze('
+    execute 'highlight myFunction guifg=' . s:my_function
 endfunction
 
 function! InitScopeSyntax() abort
     silent! syntax clear myScope
     "syntax match myScope '[\(\)\{\}\[\]\<\>]'
     syntax match myScope '[\(\)\{\}\[\]]'
-    execute 'highlight myScope guifg=' . s:solarized_orange . ' ctermfg=magenta' 
+    execute 'highlight myScope guifg=' . s:my_scope . ' ctermfg=magenta' 
 endfunction
 
 function! HighlightSelfKeyword()
     if &filetype ==# 'python'
         syntax match mySelf '\<self'
-        execute 'highlight mySelf guifg=' . s:solarized_yellow
+        execute 'highlight mySelf guifg=' . s:solarized_orange
     endif
 endfunction
 
@@ -161,20 +176,20 @@ function! DisableGuiBold() abort
     endfor
 endfunction
 
+" ==============================================================================
 " Run OnStart
 augroup MySyntaxTweaks
     autocmd!
     autocmd Syntax * call InitNamespaceSyntax()
-    autocmd Syntax * call InitScopeSyntax()
-    " autocmd Syntax * call InitFunctionSyntax()
+    "autocmd Syntax * call InitScopeSyntax()
+    "autocmd Syntax * call InitFunctionSyntax()
+    autocmd Syntax * call HighlightSelfKeyword
     autocmd Syntax * call DisableGuiBold()
 augroup END
 
 call InitNamespaceSyntax()
-call InitScopeSyntax()
-" call InitFunctionSyntax()
-call DisableGuiBold()
+"call InitScopeSyntax()
+"call InitFunctionSyntax()
 call HighlightSelfKeyword()
-
-execute 'hi MatchParen guifg=' . s:solarized_red 
+call DisableGuiBold()
 

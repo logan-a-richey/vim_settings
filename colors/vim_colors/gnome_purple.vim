@@ -1,7 +1,7 @@
-" Name: DESERT
-" Descripton: Inspired by my dad's favorite coding theme.
-" Date: 2025-12-01
-" Author: Logan Richey
+" Name:         DESERT
+" Descripton:   Inspired by my dad's favorite coding theme.
+" Date:         2026-02-01
+" Author:       Logan A Richey
 
 hi clear
 hi clear myNamespace 

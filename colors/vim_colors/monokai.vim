@@ -111,13 +111,15 @@ execute 'hi DiffText guibg=' . '#4c4745'
 
 " Syntax change function : color entire word containing ::
 function! InitNamespaceSyntax() abort
+    " syntax match myNamespace '\<[a-zA-Z_][a-zA-Z0-9_]*\(::[~a-zA-Z_][a-zA-Z0-9_]*\)\+'
     syntax match myNamespace '\<[a-zA-Z_][a-zA-Z0-9_]*\(::[~a-zA-Z_][a-zA-Z0-9_]*\)\+'
     execute 'highlight myNamespace guifg=' . s:namespace
 endfunction 
 
 " Syntax change function : color word that precede a (, to signal a function call
 function! InitFunctionSyntax() abort
-    syntax match myFunction '\<\~\?[A-Za-z_][A-Za-z0-9_]*\ze('
+    " syntax match myFunction '\<\~\?[A-Za-z_][A-Za-z0-9_]*\ze('
+    syntax match myFunction '[~a-zA-Z_][A-Za-z0-9_]*\ze('
     execute 'highlight myFunction guifg=' . s:function
 endfunction
 
@@ -160,15 +162,16 @@ endfunction
 augroup MySyntaxTweaks
     autocmd!
     autocmd Syntax * call InitNamespaceSyntax()
-    "autocmd Syntax * call InitFunctionSyntax()
+    autocmd Syntax * call InitFunctionSyntax()
     autocmd Syntax * call InitScopeSyntax()
     autocmd Syntax * call DisableGuiBold()
     autocmd Syntax * call HighlightSelfKeyword()
 augroup END
 
+" Load always
 call InitNamespaceSyntax()
-"call InitFunctionSyntax()
+call InitFunctionSyntax()
 call InitScopeSyntax()
-call DisableGuiBold()
 call HighlightSelfKeyword()
+call DisableGuiBold()
 

@@ -16,18 +16,23 @@ class HSV_Balancer:
     """ hsv utils """
 
     def __init__(self):
-        def increase_hsv(hex_color, sat_factor=1.1, val_factor=1.1):
-            """ Enhance color by increasing the value in HSV """
-            
-            hex_color = hex_color.lstrip('#')
-            r = int(hex_color[0:2], 16) / 255
-            g = int(hex_color[2:4], 16) / 255
-            b = int(hex_color[4:6], 16) / 255
-            h, s, v = colorsys.rgb_to_hsv(r, g, b)
-            s = min(1.0, s * sat_factor)
-            v = min(1.0, v * val_factor)
-            r, g, b = colorsys.hsv_to_rgb(h, s, v)
-            return f"#{int(r*255):02x}{int(g*255):02x}{int(b*255):02x}"
+        pass
+
+    def increase_hsv(self, hex_color: str, sat_factor=1.1, val_factor=1.1):
+        """ Enhance color by increasing the value in HSV """
+        
+        hex_color = hex_color.lstrip('#')
+        
+        r = int(hex_color[0:2], 16) / 255
+        g = int(hex_color[2:4], 16) / 255
+        b = int(hex_color[4:6], 16) / 255
+        h, s, v = colorsys.rgb_to_hsv(r, g, b)
+
+        s = min(1.0, s * sat_factor)
+        v = min(1.0, v * val_factor)
+        r, g, b = colorsys.hsv_to_rgb(h, s, v)
+        
+        return f"#{int(r*255):02x}{int(g*255):02x}{int(b*255):02x}"
 
 class Contrast_Balancer:
     """
@@ -42,7 +47,9 @@ class Contrast_Balancer:
     def rel_luminance(self, r, g, b) -> tuple:
         def f(c):
             return c/12.92 if c <= 0.03928 else ((c + 0.055)/1.055) ** 2.4
+        
         r, g, b = map(f, (r, g, b))
+        
         return 0.2126*r + 0.7152*g + 0.0722*b
 
     def hex_to_rgb01(self, hex_color) -> tuple:
@@ -111,8 +118,8 @@ def print_new_colors(input_file, color_json):
     background_color = first_value
 
     for name, color in color_json.items():
-        # new_color =  my_value_editor.increase_hsv(color, 1.15, 1.10)
-        new_color = my_contraster.increase_contrast(color, background_color)
+        new_color =  my_value_editor.increase_hsv(color, 1.15, 1.10)
+        # new_color = my_contraster.increase_contrast(color, background_color)
         
         print("let s:{}_{} = \'{}\'".format(basename, name, new_color))
 

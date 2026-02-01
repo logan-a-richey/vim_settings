@@ -1,7 +1,7 @@
-" Name: GEDIT COBALT
-" Descripton: Inspired by Gedit Cobalt blue theme.
-" Date: 2025-11-26
-" Author: Logan Richey
+" Name:         GEDIT COBALT
+" Descripton:   Inspired by Gedit Cobalt blue theme.
+" Date:         2026-02-01
+" Author:       Logan A Richey
 
 " ============================================================
 hi clear
@@ -10,7 +10,6 @@ if exists('syntax_on')
 endif
 let g:colors_name = 'cobalt'
 set termguicolors
-set nocursorline
 
 " ============================================================
 " Colors 
@@ -43,15 +42,18 @@ let s:statement 	= s:cobalt_orange
 let s:type 			= s:cobalt_turqoise
 
 let s:function 		= s:cobalt_yellow
-let s:namespace 	= s:cobalt_yellow
+let s:my_namespace 	= s:white_depressed
 let s:defclass      = s:cobalt_red
 
+let s:py_function   = s:cobalt_turqoise 
+let s:py_builtin    = s:cobalt_turqoise
+let s:py_exceptions = s:cobalt_red 
+
 let s:preproc 		= s:cobalt_green
-let s:number 		= s:cobalt_red
+let s:number 		= s:cobalt_green
 let s:string 		= s:cobalt_green
 let s:character 	= s:cobalt_green
 let s:special 		= s:cobalt_red
-"let s:paren         = s:cobalt_highlight
 let s:paren         = s:cobalt_yellow
 let s:visual_select = s:cobalt_highlight
 
@@ -93,6 +95,12 @@ execute 'hi PreProc guifg=' . s:preproc
 execute 'hi Type guifg=' . s:type 
 execute 'hi Special guifg=' . s:special 
 
+execute 'hi pythonFunction guifg=' . s:py_function
+execute 'hi pythonBuiltin guifg=' . s:py_builtin
+execute 'hi pythonExceptions guifg=' . s:py_exceptions
+
+execute 'hi NonText guifg=' . s:comment
+
 execute 'hi Error guifg=#d0d0d0 guibg=#dd0000'
 execute 'hi Todo guifg=#000000 guibg=#dddd00'
 
@@ -112,12 +120,13 @@ execute 'hi DiffText guibg=' . '#4c4745'
 " Syntax change function : color entire word containing ::
 function! InitNamespaceSyntax() abort
     syntax match myNamespace '\<[a-zA-Z_][a-zA-Z0-9_]*\(::[a-zA-Z_][a-zA-Z0-9_]*\)\+'
-    execute 'highlight myNamespace guifg=' . s:namespace
+    execute 'highlight myNamespace guifg=' . s:my_namespace
 endfunction 
 
 " Syntax change function : color word that precede a (, to signal a function call
 function! InitFunctionSyntax() abort
-    syntax match myFunction '\<[A-Za-z_][A-Za-z0-9_]*\ze('
+    " syntax match myFunction '\<[A-Za-z_][A-Za-z0-9_]*\ze('
+    syntax match myFunction '[~a-zA-Z_][A-Za-z0-9_]*\ze('
     execute 'highlight myFunction guifg=' . s:function
 endfunction
 
@@ -126,6 +135,13 @@ function! InitScopeSyntax() abort
     "syntax match myScope '[\(\)\{\}\[\]\<\>]'
     syntax match myScope '[\(\)\{\}\[\]]'
     execute 'highlight myScope guifg=' . s:paren . ' ctermfg=magenta' 
+endfunction
+
+function! HighlightSelfKeyword()
+    if &filetype ==# 'python'
+        syntax match mySelf '\<self'
+        execute 'highlight mySelf guifg=' . s:cobalt_turqoise
+    endif
 endfunction
 
 function! DisableGuiBold() abort
@@ -152,14 +168,16 @@ endfunction
 " Run OnStart
 augroup MySyntaxTweaks
     autocmd!
-    " autocmd Syntax * call InitNamespaceSyntax()
-    " autocmd Syntax * call InitFunctionSyntax()
+    autocmd Syntax * call InitNamespaceSyntax()
     autocmd Syntax * call InitScopeSyntax()
+    " autocmd Syntax * call InitFunctionSyntax()
+    autocmd Syntax * call HighlightSelfKeyword
     autocmd Syntax * call DisableGuiBold()
 augroup END
 
-" call InitNamespaceSyntax()
+call InitNamespaceSyntax()
 " call InitFunctionSyntax()
 call InitScopeSyntax()
+call HighlightSelfKeyword()
 call DisableGuiBold()
 
