@@ -9,6 +9,15 @@ set clipboard+=unnamedplus
 " Set Caps Lock to ESC key
 " execute 'setxkbmap -option caps:escape'
 
+" Disable auto comment on endl
+" :set formatoptions-=c formatoptions-=r formatoptions-=o
+:set formatoptions-=cro
+
+augroup NoAutoComment
+  autocmd!
+  autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+augroup end
+
 " vim window change
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -42,6 +51,5 @@ execute 'set softtabstop=' . s:my_spacing
 
 set nocursorline
 syntax enable
-" colorscheme monokai
-colorscheme solarized
+colorscheme monokai
 
