@@ -5,6 +5,6 @@ set -e
 DEST="$HOME/.config/nvim/colors"
 
 mkdir -p "$DEST"
-cp *.vim *.lua "$DEST"
+cp *.vim "$DEST"
 
 echo "Themes have been copied to $DEST"
