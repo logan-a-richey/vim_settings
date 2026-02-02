@@ -1,0 +1,152 @@
+-- ============================================================
+-- Solarized Minimal (Neovim / Lua)
+-- ============================================================
+
+vim.cmd("hi clear")
+if vim.fn.exists("syntax_on") == 1 then
+  vim.cmd("syntax reset")
+end
+
+vim.o.termguicolors = true
+vim.g.colors_name = "solarized_minimal"
+
+-- ============================================================
+-- Colors
+-- ============================================================
+
+local c = {
+  base03  = "#002f3b",
+  base02  = "#003948",
+  base01  = "#5c7780",
+  base00  = "#6a8590",
+  base0   = "#8ca2a5",
+  base1   = "#9fb1b1",
+  base2   = "#fff7e0",
+  base3   = "#fff6e0",
+
+  yellow  = "#c79600",
+  orange  = "#df4100",
+  red     = "#f21a17",
+  magenta = "#e82181",
+  purple  = "#686ed7",
+  blue    = "#0d8de7",
+  cyan    = "#1ab1a5",
+  green   = "#92a800",
+  gray    = "#676767",
+}
+
+-- ============================================================
+-- Highlight helper
+-- ============================================================
+
+local function hi(group, opts)
+  vim.api.nvim_set_hl(0, group, opts)
+end
+
+-- ============================================================
+-- UI
+-- ============================================================
+
+hi("Normal",       { fg = c.base2, bg = c.base03 })
+hi("CursorLine",   { bg = c.base02 })
+hi("CursorLineNr", { fg = c.base2 })
+hi("LineNr",       { fg = c.base01 })
+hi("NonText",      { fg = c.gray })
+
+hi("Visual",    { fg = c.base03, bg = c.yellow })
+hi("Search",    { fg = c.base03, bg = c.yellow })
+hi("IncSearch", { fg = c.base03, bg = c.yellow })
+
+hi("StatusLine",   { fg = c.base03, bg = c.base2 })
+hi("StatusLineNC", { fg = c.base01, bg = c.base02 })
+hi("VertSplit",    { fg = c.base02, bg = c.base03 })
+
+-- ============================================================
+-- Semantic core syntax
+-- ============================================================
+
+-- Green: control flow
+hi("Statement", { fg = c.green })
+hi("Keyword",   { fg = c.green })
+
+-- Yellow: types
+hi("Type", { fg = c.yellow })
+
+-- Cyan: scalars / literals
+hi("String",    { fg = c.cyan })
+hi("Character", { fg = c.cyan })
+hi("Number",    { fg = c.cyan })
+hi("Boolean",   { fg = c.cyan })
+hi("Constant",  { fg = c.cyan })
+
+-- Blue: definitions / names
+hi("Identifier", { fg = c.blue })
+hi("Function",   { fg = c.blue })
+
+-- Misc
+hi("Comment", { fg = c.gray })
+hi("PreProc", { fg = c.orange })
+hi("Special", { fg = c.magenta })
+hi("MatchParen", { fg = c.base03, bg = c.magenta })
+
+-- ============================================================
+-- Custom syntax (regex-based)
+-- ============================================================
+
+local function init_static_syntax()
+  vim.cmd([[syntax clear MyFunctionName]])
+  vim.cmd([[syntax clear MyNamespaceName]])
+  vim.cmd([[syntax clear MyScope]])
+
+  vim.cmd([[syntax match MyFunctionName /\<[A-Za-z_][A-Za-z0-9_]*\>\ze\s*(/]])
+  vim.cmd([[syntax match MyNamespaceName /\<[A-Za-z_][A-Za-z0-9_]*\(::[A-Za-z_][A-Za-z0-9_]*\)\+/]])
+  vim.cmd([[syntax match MyScope /[(){}\[\]]/]])
+
+  hi("MyFunctionName",  { fg = c.orange })
+  hi("MyNamespaceName", { fg = c.blue })
+  hi("MyScope",         { fg = c.magenta })
+end
+
+-- ============================================================
+-- Python-specific
+-- ============================================================
+
+local function init_python()
+  hi("pythonStatement", { fg = c.green })
+  hi("pythonBuiltin",   { fg = c.green })
+  hi("pythonFunction",  { fg = c.blue })
+  hi("pythonDecorator", { fg = c.magenta })
+  hi("pythonException", { fg = c.red })
+
+  vim.cmd([[syntax clear PythonSelf]])
+  vim.cmd([[syntax match PythonSelf /\<self\>/]])
+  hi("PythonSelf", { fg = c.orange })
+end
+
+-- ============================================================
+-- Dispatcher
+-- ============================================================
+
+local function apply_by_filetype()
+  local ft = vim.bo.filetype
+
+  if ft == "python" then
+    init_python()
+  elseif ft == "c" or ft == "cpp" or ft == "rust" or ft == "java" then
+    init_static_syntax()
+  end
+end
+
+-- ============================================================
+-- Autocmds
+-- ============================================================
+
+local augroup = vim.api.nvim_create_augroup("SolarizedMinimal", { clear = true })
+
+vim.api.nvim_create_autocmd(
+  { "ColorScheme", "BufEnter", "FileType" },
+  {
+    group = augroup,
+    callback = apply_by_filetype,
+  }
+)

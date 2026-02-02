@@ -1,7 +1,29 @@
-" Name:         GEDIT SOLARIZED
+" Name:         SOLARIZED
 " Descripton:   Inspired by Solarized theme, Gedit variation.
 " Date:         2026-02-01
-" Author:       Logan A Richey
+
+" ========================================
+" NOTE: You can see the syntax group being applied to the current word using the following command:
+" :echo synIDattr(synID(line('.'), col('.'), 1), 'name')
+" ========================================
+
+" ========================================
+" Python attributes:
+" ========================================
+" pythonInclude
+" pythonStatement
+" pythonNumber
+" pythonString
+" pythonEscape
+" pythonFunction
+" pythonBuiltin
+" pythonDecorator
+" pythonDecoratorName
+" ========================================
+
+function! What() abort
+    execute "echo synIDattr(synID(line('.'), col('.'), 1), 'name')"
+endfunction 
 
 hi clear
 hi clear myFunction
@@ -15,23 +37,24 @@ let g:colors_name = 'solarized'
 set termguicolors
 
 " --- Colors ---
-let s:solarized_base03 = '#002f3b'
-let s:solarized_base02 = '#003948'
-let s:solarized_base01 = '#5c7780'
-let s:solarized_base00 = '#6a8590'
-let s:solarized_base0 = '#8ca2a5'
-let s:solarized_base1 = '#9fb1b1'
-let s:solarized_base2 = '#fff7e0'
-let s:solarized_base3 = '#fff6e0'
-let s:solarized_yellow = '#c79600'
-let s:solarized_orange = '#df4100'
-let s:solarized_red = '#f21a17'
-let s:solarized_magenta = '#e82181'
-let s:solarized_purple = '#686ed7'
-let s:solarized_blue = '#0d8de7'
-let s:solarized_cyan = '#1ab1a5'
-let s:solarized_green = '#92a800'
-let s:solarized_gray = '#676767'
+let s:colors = {}
+let s:colors['base03'] = '#002f3b'
+let s:colors['base02'] = '#003948'
+let s:colors['base01'] = '#5c7780'
+let s:colors['base00'] = '#6a8590'
+let s:colors['base0'] = '#8ca2a5'
+let s:colors['base1'] = '#9fb1b1'
+let s:colors['base2'] = '#fff7e0'
+let s:colors['base3'] = '#fff6e0'
+let s:colors['yellow'] = '#c79600'
+let s:colors['orange'] = '#df4100'
+let s:colors['red'] = '#f21a17'
+let s:colors['magenta'] = '#e82181'
+let s:colors['purple'] = '#686ed7'
+let s:colors['blue'] = '#0d8de7'
+let s:colors['cyan'] = '#1ab1a5'
+let s:colors['green'] = '#92a800'
+let s:colors['gray'] = '#676767'
 
 " --- Mapping ---
 let s:bg = s:solarized_base03
