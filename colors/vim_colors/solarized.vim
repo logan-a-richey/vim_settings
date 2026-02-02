@@ -31,37 +31,37 @@ let s:solarized_purple = '#686ed7'
 let s:solarized_blue = '#0d8de7'
 let s:solarized_cyan = '#1ab1a5'
 let s:solarized_green = '#92a800'
-
+let s:solarized_gray = '#676767'
 
 " --- Mapping ---
-let s:bg 			= s:solarized_base03
-let s:bg_sec        = s:solarized_base02
-let s:cursor_line 	= s:bg_sec
-let s:fg 			= s:solarized_base2
-let s:comment 		= "#676767"
+let s:bg = s:solarized_base03
+let s:bg_sec = s:solarized_base02
+let s:cursor_line = s:bg_sec
+let s:fg = s:solarized_base2
+let s:comment = s:solarized_gray
 
 let s:line_nr_above = s:comment
 let s:line_nr_below = s:comment
-let s:line_nr 		= s:fg
-let s:statement 	= s:solarized_green
-let s:type 			= s:solarized_yellow
+let s:line_nr = s:fg
+let s:statement = s:solarized_green
+let s:type = s:solarized_yellow
 
-let s:defclass      = s:solarized_blue
+let s:defclass = s:solarized_blue
 
-let s:my_function 		= s:solarized_orange
-let s:my_namespace 	= s:solarized_blue
-let s:my_scope = s:fg
+let s:my_function = s:solarized_orange
+let s:my_namespace = s:solarized_blue
+let s:my_scope = s:solarized_magenta
 
 let s:py_function = s:solarized_purple
 let s:py_builtin = s:solarized_green
 let s:py_exceptions = s:solarized_red
 
-let s:preproc 		= s:solarized_orange
-let s:number 		= s:solarized_cyan
-let s:string 		= s:solarized_cyan
-let s:character 	= s:solarized_cyan
-let s:special 		= s:solarized_magenta
-let s:paren         = s:solarized_purple
+let s:preproc = s:solarized_orange
+let s:number = s:solarized_cyan
+let s:string = s:solarized_cyan
+let s:character = s:solarized_cyan
+let s:special = s:solarized_magenta
+let s:paren = s:solarized_purple
 let s:visual_select = s:solarized_yellow
 
 " ============================================================
@@ -143,7 +143,6 @@ endfunction
 
 function! InitScopeSyntax() abort
     silent! syntax clear myScope
-    "syntax match myScope '[\(\)\{\}\[\]\<\>]'
     syntax match myScope '[\(\)\{\}\[\]]'
     execute 'highlight myScope guifg=' . s:my_scope . ' ctermfg=magenta' 
 endfunction
@@ -181,15 +180,16 @@ endfunction
 augroup MySyntaxTweaks
     autocmd!
     autocmd Syntax * call InitNamespaceSyntax()
-    "autocmd Syntax * call InitScopeSyntax()
-    "autocmd Syntax * call InitFunctionSyntax()
+    autocmd Syntax * call InitScopeSyntax()
+    autocmd Syntax * call InitFunctionSyntax()
     autocmd Syntax * call HighlightSelfKeyword()
     autocmd Syntax * call DisableGuiBold()
 augroup END
 
+" Run every time
 call InitNamespaceSyntax()
-"call InitScopeSyntax()
-"call InitFunctionSyntax()
+call InitScopeSyntax()
+call InitFunctionSyntax()
 call HighlightSelfKeyword()
 call DisableGuiBold()
 
