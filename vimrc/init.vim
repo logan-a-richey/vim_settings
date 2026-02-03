@@ -51,5 +51,5 @@ execute 'set softtabstop=' . s:my_spacing
 
 set nocursorline
 syntax enable
-colorscheme monokai
+colorscheme naysayer88
 

@@ -7,6 +7,10 @@
 " NOTE: You can see the syntax group being applied to the current word using the following command:
 " :echo synIDattr(synID(line('.'), col('.'), 1), 'name')
 
+function! What() abort 
+    execute "echo synIDattr(synID(line('.'), col('.'), 1), 'name')"
+endfunction 
+
 " ========================================
 " Python attributes:
 " ========================================
@@ -173,6 +177,15 @@ endfunction
 " ============================================================
 " Run immediately
 " ============================================================
+
+augroup MyInitGroup
+    autocmd! 
+    autocmd FileType * call InitNamespaceSyntax()
+    " autocmd FileType * call InitScopeSyntax()
+    autocmd FileType * call InitFunctionSyntax()
+    autocmd FileType python call HighlightSelfKeyword()
+    autocmd FileType * call DisableGuiBold()
+augroup END 
 
 call InitNamespaceSyntax()
 " call InitScopeSyntax()

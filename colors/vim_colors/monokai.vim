@@ -13,6 +13,13 @@ let g:colors_name = 'monokai_dark'
 set termguicolors
 " set cursorline
 
+" NOTE: You can see the syntax group being applied to the current word using the following command:
+" :echo synIDattr(synID(line('.'), col('.'), 1), 'name')
+
+function! What() abort 
+    execute "echo synIDattr(synID(line('.'), col('.'), 1), 'name')"
+endfunction 
+
 " ------------------------------------------------------------------------------
 " Basic Tones
 
@@ -79,7 +86,7 @@ execute 'hi MatchParen guifg=' . s:fg . ' guibg=' . s:colors.blue
 
 execute 'hi pythonExceptions guifg=' . s:colors.blue
 execute 'hi pythonInclude guifg=' . s:colors.magenta
-execute 'hi pythonStatement guifg=' . s:colors.green
+execute 'hi pythonStatement guifg=' . s:colors.magenta
 execute 'hi pythonNumber guifg=' . s:colors.purple
 execute 'hi pythonString guifg=' . s:colors.purple
 execute 'hi pythonEscape guifg=' . s:colors.yellow

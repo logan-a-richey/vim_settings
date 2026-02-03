@@ -1,24 +1,8 @@
-" ==============================================================================
+" ------------------------------------------------------------------------------
 " Name:         NAYSAYER88
 " Descripton:   Inspired by Solarized theme, Gedit variation.
 " Date:         2026-02-01
-" ==============================================================================
-
-" NOTE: You can see the syntax group being applied to the current word using the following command:
-" :echo synIDattr(synID(line('.'), col('.'), 1), 'name')
-
-" ========================================
-" Python attributes:
-" ========================================
-" pythonInclude
-" pythonStatement
-" pythonNumber
-" pythonString
-" pythonEscape
-" pythonFunction
-" pythonBuiltin
-" pythonDecorator
-" pythonDecoratorName
+" ------------------------------------------------------------------------------
 
 hi clear
 hi clear myFunctionName
@@ -32,9 +16,15 @@ endif
 let g:colors_name = 'solarized'
 set termguicolors
 
-" ============================================================
+" ------------------------------------------------------------------------------
 " Colors dictionary
-" ============================================================
+" See current syntax being applied to word:
+function! What() abort 
+    execute "echo synIDattr(synID(line('.'), col('.'), 1), 'name')"
+endfunction 
+
+" ------------------------------------------------------------------------------
+" Colors dictionary
 
 let s:colors = {
 \ 'fg': '#bdb395',
@@ -42,12 +32,13 @@ let s:colors = {
 \ 'scalar': '#2ca198',
 \ 'comment': '#26922b',
 \ 'type': '#cccccc',
-\ 'flow': '#9de3c0'
+\ 'flow': '#9de3c0',
+\ 'function': '#a15f2c',
+\ 'namespace':  '#8a826b'
 \}
 
-" ============================================================
+" ------------------------------------------------------------------------------
 " Base UI colors
-" ============================================================
 
 let s:bg = s:colors.bg
 let s:bg_sec = s:colors.bg
@@ -104,29 +95,28 @@ execute 'hi pythonDecorator guifg=' . s:colors.fg
 execute 'hi pythonDecoratorName guifg=' . s:colors.scalar
 
 execute 'hi NonText guifg=' . s:colors.comment
-execute 'hi Error guifg=#d0d0d0 guibg=#dd0000'
-execute 'hi Todo guifg=#000000 guibg=#dddd00'
+execute 'hi Error guifg=#aaaaaa guibg=#aa0000'
+execute 'hi Todo guifg=#000000 guibg=#aaaa00'
 
 " For merge/pull requests
 execute 'hi Title guifg=' . s:colors.fg
 execute 'hi Directory guifg=' . s:colors.fg
-execute 'hi DiffAdd guifg='. s:fg . ' guibg=#fa0000'
-execute 'hi DiffChange guifg=' . s:fg . ' guibg=#fafa00'
-execute 'hi DiffText guifg=' . s:fg . ' guibg=#fafa00'
-execute 'hi DiffDelete guifg=' . s:fg . ' guibg=#0000fa'
+execute 'hi DiffAdd guifg='. s:fg . ' guibg=#aa0000'
+execute 'hi DiffChange guifg=' . s:fg . ' guibg=#aaaa00'
+execute 'hi DiffText guifg=' . s:fg . ' guibg=#aaaa00'
+execute 'hi DiffDelete guifg=' . s:fg . ' guibg=#0000aa'
 
-" ============================================================
+" ------------------------------------------------------------------------------
 " Syntax tweaks
-" ============================================================
 
 function! InitNamespaceSyntax() abort
     syntax match myNamespaceName '\<[A-Za-z_][A-Za-z0-9_]*\(::[~A-Za-z_][A-Za-z0-9_]*\)\+'
-    execute 'highlight myNamespaceName guifg=#8a826b'
+    execute 'highlight myNamespaceName guifg=' . s:colors.namespace
 endfunction
 
 function! InitFunctionSyntax() abort
     syntax match myFunctionName '[~A-Za-z_][A-Za-z0-9_]*\ze('
-    execute 'highlight myFunctionName guifg=#a15f2c'
+    execute 'highlight myFunctionName guifg=' . s:colors.function
 endfunction
 
 function! InitScopeSyntax() abort
@@ -158,9 +148,17 @@ function! DisableGuiBold() abort
     endfor
 endfunction
 
-" ============================================================
+" ------------------------------------------------------------------------------
 " Run immediately
-" ============================================================
+
+augroup MyInitGroup
+    autocmd! 
+    autocmd FileType * call InitNamespaceSyntax()
+    " autocmd FileType * call InitScopeSyntax()
+    autocmd FileType * call InitFunctionSyntax()
+    autocmd FileType python call HighlightSelfKeyword()
+    autocmd FileType * call DisableGuiBold()
+augroup END 
 
 call InitNamespaceSyntax()
 " call InitScopeSyntax()
