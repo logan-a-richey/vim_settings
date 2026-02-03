@@ -1,176 +1,160 @@
-" Name: MONOKAI DARK
-" Descripton: Inspired by VSCode Monokai
-" Date: 2025-11-25
-" Author: Logan Richey
+" ------------------------------------------------------------------------------
+" Name:         MONOKAI DARK
+" Descripton:   Inspired by VSCode Monokai
+" Date:         2026-02-03
+" Author:       Logan Richey
+" ------------------------------------------------------------------------------
 
-" ============================================================
 hi clear
 if exists('syntax_on')
-    syntax reset
+  syntax reset
 endif
 let g:colors_name = 'monokai_dark'
 set termguicolors
 " set cursorline
 
-" ============================================================
+" ------------------------------------------------------------------------------
 " Basic Tones
-let s:monokai_foreground = '#cdf2ff'
-let s:monokai_comment = '#95906f'
-" let s:monokai_background_1 = '#2a2c24'
-" let s:monokai_background_2 = '#444235'
-let s:monokai_background_1 = "#202020"
-let s:monokai_background_2 = "#303030"
-let s:monokai_pink = '#ec0c6c'
-let s:monokai_purple = '#a76eff'
-let s:monokai_blue = '#56e4ff'
-let s:monokai_orange = '#ff8900'
-let s:monokai_yellow = '#fdef6c'
-let s:monokai_green = '#9df814'
 
-" Mapping
-let s:bg 			= s:monokai_background_1
-let s:bg_sec        = s:monokai_background_2
-let s:cursor_line 	= s:bg_sec
-let s:fg 			= s:monokai_foreground
-let s:comment 		= s:monokai_comment
+let s:colors = {
+\ 'bg': '#202020',
+\ 'bg_sec': '#303030',
+\ 'fg': '#cdf2ff',
+\ 'gray': '#95906f',
+\ 'yellow': '#fdef6c',
+\ 'orange': '#ff8900',
+\ 'green': '#9df814',
+\ 'blue': '#56e4ff',
+\ 'purple': '#a76eff',
+\ 'magenta': '#ec0c6c',
+\}
 
-let s:line_nr_above = s:monokai_background_2
-let s:line_nr_below = s:monokai_background_2
-let s:line_nr 		= s:monokai_blue
-let s:statement 	= s:monokai_pink
-let s:type 			= s:monokai_blue
+" ------------------------------------------------------------------------------
+" Color Mappings
 
-let s:function 		= s:monokai_orange
-let s:namespace 	= s:monokai_green
-let s:defclass      = s:monokai_green
-
-let s:preproc 		= s:monokai_pink
-let s:number 		= s:monokai_purple
-let s:string 		= s:monokai_purple
-let s:character 	= s:monokai_purple
-let s:special 		= s:monokai_yellow
-let s:paren         = s:monokai_yellow
-let s:visual_select = s:monokai_green
-
-" ============================================================
-" VIM UI Syntax 
+let s:bg = s:colors.bg
+let s:bg_sec = s:colors.bg_sec
+let s:comment = s:colors.gray
+let s:fg = s:colors.fg
 
 execute 'hi Normal guifg=' . s:fg . ' guibg=' . s:bg
-execute 'hi CursorLine guibg=' . s:cursor_line
-execute 'hi CursorLineNr guifg=' . s:line_nr
-execute 'hi LineNr guifg=' . s:line_nr
-execute 'hi LineNrAbove guifg=' . s:line_nr_above
-execute 'hi LineNrBelow guifg=' . s:line_nr_below
+execute 'hi Comment guifg=' . s:colors.gray
 
-execute 'hi Visual guifg=' . s:bg . ' guibg=' . s:visual_select 
-execute 'hi Search guifg=' . s:bg . ' guibg=' . s:visual_select 
-execute 'hi IncSearch guifg=' . s:bg . ' guibg=' . s:visual_select
+execute 'hi CursorLine guibg=' . s:bg_sec
+execute 'hi CursorLineNr guifg=' . s:colors.gray
+execute 'hi LineNr guifg=' . s:colors.blue
+execute 'hi LineNrAbove guifg=' . s:comment
+execute 'hi LineNrBelow guifg=' . s:comment
+execute 'hi NonText guifg=' . s:comment
+
+execute 'hi Visual guifg=' . s:bg . ' guibg=' . s:colors.purple
+execute 'hi Search guifg=' . s:bg . ' guibg=' . s:colors.purple
+execute 'hi IncSearch guifg=' . s:bg . ' guibg=' . s:colors.purple
 
 execute 'hi VertSplit guifg=' . s:bg_sec . ' guibg=' . s:bg
-execute 'hi StatusLineNC guifg=' . s:bg_sec . ' guibg=' . s:comment
 execute 'hi StatusLine guifg=' . s:bg . ' guibg=' . s:fg
+execute 'hi StatusLineNC guifg=' . s:bg_sec . ' guibg=' . s:colors.gray
 
 highlight Pmenu ctermbg=darkblue guibg=darkblue
 highlight PmenuSel ctermbg=blue guibg=blue
 
-" ============================================================
-" Code syntax 
+execute 'hi Constant guifg=' . s:colors.blue
+execute 'hi String guifg=' . s:colors.purple
+execute 'hi Character guifg=' . s:colors.purple
+execute 'hi Number guifg=' . s:colors.purple
+execute 'hi Boolean guifg=' . s:colors.purple
+execute 'hi Identifier guifg=' . s:colors.purple
+execute 'hi Function guifg=' . s:colors.blue
+execute 'hi Special guifg=' . s:colors.yellow 
 
-execute 'hi Comment guifg=' . s:comment 
-execute 'hi Constant guifg=' . s:string 
-execute 'hi String guifg=' . s:string 
-execute 'hi Character guifg=' . s:string 
-execute 'hi Number guifg=' . s:number 
-execute 'hi Boolean guifg=' . s:number 
-execute 'hi Identifier guifg=' . s:defclass 
-execute 'hi Function guifg=' . s:defclass 
-execute 'hi Statement guifg=' . s:statement 
-execute 'hi Keyword guifg=' . s:statement 
-execute 'hi PreProc guifg=' . s:preproc 
-execute 'hi Type guifg=' . s:type 
-execute 'hi Special guifg=' . s:special 
+" control flow: while, if, for, while, ...
+execute 'hi Statement guifg=' . s:colors.magenta
 
-" execute 'hi pythonBuiltin guifg=' . s:monokai_green
-execute 'hi NonText guifg=' . s:comment
+" types: int, float, class, ...
+execute 'hi Type guifg=' . s:colors.blue
+
+execute 'hi Keyword guifg=' . s:colors.magenta
+execute 'hi PreProc guifg=' . s:colors.magenta
+execute 'hi MatchParen guifg=' . s:fg . ' guibg=' . s:colors.blue
+
+execute 'hi pythonExceptions guifg=' . s:colors.blue
+execute 'hi pythonInclude guifg=' . s:colors.magenta
+execute 'hi pythonStatement guifg=' . s:colors.green
+execute 'hi pythonNumber guifg=' . s:colors.purple
+execute 'hi pythonString guifg=' . s:colors.purple
+execute 'hi pythonEscape guifg=' . s:colors.yellow
+execute 'hi pythonFunction guifg=' . s:colors.green
+execute 'hi pythonBuiltin guifg=' . s:colors.green
+
+execute 'hi pythonDecorator guifg=' . s:colors.fg
+execute 'hi pythonDecoratorName guifg=' . s:colors.orange
 
 execute 'hi Error guifg=#d0d0d0 guibg=#dd0000'
 execute 'hi Todo guifg=#000000 guibg=#dddd00'
 
-" ============================================================
-" Additional Tweaks
+" For merge/pull requests
+execute 'hi Title guifg=' . s:colors.green
+execute 'hi Directory guifg=' . s:colors.blue
+execute 'hi DiffAdd guifg='. s:fg . ' guibg=' . s:colors.green 
+execute 'hi DiffChange guifg=' . s:fg . ' guibg=' . s:colors.yellow
+execute 'hi DiffText guifg=' . s:fg . ' guibg=' . s:colors.yellow
+execute 'hi DiffDelete guifg=' . s:fg . ' guibg=#dd0000'
 
-execute 'hi Title guifg=' . s:statement
-execute 'hi Directory guifg=' . s:defclass
-execute 'hi DiffAdd guibg=' . '#13354a'
-execute 'hi DiffChange guibg=' . '#4a410d'
-execute 'hi DiffDelete guibg=' . '#420e09'
-execute 'hi DiffText guibg=' . '#4c4745'
+" ------------------------------------------------------------------------------
+" --- Functions ---
 
-" ============================================================
-" Syntax Tweaks 
-
-" Syntax change function : color entire word containing ::
 function! InitNamespaceSyntax() abort
-    syntax match myNamespace '\<[a-zA-Z_][a-zA-Z0-9_]*\(::[~a-zA-Z_][a-zA-Z0-9_]*\)\+'
-    execute 'highlight myNamespace guifg=' . s:namespace
-endfunction 
+  syntax match myNamespaceName '\<[A-Za-z_][A-Za-z0-9_]*\(::[~A-Za-z_][A-Za-z0-9_]*\)\+'
+  execute 'highlight myNamespaceName guifg=' . s:colors.green
+endfunction
 
-" Syntax change function : color word that precede a (, to signal a function call
 function! InitFunctionSyntax() abort
-    " syntax match myFunction '\<\~\?[A-Za-z_][A-Za-z0-9_]*\ze('
-    syntax match myFunction '[~a-zA-Z_][A-Za-z0-9_]*\ze('
-    execute 'highlight myFunction guifg=' . s:function
+  syntax match myFunctionName '[~A-Za-z_][A-Za-z0-9_]*\ze('
+  execute 'highlight myFunctionName guifg=' . s:colors.orange
 endfunction
 
 function! InitScopeSyntax() abort
-    silent! syntax clear myScope
-    "syntax match myScope '[\(\)\{\}\[\]\<\>]'
-    syntax match myScope '[\(\)\{\}\[\]]'
-    execute 'highlight myScope guifg=' . s:paren . ' ctermfg=magenta' 
+  silent! syntax clear myScopeName
+  syntax match myScopeName '[(){}\[\]]'
+  execute 'highlight myScopeName guifg=' . s:colors.yellow
 endfunction
 
-function! HighlightSelfKeyword()
-    if &filetype ==# 'python'
-        syntax match mySelf '\<self'
-        execute 'highlight mySelf guifg=' . s:monokai_blue
-    endif
+function! HighlightSelfKeyword() abort
+  if &filetype ==# 'python'
+    syntax match mySelf '\<self\>'
+    execute 'highlight mySelf guifg=' . s:colors.blue
+  endif
 endfunction
 
 function! DisableGuiBold() abort
-    for group in getcompletion('', 'highlight')
-        " Only process valid highlight group names
-        if group =~# '^\w\+$' 
-            try
-                " Get current highlight settings for the group
-                redir => l:current_settings
-                silent! execute 'highlight ' . group
-                redir END
-
-                " If 'gui=bold' is present, set gui to NONE
-                if l:current_settings =~# 'gui=bold'
-                    execute 'highlight ' . group . ' gui=NONE'
-                endif
-            catch /E28: No such highlight group/
-                " Ignore errors for non-existent groups (shouldn't happen with getcompletion)
-            endtry
+  for group in getcompletion('', 'highlight')
+    if group =~# '^\w\+$'
+      try
+        redir => l:current_settings
+        silent! execute 'highlight ' . group
+        redir END
+        if l:current_settings =~# 'gui=bold'
+          execute 'highlight ' . group . ' gui=NONE'
         endif
-    endfor
+      catch
+      endtry
+    endif
+  endfor
 endfunction
 
-" Run OnStart
-augroup MySyntaxTweaks
+augroup MyInitGroup
     autocmd!
-    autocmd Syntax * call InitNamespaceSyntax()
-    autocmd Syntax * call InitFunctionSyntax()
-    autocmd Syntax * call InitScopeSyntax()
-    autocmd Syntax * call DisableGuiBold()
-    autocmd Syntax * call HighlightSelfKeyword()
+    autocmd FileType * call InitNamespaceSyntax()
+    autocmd FileType * call InitScopeSyntax()
+    autocmd FileType * call InitFunctionSyntax()
+    autocmd FileType * call HighlightSelfKeyword()
+    autocmd FileType * call DisableGuiBold()
 augroup END
 
-" Load always
+" --- Run immediately ---
 call InitNamespaceSyntax()
-call InitFunctionSyntax()
 call InitScopeSyntax()
+call InitFunctionSyntax()
 call HighlightSelfKeyword()
 call DisableGuiBold()
 

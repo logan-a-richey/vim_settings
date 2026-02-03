@@ -1,11 +1,11 @@
+" ==============================================================================
 " Name:         SOLARIZED
 " Descripton:   Inspired by Solarized theme, Gedit variation.
 " Date:         2026-02-01
+" ==============================================================================
 
-" ========================================
 " NOTE: You can see the syntax group being applied to the current word using the following command:
 " :echo synIDattr(synID(line('.'), col('.'), 1), 'name')
-" ========================================
 
 " ========================================
 " Python attributes:
@@ -62,51 +62,24 @@ let s:colors = {
 
 let s:bg = s:colors.base03
 let s:bg_sec = s:colors.base02
-let s:cursor_line = bg_sec
+let s:cursor_line = s:bg_sec
 let s:fg = s:colors.base2
-let s:comment = s:colors.gray
-
-let s:line_nr = fg
-let s:line_nr_above = comment
-let s:line_nr_below = comment
-
-let s:statement = s:colors.green
-let s:type_color = s:colors.yellow
-let s:defclass = s:colors.blue
-let s:my_function = s:colors.orange
-let s:my_namespace = s:colors.blue
-let s:my_scope = s:colors.magenta
-let s:preproc = s:colors.orange
-let s:number = s:colors.cyan
-let s:string = s:colors.cyan
-let s:character = s:colors.cyan
-let s:special = s:colors.magenta
-let s:visual_select = s:colors.yellow
-
-let s:py_function = s:colors.purple
-let s:py_builtin = s:colors.green
-let s:py_exceptions = s:colors.red
-let s:py_self = s:colors.orange
-
-" ============================================================
-" Vim UI highlights
-" ============================================================
 
 execute 'hi Normal guifg=' . s:fg . ' guibg=' . s:bg
 execute 'hi CursorLine guibg=' . s:cursor_line
-execute 'hi CursorLineNr guifg=' . s:line_nr
-execute 'hi LineNr guifg=' . s:line_nr
-execute 'hi LineNrAbove guifg=' . s:line_nr_above
-execute 'hi LineNrBelow guifg=' . s:line_nr_below
-execute 'hi NonText guifg=' . s:colors.blue
+execute 'hi CursorLineNr guifg=' . s:colors.gray
+execute 'hi LineNr guifg=' . s:fg
+execute 'hi LineNrAbove guifg=' . s:colors.gray
+execute 'hi LineNrBelow guifg=' . s:colors.gray
+execute 'hi NonText guifg=' . s:colors.gray
 
-execute 'hi Visual guifg=' . s:bg . ' guibg=' . s:visual_select
-execute 'hi Search guifg=' . s:bg . ' guibg=' . s:visual_select
-execute 'hi IncSearch guifg=' . s:bg . ' guibg=' . s:visual_select
+execute 'hi Visual guifg=' . s:bg . ' guibg=' . s:colors.purple
+execute 'hi Search guifg=' . s:bg . ' guibg=' . s:colors.purple
+execute 'hi IncSearch guifg=' . s:bg . ' guibg=' . s:colors.purple
 
 execute 'hi VertSplit guifg=' . s:bg_sec . ' guibg=' . s:bg
 execute 'hi StatusLine guifg=' . s:bg . ' guibg=' . s:fg
-execute 'hi StatusLineNC guifg=' . s:bg_sec . ' guibg=' . s:comment
+execute 'hi StatusLineNC guifg=' . s:bg_sec . ' guibg=' . s:colors.gray
 
 highlight Pmenu ctermbg=darkblue guibg=darkblue
 highlight PmenuSel ctermbg=blue guibg=blue
@@ -115,20 +88,20 @@ highlight PmenuSel ctermbg=blue guibg=blue
 " Code syntax highlights
 " ============================================================
 
-execute 'hi Comment guifg=' . s:comment
-execute 'hi Constant guifg=' . s:string
-execute 'hi String guifg=' . s:string
-execute 'hi Character guifg=' . s:string
-execute 'hi Number guifg=' . s:number
-execute 'hi Boolean guifg=' . s:number
-execute 'hi Identifier guifg=' . s:defclass
-execute 'hi Function guifg=' . s:defclass
-execute 'hi Statement guifg=' . s:statement
-execute 'hi Keyword guifg=' . s:statement
-execute 'hi PreProc guifg=' . s:preproc
-execute 'hi Type guifg=' . s:type_color
-execute 'hi Special guifg=' . s:special
-execute 'hi MatchParen guifg=' . s:bg . ' guibg=' . s:colors.magenta
+execute 'hi Comment guifg=' . s:colors.gray
+execute 'hi Constant guifg=' . s:colors.cyan
+execute 'hi String guifg=' . s:colors.cyan
+execute 'hi Character guifg=' . s:colors.cyan
+execute 'hi Number guifg=' . s:colors.cyan
+execute 'hi Boolean guifg=' . s:colors.cyan
+execute 'hi Identifier guifg=' . s:colors.blue
+execute 'hi Function guifg=' . s:colors.blue
+execute 'hi Statement guifg=' . s:colors.green
+execute 'hi Keyword guifg=' . s:colors.yellow
+execute 'hi PreProc guifg=' . s:colors.orange
+execute 'hi Type guifg=' . s:colors.yellow
+execute 'hi Special guifg=' . s:colors.orange
+execute 'hi MatchParen guifg=' . s:fg . ' guibg=' . s:colors.magenta
 
 execute 'hi pythonExceptions guifg=' . s:colors.yellow
 execute 'hi pythonInclude guifg=' . s:colors.magenta
@@ -141,35 +114,37 @@ execute 'hi pythonBuiltin guifg=' . s:colors.yellow
 execute 'hi pythonDecorator guifg=' . s:colors.green
 execute 'hi pythonDecoratorName guifg=' . s:colors.magenta
 
-execute 'hi NonText guifg=' . s:comment
+execute 'hi NonText guifg=' . s:colors.gray
 execute 'hi Error guifg=#d0d0d0 guibg=#dd0000'
 execute 'hi Todo guifg=#000000 guibg=#dddd00'
 
-execute 'hi Title guifg=' . s:statement
-execute 'hi Directory guifg=' . s:defclass
-execute 'hi DiffAdd guibg=#13354a'
-execute 'hi DiffChange guibg=#4a410d'
-execute 'hi DiffDelete guibg=#420e09'
-execute 'hi DiffText guibg=#4c4745'
+" For merge/pull requests
+execute 'hi Title guifg=' . s:colors.green
+execute 'hi Directory guifg=' . s:colors.blue
+execute 'hi DiffAdd guifg='. s:fg . ' guibg=' . s:colors.green 
+execute 'hi DiffChange guifg=' . s:fg . ' guibg=' . s:colors.yellow
+execute 'hi DiffText guifg=' . s:fg . ' guibg=' . s:colors.yellow
+execute 'hi DiffDelete guifg=' . s:fg . ' guibg=' . s:colors.red 
+
 
 " ============================================================
 " Syntax tweaks
 " ============================================================
 
 function! InitNamespaceSyntax() abort
-    syntax match myNamespaceName '\<[A-Za-z_][A-Za-z0-9_]*\(::[A-Za-z_][A-Za-z0-9_]*\)\+'
+    syntax match myNamespaceName '\<[A-Za-z_][A-Za-z0-9_]*\(::[~A-Za-z_][A-Za-z0-9_]*\)\+'
     execute 'highlight myNamespaceName guifg=' . s:colors.blue
 endfunction
 
 function! InitFunctionSyntax() abort
-    syntax match myFunctionName '[A-Za-z_][A-Za-z0-9_]*\ze('
+    syntax match myFunctionName '[~A-Za-z_][A-Za-z0-9_]*\ze('
     execute 'highlight myFunctionName guifg=' . s:colors.orange
 endfunction
 
 function! InitScopeSyntax() abort
     silent! syntax clear myScopeName
     syntax match myScopeName '[(){}\[\]]'
-    execute 'highlight myScopeName guifg=' . s:colors.purple
+    execute 'highlight myScopeName guifg=' . s:fg
 endfunction
 
 function! HighlightSelfKeyword() abort
@@ -200,7 +175,7 @@ endfunction
 " ============================================================
 
 call InitNamespaceSyntax()
-call InitScopeSyntax()
+" call InitScopeSyntax()
 call InitFunctionSyntax()
 call HighlightSelfKeyword()
 call DisableGuiBold()
